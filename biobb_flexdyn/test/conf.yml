@@ -1,0 +1,14 @@
+working_dir_path: /tmp/biobb/unitests
+
+concoord_dist:
+  paths:
+    input_structure_path: file:test_data_dir/flexdyn/structure.pdb
+    output_pdb_path: concoord_dist.pdb
+    output_gro_path: concoord_dist.gro
+    output_dat_path: concoord_dist.dat
+    ref_output_pdb_path: file:test_reference_dir/flexdyn/dist.pdb
+    ref_output_gro_path: file:test_reference_dir/flexdyn/dist.gro
+    ref_output_dat_path: file:test_reference_dir/flexdyn/dist.dat
+  properties:
+    vdw: 1
+    bond_angle: 1
