@@ -15,9 +15,9 @@ class ConcoordDisco(BiobbObject):
     | Structure generation based on a set of geometric constraints extracted with the Concoord Dist tool.
 
     Args:
-        input_pdb_path (str): Input structure file in PDB format. File type: input. `Sample file <https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/data/flexdyn/dist.pdb>`_. Accepted formats: pdb (edam:format_1476).
+        input_pdb_path (str): Input structure file in PDB format. File type: input. `Sample file <https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/data/flexdyn/structure.pdb>`_. Accepted formats: pdb (edam:format_1476).
         input_dat_path (str): Input dat with structure interpretation and bond definitions. File type: input. `Sample file <https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/data/flexdyn/dist.dat>`_. Accepted formats: dat (edam:format_1637), txt (edam:format_2330).
-        output_traj_path (str): Output trajectory file. File type: output. `Sample file <https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/flexdyn/disco_traj.pdb>`_. Accepted formats: pdb (edam:format_1476), xtc (edam:format_3875), gro (edam:format_2033).
+        output_traj_path (str): Output trajectory file. File type: output. `Sample file <https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/flexdyn/disco_trj.pdb>`_. Accepted formats: pdb (edam:format_1476), xtc (edam:format_3875), gro (edam:format_2033).
         output_rmsd_path (str): Output rmsd file. File type: output. `Sample file <https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/flexdyn/disco_rmsd.dat>`_. Accepted formats: dat (edam:format_1637).
         output_bfactor_path (str): Output B-factor file. File type: output. `Sample file <https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/flexdyn/disco_bfactor.pdb>`_. Accepted formats: pdb (edam:format_1476).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
@@ -62,7 +62,7 @@ class ConcoordDisco(BiobbObject):
         * wrapped_software:
             * name: Concoord 
             * version: >=2.1.2
-            * license: (C) Bert de Groot, 1996-2010
+            * license: other
         * ontology:
             * name: EDAM
             * schema: http://edamontology.org/EDAM.owl
@@ -132,30 +132,38 @@ class ConcoordDisco(BiobbObject):
         atoms_file = concoord_lib + "/ATOMS_" + vdw_values[self.vdw] + ".DAT"
         bonds_file = concoord_lib + "/BONDS.DAT"
         shutil.copy2(margins_file, self.stage_io_dict.get("unique_dir"))
+        shutil.copy2(margins_file, self.stage_io_dict.get("unique_dir")+"/MARGINS.DAT")
         shutil.copy2(atoms_file, self.stage_io_dict.get("unique_dir"))
         shutil.copy2(bonds_file, self.stage_io_dict.get("unique_dir"))
 
         # Command line
         # (concoord) OROZCO67:biobb_flexdyn hospital$ disco -d biobb_flexdyn/test/reference/flexdyn/dist.dat 
         # -p biobb_flexdyn/test/reference/flexdyn/dist.pdb  -op patata.pdb 
-        self.cmd = [self.binary_path, 
-                "-p", str(Path(self.stage_io_dict["in"]["input_pdb_path"]).relative_to(Path.cwd())),
-                "-d", str(Path(self.stage_io_dict["in"]["input_dat_path"]).relative_to(Path.cwd())),
-                "-or", str(Path(self.stage_io_dict["out"]["output_rmsd_path"]).relative_to(Path.cwd())),
-                "-of", str(Path(self.stage_io_dict["out"]["output_bfactor_path"]).relative_to(Path.cwd()))
+        self.cmd = ["cd ", self.stage_io_dict.get('unique_dir'), ";", self.binary_path, 
+ #               "-p", str(Path(self.stage_io_dict["in"]["input_pdb_path"]).relative_to(Path.cwd())),
+ #               "-d", str(Path(self.stage_io_dict["in"]["input_dat_path"]).relative_to(Path.cwd())),
+ #               "-or", str(Path(self.stage_io_dict["out"]["output_rmsd_path"]).relative_to(Path.cwd())),
+ #               "-of", str(Path(self.stage_io_dict["out"]["output_bfactor_path"]).relative_to(Path.cwd()))
+                "-p", str(Path(self.stage_io_dict["in"]["input_pdb_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir')))),
+                "-d", str(Path(self.stage_io_dict["in"]["input_dat_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir')))),
+                "-or", str(Path(self.stage_io_dict["out"]["output_rmsd_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir')))),
+                "-of", str(Path(self.stage_io_dict["out"]["output_bfactor_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir'))))
                 ]
 
         # Output structure formats:
         file_extension = Path(self.stage_io_dict["out"]["output_traj_path"]).suffix
         if file_extension == ".pdb":
             self.cmd.append('-on') # NMR-PDB format (multi-model)
-            self.cmd.append(str(Path(self.stage_io_dict["out"]["output_traj_path"]).relative_to(Path.cwd())))
+#            self.cmd.append(str(Path(self.stage_io_dict["out"]["output_traj_path"]).relative_to(Path.cwd())))
+            self.cmd.append(str(Path(self.stage_io_dict["out"]["output_traj_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir')))))
         elif file_extension == ".gro":
             self.cmd.append('-ot')
-            self.cmd.append(str(Path(self.stage_io_dict["out"]["output_traj_path"]).relative_to(Path.cwd())))
+#            self.cmd.append(str(Path(self.stage_io_dict["out"]["output_traj_path"]).relative_to(Path.cwd())))
+            self.cmd.append(str(Path(self.stage_io_dict["out"]["output_traj_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir')))))
         elif file_extension == ".xtc":
             self.cmd.append('-ox')
-            self.cmd.append(str(Path(self.stage_io_dict["out"]["output_traj_path"]).relative_to(Path.cwd())))
+#            self.cmd.append(str(Path(self.stage_io_dict["out"]["output_traj_path"]).relative_to(Path.cwd())))
+            self.cmd.append(str(Path(self.stage_io_dict["out"]["output_traj_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir')))))
         else:
             fu.log("ERROR: output_traj_path ({}) must be a PDB, GRO or XTC formatted file ({})".format(self.io_dict["out"]["output_traj_path"], file_extension), self.out_log, self.global_log)
         

@@ -12,3 +12,51 @@ concoord_dist:
   properties:
     vdw: 1
     bond_angle: 1
+
+concoord_disco:
+  paths:
+    input_pdb_path: file:test_data_dir/flexdyn/structure.pdb
+    input_dat_path: file:test_data_dir/flexdyn/dist.dat
+    output_traj_path: concoord_disco.pdb
+    output_rmsd_path: concoord_disco_rmsd.dat
+    output_bfactor_path: concoord_disco_bfactor.pdb
+    ref_output_traj_path: file:test_reference_dir/flexdyn/disco_trj.pdb
+    ref_output_rmsd_path: file:test_reference_dir/flexdyn/disco_rmsd.dat
+    ref_output_bfactor_path: file:test_reference_dir/flexdyn/disco_bfactor.pdb
+  properties:
+    vdw : 4
+    num_structs : 20
+
+nolb_nma:
+  paths:
+    input_pdb_path: file:test_data_dir/flexdyn/structure.pdb
+    output_pdb_path: nolb_output.pdb
+    ref_output_pdb_path: file:test_reference_dir/flexdyn/nolb_output.pdb
+  properties:
+    num_structs : 20
+
+prody_anm:
+  paths:
+    input_pdb_path: file:test_data_dir/flexdyn/structure.pdb
+    output_pdb_path: prody_output.pdb
+    ref_output_pdb_path: file:test_reference_dir/flexdyn/prody_output.pdb
+  properties:
+    num_structs : 20
+    rmsd : 4.0
+
+imod_imode:
+  paths:
+    input_pdb_path: file:test_data_dir/flexdyn/structure.pdb
+    output_dat_path: imod_imode_evecs.dat
+    ref_output_dat_path: file:test_reference_dir/flexdyn/imod_imode_evecs.dat
+  properties:
+    cg : 2
+
+imod_imove:
+  paths:
+    input_pdb_path: file:test_data_dir/flexdyn/structure_cleaned.pdb
+    input_dat_path: file:test_data_dir/flexdyn/imod_imode_evecs.dat
+    output_pdb_path: imod_imove_output.pdb
+    ref_output_pdb_path: file:test_reference_dir/flexdyn/imod_imove_output.pdb
+  properties:
+    pc : 1

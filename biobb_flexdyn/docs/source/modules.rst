@@ -1,7 +1,7 @@
-biobb_flexserv
+biobb_flexdyn
 ==============
 
 .. toctree::
    :maxdepth: 4
 
-   flexserv
+   flexdyn

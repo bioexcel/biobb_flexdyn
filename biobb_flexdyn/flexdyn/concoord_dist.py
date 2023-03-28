@@ -50,7 +50,7 @@ class ConcoordDist(BiobbObject):
         * wrapped_software:
             * name: Concoord 
             * version: >=2.1.2
-            * license: (C) Bert de Groot, 1996-2010
+            * license: other
         * ontology:
             * name: EDAM
             * schema: http://edamontology.org/EDAM.owl

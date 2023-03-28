@@ -17,7 +17,7 @@ class ProdyANM(BiobbObject):
 
     Args:
         input_pdb_path (str): Input PDB file. File type: input. `Sample file <https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/data/flexdyn/structure.pdb>`_. Accepted formats: pdb (edam:format_1476).
-        output_pdb_path (str): Output multi-model PDB file with the generated ensemble. File type: output. `Sample file <https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/prody/ensemble.pdb>`_. Accepted formats: pdb (edam:format_1476).
+        output_pdb_path (str): Output multi-model PDB file with the generated ensemble. File type: output. `Sample file <https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/prody/prody_output.pdb>`_. Accepted formats: pdb (edam:format_1476).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
             * **num_structs** (*int*) - (500) Number of structures to be generated
             * **selection** (*str*) - (calpha) Atoms selection (Prody syntax: http://prody.csb.pitt.edu/manual/reference/atomic/select.html)
@@ -43,7 +43,7 @@ class ProdyANM(BiobbObject):
         * wrapped_software:
             * name: Prody 
             * version: >=2.2.0
-            * license: MIT License
+            * license: MIT
         * ontology:
             * name: EDAM
             * schema: http://edamontology.org/EDAM.owl

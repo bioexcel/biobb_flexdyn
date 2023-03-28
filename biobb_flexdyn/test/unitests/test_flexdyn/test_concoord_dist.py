@@ -7,7 +7,7 @@ class TestConcoordDist():
 
     def teardown_class(self):
         fx.test_teardown(self)
-        pass
+        #pass
 
     def test_concoord_dist(self):
         concoord_dist(properties=self.properties, **self.paths)

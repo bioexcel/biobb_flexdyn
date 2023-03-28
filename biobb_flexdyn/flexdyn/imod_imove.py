@@ -9,16 +9,16 @@ from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import  settings
 from biobb_common.tools.file_utils import launchlogger
 
-class imodImove(BiobbObject):
+class ImodImove(BiobbObject):
     """
     | biobb_flexdyn imod_imove
     | Wrapper of the imove tool 
     | Compute the normal modes of a macromolecule using the imove tool from the iMODS package.
 
     Args:
-        input_pdb_path (str): Input PDB file. File type: input. `Sample file <https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/data/flexdyn/structure.pdb>`_. Accepted formats: pdb (edam:format_1476).
-        input_dat_path (str): Input dat with normal modes. File type: input. `Sample file <https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/flexdyn/dist.dat>`_. Accepted formats: dat (edam:format_1637), txt (edam:format_2330).
-        output_pdb_path (str): Output multi-model PDB file with the generated animation by Principal Component. File type: output. `Sample file <https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/flexdyn/ensemble_nolb.pdb>`_. Accepted formats: pdb (edam:format_1476).
+        input_pdb_path (str): Input PDB file. File type: input. `Sample file <https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/data/flexdyn/structure_cleaned.pdb>`_. Accepted formats: pdb (edam:format_1476).
+        input_dat_path (str): Input dat with normal modes. File type: input. `Sample file <https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/data/flexdyn/imod_imode_evecs.dat>`_. Accepted formats: dat (edam:format_1637), txt (edam:format_2330).
+        output_pdb_path (str): Output multi-model PDB file with the generated animation by Principal Component. File type: output. `Sample file <https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/flexdyn/imod_imove_output.pdb>`_. Accepted formats: pdb (edam:format_1476).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
             * **pc** (*int*) - (1) Principal Component.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
@@ -40,7 +40,7 @@ class imodImove(BiobbObject):
         * wrapped_software:
             * name: iMODS 
             * version: >=1.0.4
-            * license: All rights reserved. The academic version is free. https://chaconlab.org/images/download/License.txt
+            * license: other
         * ontology:
             * name: EDAM
             * schema: http://edamontology.org/EDAM.owl
@@ -113,10 +113,10 @@ class imodImove(BiobbObject):
 
 def imod_imove(input_pdb_path: str, input_dat_path: str, output_pdb_path: str, 
             properties: dict = None, **kwargs) -> int:
-    """Create :class:`imodImove <flexdyn.imodImove.imodImove>`flexdyn.imodImove.imodImove class and
-    execute :meth:`launch() <flexdyn.imodImove.imodImove.launch>` method"""
+    """Create :class:`ImodImove <flexdyn.imod_imove.ImodImove>`flexdyn.imod_imove.ImodImove class and
+    execute :meth:`launch() <flexdyn.imod_imove.ImodImove.launch>` method"""
 
-    return imodImove(   input_pdb_path=input_pdb_path,
+    return ImodImove(   input_pdb_path=input_pdb_path,
                         input_dat_path=input_dat_path,
                         output_pdb_path=output_pdb_path,
                         properties=properties).launch()

@@ -1,0 +1,86 @@
+{
+    "_id": "biobb_flexdyn",
+    "desc": "Biobb_flexdyn is the Biobb module collection for studies on the conformational landscape of native proteins.",
+    "github": "https://github.com/bioexcel/biobb_flexdyn",
+    "readthedocs": "https://biobb-flexdyn.readthedocs.io/en/latest/",
+    "conda": "https://anaconda.org/bioconda/biobb_flexdyn",
+    "docker": "https://quay.io/biocontainers/biobb_flexdyn:3.9.0--pyhdfd78af_0",
+    "singularity": "https://depot.galaxyproject.org/singularity/biobb_flexdyn:3.9.0--pyhdfd78af_0",
+    "version": "3.9.0",
+    "rest": true,
+    "tools" : [
+        {
+            "block" : "ConcoordDisco", 
+            "tool" : "Concoord", 
+            "desc" : "Wrapper of the Concoord_disco software.",
+            "exec" : "concoord_disco",
+            "docs": "https://biobb-flexdyn.readthedocs.io/en/latest/flexdyn.html#module-flexdyn.concoord_disco",
+            "rest": true
+        },
+        {
+            "block" : "ConcoordDist", 
+            "tool" : "Concoord", 
+            "desc" : "Wrapper of the Concoord_dist software.",
+            "exec" : "concoord_dist",
+            "docs": "https://biobb-flexdyn.readthedocs.io/en/latest/flexdyn.html#module-flexdyn.concoord_dist",
+            "rest": true
+        },
+        {
+            "block" : "ImodImode", 
+            "tool" : "Imods", 
+            "desc" : "Wrapper of the imods_imode software.",
+            "exec" : "imod_imode",
+            "docs": "https://biobb-flexdyn.readthedocs.io/en/latest/flexdyn.html#module-flexdyn.imod_imode",
+            "rest": true
+        },
+        {
+            "block" : "ImodImove", 
+            "tool" : "Imods", 
+            "desc" : "Wrapper of the imods_imove software.",
+            "exec" : "imod_imove",
+            "docs": "https://biobb-flexdyn.readthedocs.io/en/latest/flexdyn.html#module-flexdyn.imod_imove",
+            "rest": true
+        },
+        {
+            "block" : "Nolb_nma", 
+            "tool" : "NOLB", 
+            "desc" : "Wrapper of the Nolb software.",
+            "exec" : "nolb_nma",
+            "docs": "https://biobb-flexdyn.readthedocs.io/en/latest/flexdyn.html#module-flexdyn.nolb",
+            "rest": true
+        },
+        {
+            "block" : "ProdyANM", 
+            "tool" : "Prody", 
+            "desc" : "Wrapper of the Prody software.",
+            "exec" : "prody_anm",
+            "docs": "https://biobb-flexdyn.readthedocs.io/en/latest/flexdyn.html#module-flexdyn.prody_anm",
+            "rest": true
+        },
+    ],
+    "dep_pypi" : [
+        "install_requires=['biobb_common==3.9.0']", 
+        "python_requires='>=3.7,<3.10'"
+    ], 
+    "dep_conda" : [
+        "python >=3.7,<3.10", 
+        "biobb_common ==3.9.0", 
+        "biobb_flexserv ==3.8.1",
+        "imods",
+        "concoord",
+        "nolb",
+        "prody" 
+    ],
+    "keywords" : [
+        "3D-Bioinfo",
+        "ELIXIR",
+        "FlexDyn",
+        "Bioinformatics",
+        "Workflows",
+        "BioExcel",
+        "Compatibility",
+        "Flexibility",
+        "Ensembles",
+        "Protein Structure"
+    ]
+}

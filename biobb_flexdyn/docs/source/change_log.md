@@ -1,9 +1,9 @@
-# Biobb FlexServ changelog
+# Biobb FlexDyn changelog
 
-## What's new in version [3.8.0](https://github.com/bioexcel/biobb_flexserv/releases/tag/v3.8.0)?
-The version 3.8.0 is the first release of biobb_flexserv. There have been added the run_bd, run_dmd and run_nma tools.
+## What's new in version [3.9.0](https://github.com/bioexcel/biobb_flexdyn/releases/tag/v3.9.0)?
+The version 3.9.0 is the first release of biobb_flexdyn. There have been added the concoord_dist, concoord_disco, imod_imode, imod_imove, prody_anm and nolb_nma tools.
 
 ### New features
 
 * First release
-* FlexServ module: bd_run, dmd_run and nma_run tools
+* FlexDyn module: concoord_dist, concoord_disco, imod_imode, imod_imove, prody_anm and nolb_nma tools

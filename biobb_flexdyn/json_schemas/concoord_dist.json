@@ -1,0 +1,223 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://bioexcel.eu/biobb_flexdyn/json_schemas/1.0/concoord_dist",
+    "name": "biobb_flexdyn ConcoordDist",
+    "title": "Wrapper of the Dist tool from the Concoord package.",
+    "description": "Structure interpretation and bond definitions from a PDB/GRO file.",
+    "type": "object",
+    "info": {
+        "wrapped_software": {
+            "name": "Concoord",
+            "version": ">=2.1.2",
+            "license": "other"
+        },
+        "ontology": {
+            "name": "EDAM",
+            "schema": "http://edamontology.org/EDAM.owl"
+        }
+    },
+    "required": [
+        "input_structure_path",
+        "output_pdb_path",
+        "output_gro_path",
+        "output_dat_path"
+    ],
+    "properties": {
+        "input_structure_path": {
+            "type": "string",
+            "description": "Input structure file",
+            "filetype": "input",
+            "sample": "https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/data/flexdyn/structure.pdb",
+            "enum": [
+                ".*\\.pdb$",
+                ".*\\.gro$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.pdb$",
+                    "description": "Input structure file",
+                    "edam": "format_1476"
+                },
+                {
+                    "extension": ".*\\.gro$",
+                    "description": "Input structure file",
+                    "edam": "format_2033"
+                }
+            ]
+        },
+        "output_pdb_path": {
+            "type": "string",
+            "description": "Output pdb file",
+            "filetype": "output",
+            "sample": "https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/flexdyn/dist.pdb",
+            "enum": [
+                ".*\\.pdb$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.pdb$",
+                    "description": "Output pdb file",
+                    "edam": "format_1476"
+                }
+            ]
+        },
+        "output_gro_path": {
+            "type": "string",
+            "description": "Output gro file",
+            "filetype": "output",
+            "sample": "https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/flexdyn/dist.gro",
+            "enum": [
+                ".*\\.gro$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.gro$",
+                    "description": "Output gro file",
+                    "edam": "format_2033"
+                }
+            ]
+        },
+        "output_dat_path": {
+            "type": "string",
+            "description": "Output dat with structure interpretation and bond definitions",
+            "filetype": "output",
+            "sample": "https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/flexdyn/dist.dat",
+            "enum": [
+                ".*\\.dat$",
+                ".*\\.txt$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.dat$",
+                    "description": "Output dat with structure interpretation and bond definitions",
+                    "edam": "format_1637"
+                },
+                {
+                    "extension": ".*\\.txt$",
+                    "description": "Output dat with structure interpretation and bond definitions",
+                    "edam": "format_2330"
+                }
+            ]
+        },
+        "properties": {
+            "type": "object",
+            "properties": {
+                "binary_path": {
+                    "type": "string",
+                    "default": "dist",
+                    "wf_prop": false,
+                    "description": "Concoord dist binary path to be used."
+                },
+                "vdw": {
+                    "type": "integer",
+                    "default": 1,
+                    "wf_prop": false,
+                    "description": "Select a set of Van der Waals parameters. ",
+                    "enum": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6
+                    ],
+                    "property_formats": [
+                        {
+                            "name": 1,
+                            "description": "OPLS-UA -united atoms- parameters"
+                        },
+                        {
+                            "name": 2,
+                            "description": "OPLS-AA -all atoms- parameters"
+                        },
+                        {
+                            "name": 3,
+                            "description": "PROLSQ repel parameters"
+                        },
+                        {
+                            "name": 4,
+                            "description": "Yamber2 parameters"
+                        },
+                        {
+                            "name": 5,
+                            "description": "Li et al. parameters"
+                        },
+                        {
+                            "name": 6,
+                            "description": "OPLS-X parameters -recommended for NMR structure determination-"
+                        }
+                    ]
+                },
+                "bond_angle": {
+                    "type": "integer",
+                    "default": 1,
+                    "wf_prop": false,
+                    "description": "Select a set of bond/angle parameters. ",
+                    "enum": [
+                        1,
+                        2
+                    ],
+                    "property_formats": [
+                        {
+                            "name": 1,
+                            "description": "Concoord default parameters"
+                        },
+                        {
+                            "name": 2,
+                            "description": "Engh-Huber parameters"
+                        }
+                    ]
+                },
+                "retain_hydrogens": {
+                    "type": "boolean",
+                    "default": false,
+                    "wf_prop": false,
+                    "description": "Retain hydrogen atoms"
+                },
+                "nb_interactions": {
+                    "type": "boolean",
+                    "default": false,
+                    "wf_prop": false,
+                    "description": "Try to find alternatives for non-bonded interactions (by default the native contacts will be preserved)"
+                },
+                "cutoff": {
+                    "type": "number",
+                    "default": 4.0,
+                    "wf_prop": false,
+                    "description": "cut-off radius (Angstroms) for non-bonded interacting pairs (the cut-off distances are additional to the sum of VDW radii)"
+                },
+                "min_distances": {
+                    "type": "integer",
+                    "default": 50,
+                    "wf_prop": false,
+                    "description": "Minimum number of distances to be defined for each atom"
+                },
+                "damp": {
+                    "type": "number",
+                    "default": 1.0,
+                    "wf_prop": false,
+                    "description": "Multiply each distance margin by this value"
+                },
+                "fixed_atoms": {
+                    "type": "boolean",
+                    "default": false,
+                    "wf_prop": false,
+                    "description": "Interpret zero occupancy as atoms to keep fixed"
+                },
+                "remove_tmp": {
+                    "type": "boolean",
+                    "default": true,
+                    "wf_prop": true,
+                    "description": "Remove temporal files."
+                },
+                "restart": {
+                    "type": "boolean",
+                    "default": false,
+                    "wf_prop": true,
+                    "description": "Do not execute if output files exist."
+                }
+            }
+        }
+    },
+    "additionalProperties": false
+}

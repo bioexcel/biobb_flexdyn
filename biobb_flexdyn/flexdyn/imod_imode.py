@@ -9,7 +9,7 @@ from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import  settings
 from biobb_common.tools.file_utils import launchlogger
 
-class imodImode(BiobbObject):
+class ImodImode(BiobbObject):
     """
     | biobb_flexdyn imod_imode
     | Wrapper of the imode tool 
@@ -17,7 +17,7 @@ class imodImode(BiobbObject):
 
     Args:
         input_pdb_path (str): Input PDB file. File type: input. `Sample file <https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/data/flexdyn/structure.pdb>`_. Accepted formats: pdb (edam:format_1476).
-        output_dat_path (str): Output dat with normal modes. File type: output. `Sample file <https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/flexdyn/dist.dat>`_. Accepted formats: dat (edam:format_1637), txt (edam:format_2330).
+        output_dat_path (str): Output dat with normal modes. File type: output. `Sample file <https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/flexdyn/imod_imode_evecs.dat>`_. Accepted formats: dat (edam:format_1637), txt (edam:format_2330).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
             * **cg** (*int*) - (2) Coarse-Grained model. Values: 0 (CA), 1 (C5), 2 (Heavy atoms).
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
@@ -38,7 +38,7 @@ class imodImode(BiobbObject):
         * wrapped_software:
             * name: iMODS 
             * version: >=1.0.4
-            * license: All rights reserved. The academic version is free. https://chaconlab.org/images/download/License.txt
+            * license: other
         * ontology:
             * name: EDAM
             * schema: http://edamontology.org/EDAM.owl
@@ -110,10 +110,10 @@ class imodImode(BiobbObject):
 
 def imod_imode(input_pdb_path: str, output_dat_path: str, 
             properties: dict = None, **kwargs) -> int:
-    """Create :class:`imodImode <flexdyn.imode.imodImode>`flexdyn.imode.imodImode class and
-    execute :meth:`launch() <flexdyn.imode.imodImode.launch>` method"""
+    """Create :class:`ImodImode <flexdyn.imod_imode.ImodImode>`flexdyn.imod_imode.ImodImode class and
+    execute :meth:`launch() <flexdyn.imod_imode.ImodImode.launch>` method"""
 
-    return imodImode(    input_pdb_path=input_pdb_path,
+    return ImodImode(    input_pdb_path=input_pdb_path,
                         output_dat_path=output_dat_path,
                         properties=properties).launch()
 

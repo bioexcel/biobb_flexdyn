@@ -4,20 +4,19 @@
 import argparse
 import shutil
 from pathlib import Path
-from biobb_common.tools import file_utils as fu
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import  settings
 from biobb_common.tools.file_utils import launchlogger
 
-class NOLB(BiobbObject):
+class Nolb_nma(BiobbObject):
     """
-    | biobb_flexdyn NOLB
+    | biobb_flexdyn Nolb_nma
     | Wrapper of the NOLB tool 
     | Generate an ensemble of structures using the NOLB (NOn-Linear rigid Block) NMA tool.
 
     Args:
         input_pdb_path (str): Input PDB file. File type: input. `Sample file <https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/data/flexdyn/structure.pdb>`_. Accepted formats: pdb (edam:format_1476).
-        output_pdb_path (str): Output multi-model PDB file with the generated ensemble. File type: output. `Sample file <https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/flexdyn/ensemble_nolb.pdb>`_. Accepted formats: pdb (edam:format_1476).
+        output_pdb_path (str): Output multi-model PDB file with the generated ensemble. File type: output. `Sample file <https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/flexdyn/nolb_output.pdb>`_. Accepted formats: pdb (edam:format_1476).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
             * **num_structs** (*int*) - (500) Number of structures to be generated
             * **cutoff** (*float*) - (5.0) This options specifies the interaction cutoff distance for the elastic network models (in angstroms), 5 by default. The Hessian matrix is constructed according to this interaction distance. Some artifacts should be expected for too short distances (< 5 Å). 
@@ -28,11 +27,11 @@ class NOLB(BiobbObject):
     Examples:
         This is a use example of how to use the building block from Python::
 
-            from biobb_flexdyn.flexdyn.nolb import nolb
+            from biobb_flexdyn.flexdyn.nolb_nma import nolb_nma
             prop = {
                 'num_structs' : 20
             }
-            nolb(   input_pdb_path='/path/to/structure.pdb',
+            nolb_nma(   input_pdb_path='/path/to/structure.pdb',
                     output_pdb_path='/path/to/output.pdb',
                     properties=prop)
 
@@ -40,7 +39,7 @@ class NOLB(BiobbObject):
         * wrapped_software:
             * name: NOLB 
             * version: >=1.9
-            * license: All rights reserved. The academic version is free.
+            * license: other
         * ontology:
             * name: EDAM
             * schema: http://edamontology.org/EDAM.owl
@@ -135,12 +134,12 @@ class NOLB(BiobbObject):
 
         return self.return_code
 
-def nolb(input_pdb_path: str, output_pdb_path: str, 
+def nolb_nma(input_pdb_path: str, output_pdb_path: str, 
             properties: dict = None, **kwargs) -> int:
-    """Create :class:`NOLB <flexdyn.nolb.NOLB>`flexdyn.nolb.NOLB class and
-    execute :meth:`launch() <flexdyn.nolb.NOLB.launch>` method"""
+    """Create :class:`Nolb_nma <flexdyn.nolb_nma.Nolb_nma>`flexdyn.nolb_nma.Nolb_nma class and
+    execute :meth:`launch() <flexdyn.nolb_nma.Nolb_nma.launch>` method"""
 
-    return NOLB(    input_pdb_path=input_pdb_path,
+    return Nolb_nma(    input_pdb_path=input_pdb_path,
                         output_pdb_path=output_pdb_path,
                         properties=properties).launch()
 
@@ -158,7 +157,7 @@ def main():
     properties = settings.ConfReader(config=args.config).get_prop_dic()
 
     # Specific call
-    nolb(   input_pdb_path=args.input_pdb_path,
+    nolb_nma(   input_pdb_path=args.input_pdb_path,
             output_pdb_path=args.output_pdb_path,
             properties=properties)
 
