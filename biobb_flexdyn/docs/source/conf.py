@@ -70,7 +70,7 @@ source_suffix = ['.rst', '.md']
 master_doc = 'index'
 
 # General information about the project.
-project = u'biobb_flexserv'
+project = u'biobb_flexdyn'
 copyright = u'2022, Bioexcel Project'
 author = u'Bioexcel Project'
 
