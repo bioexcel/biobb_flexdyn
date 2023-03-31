@@ -4,8 +4,8 @@
     "github": "https://github.com/bioexcel/biobb_flexdyn",
     "readthedocs": "https://biobb-flexdyn.readthedocs.io/en/latest/",
     "conda": "https://anaconda.org/bioconda/biobb_flexdyn",
-    "docker": "https://quay.io/biocontainers/biobb_flexdyn:3.9.0--pyhdfd78af_0",
-    "singularity": "https://depot.galaxyproject.org/singularity/biobb_flexdyn:3.9.0--pyhdfd78af_0",
+    "docker": "https://quay.io/biocontainers/biobb_flexdyn:3.9.0--pyhdfd78af_1",
+    "singularity": "https://depot.galaxyproject.org/singularity/biobb_flexdyn:3.9.0--pyhdfd78af_1",
     "version": "3.9.0",
     "rest": true,
     "tools" : [
