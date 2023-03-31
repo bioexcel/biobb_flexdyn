@@ -56,7 +56,7 @@
             "exec" : "prody_anm",
             "docs": "https://biobb-flexdyn.readthedocs.io/en/latest/flexdyn.html#module-flexdyn.prody_anm",
             "rest": true
-        },
+        }
     ],
     "dep_pypi" : [
         "install_requires=['biobb_common==3.9.0']", 
