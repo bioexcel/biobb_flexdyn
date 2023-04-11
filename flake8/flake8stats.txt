@@ -1,0 +1,17 @@
+8     E124 closing bracket does not match visual indentation
+44    E128 continuation line under-indented for visual indent
+24    E201 whitespace after '{'
+8     E202 whitespace before '}'
+11    E231 missing whitespace after ','
+3     E261 at least two spaces before inline comment
+17    E265 block comment should start with '# '
+6     E271 multiple spaces after keyword
+24    E302 expected 2 blank lines, found 1
+6     E305 expected 2 blank lines after class or function definition, found 1
+1     E401 multiple imports on one line
+6     E701 multiple statements on one line (colon)
+5     F401 'biobb_common.tools.file_utils as fu' imported but unused
+2     F841 local variable 'out_file_prefix' is assigned to but never used
+44    W291 trailing whitespace
+4     W292 no newline at end of file
+3     W293 blank line contains whitespace
