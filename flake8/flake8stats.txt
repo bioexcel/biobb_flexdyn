@@ -13,5 +13,5 @@
 5     F401 'biobb_common.tools.file_utils as fu' imported but unused
 2     F841 local variable 'out_file_prefix' is assigned to but never used
 44    W291 trailing whitespace
-4     W292 no newline at end of file
+2     W292 no newline at end of file
 3     W293 blank line contains whitespace
