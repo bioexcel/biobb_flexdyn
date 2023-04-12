@@ -20,7 +20,6 @@ class ImodImc(BiobbObject):
         input_dat_path (str): Input dat with normal modes. File type: input. `Sample file <https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/data/flexdyn/imod_imode_evecs.dat>`_. Accepted formats: dat (edam:format_1637), txt (edam:format_2330).
         output_traj_path (str): Output multi-model PDB file with the generated ensemble. File type: output. `Sample file <https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/flexdyn/imod_imc_output.pdb>`_. Accepted formats: pdb (edam:format_1476).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
-            * **pc** (*int*) - (1) Principal Component.
             * **num_structs** (*int*) - (500) Number of structures to be generated
             * **num_modes** (*int*) - (5) Number of eigenvectors to be employed
             * **amplitude** (*int*) - (1) Amplitude linear factor to scale motion
