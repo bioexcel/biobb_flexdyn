@@ -6,6 +6,73 @@ biobb_command [-h] --config CONFIG --input_file(s) <input_file(s)> --output_file
 -----------------
 
 
+## Imod_imc
+Wrapper of the imc tool
+### Get help
+Command:
+```python
+imod_imc -h
+```
+    usage: imod_imc [-h] [--config CONFIG] --input_pdb_path INPUT_PDB_PATH --input_dat_path INPUT_DAT_PATH --output_traj_path OUTPUT_TRAJ_PATH
+    
+    Compute a Monte-Carlo IC-NMA based conformational ensemble using the imc tool from the iMODS package.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      --config CONFIG       Configuration file
+    
+    required arguments:
+      --input_pdb_path INPUT_PDB_PATH
+                            Input structure file. Accepted formats: pdb
+      --input_dat_path INPUT_DAT_PATH
+                            Input evecs file. Accepted formats: dat
+      --output_traj_path OUTPUT_TRAJ_PATH
+                            Output traj file. Accepted formats: pdb.
+### I / O Arguments
+Syntax: input_argument (datatype) : Definition
+
+Config input / output arguments for this building block:
+* **input_pdb_path** (*string*): Input PDB file. File type: input. [Sample file](https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/data/flexdyn/structure_cleaned.pdb). Accepted formats: PDB
+* **input_dat_path** (*string*): Input dat with normal modes. File type: input. [Sample file](https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/data/flexdyn/imod_imode_evecs.dat). Accepted formats: DAT, TXT
+* **output_traj_path** (*string*): Output multi-model PDB file with the generated ensemble. File type: output. [Sample file](https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/flexdyn/imod_imc_output.pdb). Accepted formats: PDB
+### Config
+Syntax: input_parameter (datatype) - (default_value) Definition
+
+Config parameters for this building block:
+* **num_structs** (*integer*): (500) Number of structures to be generated.
+* **num_modes** (*integer*): (5) Number of eigenvectors to be employed.
+* **amplitude** (*integer*): (1) Amplitude linear factor to scale motion.
+* **remove_tmp** (*boolean*): (True) Remove temporal files..
+* **restart** (*boolean*): (False) Do not execute if output files exist..
+### YAML
+#### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imc.yml)
+```python
+properties:
+  amplitude: 6.0
+  num_modes: 10
+  num_structs: 10
+
+```
+#### Command line
+```python
+imod_imc --config config_imod_imc.yml --input_pdb_path structure_cleaned.pdb --input_dat_path imod_imode_evecs.dat --output_traj_path imod_imc_output.pdb
+```
+### JSON
+#### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imc.json)
+```python
+{
+  "properties": {
+    "num_structs": 10,
+    "num_modes": 10,
+    "amplitude": 6.0
+  }
+}
+```
+#### Command line
+```python
+imod_imc --config config_imod_imc.json --input_pdb_path structure_cleaned.pdb --input_dat_path imod_imode_evecs.dat --output_traj_path imod_imc_output.pdb
+```
+
 ## Imod_imode
 Wrapper of the imode tool
 ### Get help
@@ -318,6 +385,7 @@ Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
 * **pc** (*integer*): (1) Principal Component..
+* **num_frames** (*integer*): (11) Number of frames to be generated.
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
 ### YAML

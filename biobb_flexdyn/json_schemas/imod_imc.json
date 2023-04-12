@@ -1,9 +1,9 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "http://bioexcel.eu/biobb_flexdyn/json_schemas/1.0/imod_imove",
-    "name": "biobb_flexdyn imod_imove",
-    "title": "Wrapper of the imove tool",
-    "description": "Compute the normal modes of a macromolecule using the imove tool from the iMODS package.",
+    "$id": "http://bioexcel.eu/biobb_flexdyn/json_schemas/1.0/imod_imc",
+    "name": "biobb_flexdyn imod_imc",
+    "title": "Wrapper of the imc tool",
+    "description": "Compute a Monte-Carlo IC-NMA based conformational ensemble using the imc tool from the iMODS package.",
     "type": "object",
     "info": {
         "wrapped_software": {
@@ -19,7 +19,7 @@
     "required": [
         "input_pdb_path",
         "input_dat_path",
-        "output_pdb_path"
+        "output_traj_path"
     ],
     "properties": {
         "input_pdb_path": {
@@ -60,18 +60,18 @@
                 }
             ]
         },
-        "output_pdb_path": {
+        "output_traj_path": {
             "type": "string",
-            "description": "Output multi-model PDB file with the generated animation by Principal Component",
+            "description": "Output multi-model PDB file with the generated ensemble",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/flexdyn/imod_imove_output.pdb",
+            "sample": "https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/flexdyn/imod_imc_output.pdb",
             "enum": [
                 ".*\\.pdb$"
             ],
             "file_formats": [
                 {
                     "extension": ".*\\.pdb$",
-                    "description": "Output multi-model PDB file with the generated animation by Principal Component",
+                    "description": "Output multi-model PDB file with the generated ensemble",
                     "edam": "format_1476"
                 }
             ]
@@ -79,17 +79,23 @@
         "properties": {
             "type": "object",
             "properties": {
-                "pc": {
+                "num_structs": {
+                    "type": "integer",
+                    "default": 500,
+                    "wf_prop": false,
+                    "description": "Number of structures to be generated"
+                },
+                "num_modes": {
+                    "type": "integer",
+                    "default": 5,
+                    "wf_prop": false,
+                    "description": "Number of eigenvectors to be employed"
+                },
+                "amplitude": {
                     "type": "integer",
                     "default": 1,
                     "wf_prop": false,
-                    "description": "Principal Component."
-                },
-                "num_frames": {
-                    "type": "integer",
-                    "default": 11,
-                    "wf_prop": false,
-                    "description": "Number of frames to be generated"
+                    "description": "Amplitude linear factor to scale motion"
                 },
                 "remove_tmp": {
                     "type": "boolean",
