@@ -60,3 +60,14 @@ imod_imove:
     ref_output_pdb_path: file:test_reference_dir/flexdyn/imod_imove_output.pdb
   properties:
     pc : 1
+
+imod_imc:
+  paths:
+    input_pdb_path: file:test_data_dir/flexdyn/structure_cleaned.pdb
+    input_dat_path: file:test_data_dir/flexdyn/imod_imode_evecs.dat
+    output_traj_path: imod_imc_output.pdb
+    ref_output_traj_path: file:test_reference_dir/flexdyn/imod_imc_output.pdb
+  properties:
+    num_structs: 10
+    num_modes: 10
+    amplitude: 6.0

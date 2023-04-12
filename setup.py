@@ -27,6 +27,7 @@ setuptools.setup(
             "concoord_disco = biobb_flexdyn.flexdyn.concoord_disco:main",
             "imod_imode = biobb_flexdyn.flexdyn.imod_imode:main",
             "imod_imove = biobb_flexdyn.flexdyn.imod_imove:main",
+            "imod_imc = biobb_flexdyn.flexdyn.imod_imc:main",
             "nolb_nma = biobb_flexdyn.flexdyn.nolb_nma:main",
             "prody_anm = biobb_flexdyn.flexdyn.prody_anm:main"
         ]

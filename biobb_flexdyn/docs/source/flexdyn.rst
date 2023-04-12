@@ -36,6 +36,14 @@ flexdyn.imod_imove module
     :undoc-members:
     :show-inheritance:
 
+flexdyn.imod_imc module
+---------------------------
+
+.. automodule:: flexdyn.imod_imc
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 flexdyn.prody_anm module
 ---------------------------
 
