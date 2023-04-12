@@ -1,5 +1,12 @@
 # Biobb FlexDyn changelog
 
+## What's new in version [4.0.1](https://github.com/bioexcel/biobb_flexdyn/releases/tag/v4.0.1)?
+In version 4.0.1 the imod_imc tool has been added.
+
+### New features
+
+* New imod_imc tool
+
 ## What's new in version [4.0.0](https://github.com/bioexcel/biobb_flexdyn/releases/tag/v4.0.0)?
 In version 4.0.0 the dependency biobb_common has been updated to 4.0.0 version.
 
