@@ -2,11 +2,14 @@
 
 """Module containing the concoord_dist class and the command line interface."""
 import argparse
+import os
+import shutil
 from pathlib import Path
 from biobb_common.tools import file_utils as fu
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.configuration import  settings
+from biobb_common.configuration import settings
 from biobb_common.tools.file_utils import launchlogger
+
 
 class ConcoordDist(BiobbObject):
     """
@@ -26,9 +29,9 @@ class ConcoordDist(BiobbObject):
             * **retain_hydrogens** (*bool*) - (False) Retain hydrogen atoms
             * **nb_interactions** (*bool*) - (False) Try to find alternatives for non-bonded interactions (by default the native contacts will be preserved)
             * **cutoff** (*float*) - (4.0) cut-off radius (Angstroms) for non-bonded interacting pairs (the cut-off distances are additional to the sum of VDW radii)
-            * **min_distances** (*int*) - (50) Minimum number of distances to be defined for each atom 
+            * **min_distances** (*int*) - (50) Minimum number of distances to be defined for each atom
             * **damp** (*float*) - (1.0) Multiply each distance margin by this value
-            * **fixed_atoms** (*bool*) - (False) Interpret zero occupancy as atoms to keep fixed 
+            * **fixed_atoms** (*bool*) - (False) Interpret zero occupancy as atoms to keep fixed
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
@@ -48,7 +51,7 @@ class ConcoordDist(BiobbObject):
 
     Info:
         * wrapped_software:
-            * name: Concoord 
+            * name: Concoord
             * version: >=2.1.2
             * license: other
         * ontology:
@@ -57,7 +60,7 @@ class ConcoordDist(BiobbObject):
 
     """
     def __init__(self, input_structure_path: str, output_pdb_path: str,
-    output_gro_path: str, output_dat_path: str, properties: dict = None, **kwargs) -> None:
+                 output_gro_path: str, output_dat_path: str, properties: dict = None, **kwargs) -> None:
 
         properties = properties or {}
 
@@ -67,11 +70,10 @@ class ConcoordDist(BiobbObject):
 
         # Input/Output files
         self.io_dict = {
-            'in': { 'input_structure_path': input_structure_path },
-            'out': {    'output_pdb_path': output_pdb_path,
-                        'output_gro_path': output_gro_path,
-                        'output_dat_path': output_dat_path
-            }
+            'in': {'input_structure_path': input_structure_path},
+            'out': {'output_pdb_path': output_pdb_path,
+                    'output_gro_path': output_gro_path,
+                    'output_dat_path': output_dat_path}
         }
 
         # Properties specific for BB
@@ -99,12 +101,19 @@ class ConcoordDist(BiobbObject):
         self.io_dict['in']['stdin_file_path'] = fu.create_stdin_file(f'{self.vdw}\n{self.bond_angle}\n')
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
+        # Copy auxiliary file (HBONDS) to the working dir
+        concoord_lib = os.getenv("CONCOORDLIB")
+
+        hbonds_file = concoord_lib + "/HBONDS.DAT"
+        shutil.copy2(hbonds_file, self.stage_io_dict.get("unique_dir"))
+
         # Command line
-        # (concoord) OROZCO67:biobb_flexdyn hospital$ dist -p biobb_flexdyn/test/data/flexdyn/structure.pdb 
-        # -op dist.pdb -og dist.gro -od dist.dat 
+        # (concoord) OROZCO67:biobb_flexdyn hospital$ dist -p biobb_flexdyn/test/data/flexdyn/structure.pdb
+        # -op dist.pdb -og dist.gro -od dist.dat
         # Select a set of Van der Waals parameters:
         # 1: OPLS-UA (united atoms) parameters
         # 2: OPLS-AA (all atoms) parameters
@@ -123,20 +132,26 @@ class ConcoordDist(BiobbObject):
         # Selected parameter set 1
         # copying /opt/anaconda3/envs/concoord/share/concoord/lib/BONDS.DAT.noeh to BONDS.DAT in current working directory
 
-        self.cmd = [self.binary_path, 
-                "-op", self.stage_io_dict["out"]["output_pdb_path"], 
-                "-og", self.stage_io_dict["out"]["output_gro_path"], 
-                "-od", self.stage_io_dict["out"]["output_dat_path"]
-                ]
-
+        self.cmd = ["cd ", self.stage_io_dict.get('unique_dir'), ";", self.binary_path,
+                    #  "-op", self.stage_io_dict["out"]["output_pdb_path"],
+                    #  "-og", self.stage_io_dict["out"]["output_gro_path"],
+                    #  "-od", self.stage_io_dict["out"]["output_dat_path"]
+                    "-op", str(Path(self.stage_io_dict["out"]["output_pdb_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir')))),
+                    "-og", str(Path(self.stage_io_dict["out"]["output_gro_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir')))),
+                    "-od", str(Path(self.stage_io_dict["out"]["output_dat_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir'))))
+                    ]
         # If input structure in pdb format:
         file_extension = Path(self.stage_io_dict["in"]["input_structure_path"]).suffix
         if file_extension == ".pdb":
             self.cmd.append('-p')
-            self.cmd.append(self.stage_io_dict["in"]["input_structure_path"])
+            # self.cmd.append(self.stage_io_dict["in"]["input_structure_path"])
+            self.cmd.append(str(Path(self.stage_io_dict["in"]["input_structure_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir')))))
+
         elif file_extension == ".gro":
             self.cmd.append('-g')
-            self.cmd.append(self.stage_io_dict["in"]["input_structure_path"])
+            # self.cmd.append(self.stage_io_dict["in"]["input_structure_path"])
+            self.cmd.append(str(Path(self.stage_io_dict["in"]["input_structure_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir')))))
+
         else:
             fu.log("ERROR: input_structure_path ({}) must be a PDB or a GRO formatted file ({})".format(self.io_dict["in"]["input_structure_path"], file_extension), self.out_log, self.global_log)
 
@@ -160,10 +175,11 @@ class ConcoordDist(BiobbObject):
         if self.damp:
             self.cmd.append('-damp')
             self.cmd.append(str(self.damp))
-            
+
         # Add stdin input file
         self.cmd.append('<')
-        self.cmd.append(self.stage_io_dict["in"]["stdin_file_path"])
+        # self.cmd.append(self.stage_io_dict["in"]["stdin_file_path"])
+        self.cmd.append(str(Path(self.stage_io_dict["in"]["stdin_file_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir')))))
 
         # Run Biobb block
         self.run_biobb()
@@ -182,17 +198,19 @@ class ConcoordDist(BiobbObject):
 
         return self.return_code
 
+
 def concoord_dist(input_structure_path: str,
-            output_pdb_path: str, output_gro_path: str, output_dat_path: str,
-            properties: dict = None, **kwargs) -> int:
+                  output_pdb_path: str, output_gro_path: str, output_dat_path: str,
+                  properties: dict = None, **kwargs) -> int:
     """Create :class:`ConcoordDist <flexdyn.concoord_dist.ConcoordDist>`flexdyn.concoord_dist.ConcoordDist class and
     execute :meth:`launch() <flexdyn.concoord_dist.ConcoordDist.launch>` method"""
 
-    return ConcoordDist(    input_structure_path=input_structure_path,
-                            output_pdb_path=output_pdb_path,
-                            output_gro_path=output_gro_path,
-                            output_dat_path=output_dat_path,
-                            properties=properties).launch()
+    return ConcoordDist(input_structure_path=input_structure_path,
+                        output_pdb_path=output_pdb_path,
+                        output_gro_path=output_gro_path,
+                        output_dat_path=output_dat_path,
+                        properties=properties).launch()
+
 
 def main():
     parser = argparse.ArgumentParser(description='Structure interpretation and bond definitions from a PDB/GRO file.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
@@ -210,11 +228,12 @@ def main():
     properties = settings.ConfReader(config=args.config).get_prop_dic()
 
     # Specific call
-    concoord_dist(  input_structure_path=args.input_structure_path,
-                    output_pdb_path=args.output_pdb_path,
-                    output_gro_path=args.output_gro_path,
-                    output_dat_path=args.output_dat_path,
-                    properties=properties)
+    concoord_dist(input_structure_path=args.input_structure_path,
+                  output_pdb_path=args.output_pdb_path,
+                  output_gro_path=args.output_gro_path,
+                  output_dat_path=args.output_dat_path,
+                  properties=properties)
+
 
 if __name__ == '__main__':
     main()

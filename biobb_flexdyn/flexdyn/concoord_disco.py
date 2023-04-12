@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 
 """Module containing the concoord_disco class and the command line interface."""
-import argparse, os, shutil
+import argparse
+import os
+import shutil
 from pathlib import Path
 from biobb_common.tools import file_utils as fu
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.configuration import  settings
+from biobb_common.configuration import settings
 from biobb_common.tools.file_utils import launchlogger
+
 
 class ConcoordDisco(BiobbObject):
     """
@@ -25,12 +28,12 @@ class ConcoordDisco(BiobbObject):
             * **vdw** (*int*) - (1) Select a set of Van der Waals parameters. Values: 1 (OPLS-UA -united atoms- parameters), 2 (OPLS-AA -all atoms- parameters), 3 (PROLSQ repel parameters), 4 (Yamber2 parameters), 5 (Li et al. parameters), 6 (OPLS-X parameters -recommended for NMR structure determination-)
             * **num_structs** (*int*) - (500) Number of structures to be generated
             * **num_iterations** (*int*) - (2500) Maximum number of iterations per structure
-            * **chirality_check** (*int*) - (2) Chirality check. Values: 0 (no chirality checks), 1 (only check afterwards), 2 (check on the fly) 
+            * **chirality_check** (*int*) - (2) Chirality check. Values: 0 (no chirality checks), 1 (only check afterwards), 2 (check on the fly)
             * **bs** (*int*) - (0) Number of rounds of triangular bound smoothing (default 0), (if >= 6, tetragonal BS is activated)
-            * **nofit** (*bool*) - (False) Do not fit generated structures to reference 
-            * **seed** (*int*) - (741265) Initial random seed 
+            * **nofit** (*bool*) - (False) Do not fit generated structures to reference
+            * **seed** (*int*) - (741265) Initial random seed
             * **violation** (*float*) - (1.0) Maximal acceptable sum of violations (nm)
-            * **nofit** (*bool*) - (False) Do not fit generated structures to reference 
+            * **nofit** (*bool*) - (False) Do not fit generated structures to reference
             * **convergence** (*int*) - (50) Consider convergence failed after this number of non-productive iterations
             * **trials** (*int*) - (25) Maximum number of trials per run
             * **damp** (*int*) - (1) Damping factor for distance corrections. Values: 1 (default), 2 (for cases with convergence problems)
@@ -39,7 +42,7 @@ class ConcoordDisco(BiobbObject):
             * **pairlist_freq** (*int*) - (10) Pairlist update frequency in steps (only valid together with bump)
             * **cutoff** (*float*) - (0.5) Cut-off radius for pairlist (nm) (only valid together with bump)
             * **ref** (*bool*) - (False) Use input coordinates instead of random starting coordinates
-            * **scale** (*int*) - (1) Pre-scale coordinates with this factor 
+            * **scale** (*int*) - (1) Pre-scale coordinates with this factor
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
@@ -60,7 +63,7 @@ class ConcoordDisco(BiobbObject):
 
     Info:
         * wrapped_software:
-            * name: Concoord 
+            * name: Concoord
             * version: >=2.1.2
             * license: other
         * ontology:
@@ -69,7 +72,7 @@ class ConcoordDisco(BiobbObject):
 
     """
     def __init__(self, input_pdb_path: str, input_dat_path: str, output_traj_path: str,
-    output_rmsd_path: str, output_bfactor_path: str, properties: dict = None, **kwargs) -> None:
+                 output_rmsd_path: str, output_bfactor_path: str, properties: dict = None, **kwargs) -> None:
 
         properties = properties or {}
 
@@ -79,13 +82,11 @@ class ConcoordDisco(BiobbObject):
 
         # Input/Output files
         self.io_dict = {
-            'in': { 'input_pdb_path': input_pdb_path,
-                    'input_dat_path': input_dat_path,
-             },
-            'out': {    'output_traj_path': output_traj_path,
-                        'output_rmsd_path': output_rmsd_path,
-                        'output_bfactor_path': output_bfactor_path
-            }
+            'in': {'input_pdb_path': input_pdb_path,
+                   'input_dat_path': input_dat_path},
+            'out': {'output_traj_path': output_traj_path,
+                    'output_rmsd_path': output_rmsd_path,
+                    'output_bfactor_path': output_bfactor_path}
         }
 
         # Properties specific for BB
@@ -119,15 +120,16 @@ class ConcoordDisco(BiobbObject):
         """Launches the execution of the FlexDyn ConcoordDisco module."""
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
-        # Copy auxiliary files (MARGINS, ATOMS, BONDS) according to the VdW property to the working dir 
+        # Copy auxiliary files (MARGINS, ATOMS, BONDS) according to the VdW property to the working dir
         concoord_lib = os.getenv("CONCOORDLIB")
 
         # MARGINS_li.DAT, MARGINS_oplsaa.DAT, MARGINS_oplsua.DAT, MARGINS_oplsx.DAT, MARGINS_repel.DAT, MARGINS_yamber2.DAT
         # 1 (OPLS-UA -united atoms- parameters), 2 (OPLS-AA -all atoms- parameters), 3 (PROLSQ repel parameters), 4 (Yamber2 parameters), 5 (Li et al. parameters), 6 (OPLS-X parameters -recommended for NMR structure determination-).
-        vdw_values = ["vdw_values","oplsua","oplsaa","repel","yamber2","li","oplsx"]
+        vdw_values = ["vdw_values", "oplsua", "oplsaa", "repel", "yamber2", "li", "oplsx"]
         margins_file = concoord_lib + "/MARGINS_" + vdw_values[self.vdw] + ".DAT"
         atoms_file = concoord_lib + "/ATOMS_" + vdw_values[self.vdw] + ".DAT"
         bonds_file = concoord_lib + "/BONDS.DAT"
@@ -137,23 +139,23 @@ class ConcoordDisco(BiobbObject):
         shutil.copy2(bonds_file, self.stage_io_dict.get("unique_dir"))
 
         # Command line
-        # (concoord) OROZCO67:biobb_flexdyn hospital$ disco -d biobb_flexdyn/test/reference/flexdyn/dist.dat 
-        # -p biobb_flexdyn/test/reference/flexdyn/dist.pdb  -op patata.pdb 
-        self.cmd = ["cd ", self.stage_io_dict.get('unique_dir'), ";", self.binary_path, 
- #               "-p", str(Path(self.stage_io_dict["in"]["input_pdb_path"]).relative_to(Path.cwd())),
- #               "-d", str(Path(self.stage_io_dict["in"]["input_dat_path"]).relative_to(Path.cwd())),
- #               "-or", str(Path(self.stage_io_dict["out"]["output_rmsd_path"]).relative_to(Path.cwd())),
- #               "-of", str(Path(self.stage_io_dict["out"]["output_bfactor_path"]).relative_to(Path.cwd()))
-                "-p", str(Path(self.stage_io_dict["in"]["input_pdb_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir')))),
-                "-d", str(Path(self.stage_io_dict["in"]["input_dat_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir')))),
-                "-or", str(Path(self.stage_io_dict["out"]["output_rmsd_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir')))),
-                "-of", str(Path(self.stage_io_dict["out"]["output_bfactor_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir'))))
-                ]
+        # (concoord) OROZCO67:biobb_flexdyn hospital$ disco -d biobb_flexdyn/test/reference/flexdyn/dist.dat
+        # -p biobb_flexdyn/test/reference/flexdyn/dist.pdb  -op patata.pdb
+        self.cmd = ["cd ", self.stage_io_dict.get('unique_dir'), ";", self.binary_path,
+                    #  "-p", str(Path(self.stage_io_dict["in"]["input_pdb_path"]).relative_to(Path.cwd())),
+                    #  "-d", str(Path(self.stage_io_dict["in"]["input_dat_path"]).relative_to(Path.cwd())),
+                    #  "-or", str(Path(self.stage_io_dict["out"]["output_rmsd_path"]).relative_to(Path.cwd())),
+                    #  "-of", str(Path(self.stage_io_dict["out"]["output_bfactor_path"]).relative_to(Path.cwd()))
+                    "-p", str(Path(self.stage_io_dict["in"]["input_pdb_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir')))),
+                    "-d", str(Path(self.stage_io_dict["in"]["input_dat_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir')))),
+                    "-or", str(Path(self.stage_io_dict["out"]["output_rmsd_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir')))),
+                    "-of", str(Path(self.stage_io_dict["out"]["output_bfactor_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir'))))
+                    ]
 
         # Output structure formats:
         file_extension = Path(self.stage_io_dict["out"]["output_traj_path"]).suffix
         if file_extension == ".pdb":
-            self.cmd.append('-on') # NMR-PDB format (multi-model)
+            self.cmd.append('-on')  # NMR-PDB format (multi-model)
 #            self.cmd.append(str(Path(self.stage_io_dict["out"]["output_traj_path"]).relative_to(Path.cwd())))
             self.cmd.append(str(Path(self.stage_io_dict["out"]["output_traj_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir')))))
         elif file_extension == ".gro":
@@ -166,7 +168,7 @@ class ConcoordDisco(BiobbObject):
             self.cmd.append(str(Path(self.stage_io_dict["out"]["output_traj_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir')))))
         else:
             fu.log("ERROR: output_traj_path ({}) must be a PDB, GRO or XTC formatted file ({})".format(self.io_dict["out"]["output_traj_path"], file_extension), self.out_log, self.global_log)
-        
+
         # Properties
         if self.num_structs:
             self.cmd.append('-n')
@@ -245,18 +247,20 @@ class ConcoordDisco(BiobbObject):
 
         return self.return_code
 
+
 def concoord_disco(input_pdb_path: str, input_dat_path: str,
-            output_traj_path: str, output_rmsd_path: str, output_bfactor_path: str,
-            properties: dict = None, **kwargs) -> int:
+                   output_traj_path: str, output_rmsd_path: str, output_bfactor_path: str,
+                   properties: dict = None, **kwargs) -> int:
     """Create :class:`ConcoordDisco <flexdyn.concoord_disco.ConcoordDisco>`flexdyn.concoord_disco.ConcoordDisco class and
     execute :meth:`launch() <flexdyn.concoord_disco.ConcoordDisco.launch>` method"""
 
-    return ConcoordDisco(   input_pdb_path=input_pdb_path,
-                            input_dat_path=input_dat_path,
-                            output_traj_path=output_traj_path,
-                            output_rmsd_path=output_rmsd_path,
-                            output_bfactor_path=output_bfactor_path,
-                            properties=properties).launch()
+    return ConcoordDisco(input_pdb_path=input_pdb_path,
+                         input_dat_path=input_dat_path,
+                         output_traj_path=output_traj_path,
+                         output_rmsd_path=output_rmsd_path,
+                         output_bfactor_path=output_bfactor_path,
+                         properties=properties).launch()
+
 
 def main():
     parser = argparse.ArgumentParser(description='Structure generation based on a set of geometric constraints extracted with the Concoord Dist tool.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
@@ -275,12 +279,13 @@ def main():
     properties = settings.ConfReader(config=args.config).get_prop_dic()
 
     # Specific call
-    concoord_disco( input_pdb_path=args.input_pdb_path,
-                    input_dat_path=args.input_dat_path,
-                    output_traj_path=args.output_traj_path,
-                    output_rmsd_path=args.output_rmsd_path,
-                    output_bfactor_path=args.output_bfactor_path,
-                    properties=properties)
+    concoord_disco(input_pdb_path=args.input_pdb_path,
+                   input_dat_path=args.input_dat_path,
+                   output_traj_path=args.output_traj_path,
+                   output_rmsd_path=args.output_rmsd_path,
+                   output_bfactor_path=args.output_bfactor_path,
+                   properties=properties)
+
 
 if __name__ == '__main__':
     main()

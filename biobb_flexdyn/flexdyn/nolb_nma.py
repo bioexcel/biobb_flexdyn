@@ -5,13 +5,14 @@ import argparse
 import shutil
 from pathlib import Path
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.configuration import  settings
+from biobb_common.configuration import settings
 from biobb_common.tools.file_utils import launchlogger
+
 
 class Nolb_nma(BiobbObject):
     """
     | biobb_flexdyn Nolb_nma
-    | Wrapper of the NOLB tool 
+    | Wrapper of the NOLB tool
     | Generate an ensemble of structures using the NOLB (NOn-Linear rigid Block) NMA tool.
 
     Args:
@@ -19,8 +20,8 @@ class Nolb_nma(BiobbObject):
         output_pdb_path (str): Output multi-model PDB file with the generated ensemble. File type: output. `Sample file <https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/flexdyn/nolb_output.pdb>`_. Accepted formats: pdb (edam:format_1476).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
             * **num_structs** (*int*) - (500) Number of structures to be generated
-            * **cutoff** (*float*) - (5.0) This options specifies the interaction cutoff distance for the elastic network models (in angstroms), 5 by default. The Hessian matrix is constructed according to this interaction distance. Some artifacts should be expected for too short distances (< 5 Å). 
-            * **rmsd** (*float*) - (1.0) Maximum RMSd for decoy generation. 
+            * **cutoff** (*float*) - (5.0) This options specifies the interaction cutoff distance for the elastic network models (in angstroms), 5 by default. The Hessian matrix is constructed according to this interaction distance. Some artifacts should be expected for too short distances (< 5 Å).
+            * **rmsd** (*float*) - (1.0) Maximum RMSd for decoy generation.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
@@ -37,7 +38,7 @@ class Nolb_nma(BiobbObject):
 
     Info:
         * wrapped_software:
-            * name: NOLB 
+            * name: NOLB
             * version: >=1.9
             * license: other
         * ontology:
@@ -46,7 +47,7 @@ class Nolb_nma(BiobbObject):
 
     """
     def __init__(self, input_pdb_path: str, output_pdb_path: str,
-    properties: dict = None, **kwargs) -> None:
+                 properties: dict = None, **kwargs) -> None:
 
         properties = properties or {}
 
@@ -56,8 +57,8 @@ class Nolb_nma(BiobbObject):
 
         # Input/Output files
         self.io_dict = {
-            'in': { 'input_pdb_path': input_pdb_path },
-            'out': { 'output_pdb_path': output_pdb_path }
+            'in': {'input_pdb_path': input_pdb_path},
+            'out': {'output_pdb_path': output_pdb_path}
         }
 
         # Properties specific for BB
@@ -65,7 +66,7 @@ class Nolb_nma(BiobbObject):
         self.binary_path = properties.get('binary_path', 'NOLB')
 
         self.num_structs = properties.get('num_structs', 500)
-        #self.num_modes = properties.get('num_modes', 10)
+        # self.num_modes = properties.get('num_modes', 10)
         self.cutoff = properties.get('cutoff', 5.0)
         self.rmsd = properties.get('rmsd', 1.0)
 
@@ -78,20 +79,21 @@ class Nolb_nma(BiobbObject):
         """Launches the execution of the FlexDyn NOLB module."""
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         # Output temporary file
-        out_file_prefix = Path(self.stage_io_dict.get("unique_dir")).joinpath("nolb_ensemble") 
-        out_file = Path(self.stage_io_dict.get("unique_dir")).joinpath("nolb_ensemble_nlb_decoys.pdb") 
+        out_file_prefix = Path(self.stage_io_dict.get("unique_dir")).joinpath("nolb_ensemble")
+        out_file = Path(self.stage_io_dict.get("unique_dir")).joinpath("nolb_ensemble_nlb_decoys.pdb")
 
         # Command line
         # ./NOLB 1ake_monomer.pdb -s 100 --rmsd 5 -m  -o patata # Output: patata_nlb_decoys.pdb
-        self.cmd = [self.binary_path, 
-                str(Path(self.stage_io_dict["in"]["input_pdb_path"]).relative_to(Path.cwd())),
-                "-o", str(out_file_prefix),
-                "-m" # Minimizing the generated structures by default
-                ]
+        self.cmd = [self.binary_path,
+                    str(Path(self.stage_io_dict["in"]["input_pdb_path"]).relative_to(Path.cwd())),
+                    "-o", str(out_file_prefix),
+                    "-m"  # Minimizing the generated structures by default
+                    ]
 
         # Properties
         if self.num_structs:
@@ -100,7 +102,7 @@ class Nolb_nma(BiobbObject):
 
         # Num modes is deactivated for the decoys generation. CHECK!
         #  * **num_modes** (*int*) - (10) Number of non-trivial modes to compute, 10 by default. If this number exceeds the size of the Hessian matrix, it will be adapted accordingly.
-        #if self.num_modes:
+        # if self.num_modes:
         #    self.cmd.append('-n')
         #    self.cmd.append(str(self.num_modes))
 
@@ -112,7 +114,7 @@ class Nolb_nma(BiobbObject):
             self.cmd.append('--rmsd')
             self.cmd.append(str(self.rmsd))
 
-        #--dist 1 -m --nSteps 5000 --tol 0.001
+        # --dist 1 -m --nSteps 5000 --tol 0.001
         self.cmd.append("--dist 1 --nSteps 5000 --tol 0.001")
 
         # Run Biobb block
@@ -134,14 +136,16 @@ class Nolb_nma(BiobbObject):
 
         return self.return_code
 
-def nolb_nma(input_pdb_path: str, output_pdb_path: str, 
-            properties: dict = None, **kwargs) -> int:
+
+def nolb_nma(input_pdb_path: str, output_pdb_path: str,
+             properties: dict = None, **kwargs) -> int:
     """Create :class:`Nolb_nma <flexdyn.nolb_nma.Nolb_nma>`flexdyn.nolb_nma.Nolb_nma class and
     execute :meth:`launch() <flexdyn.nolb_nma.Nolb_nma.launch>` method"""
 
-    return Nolb_nma(    input_pdb_path=input_pdb_path,
-                        output_pdb_path=output_pdb_path,
-                        properties=properties).launch()
+    return Nolb_nma(input_pdb_path=input_pdb_path,
+                    output_pdb_path=output_pdb_path,
+                    properties=properties).launch()
+
 
 def main():
     parser = argparse.ArgumentParser(description='Generate an ensemble of structures using the NOLB (NOn-Linear rigid Block) NMA tool.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
@@ -157,9 +161,10 @@ def main():
     properties = settings.ConfReader(config=args.config).get_prop_dic()
 
     # Specific call
-    nolb_nma(   input_pdb_path=args.input_pdb_path,
-            output_pdb_path=args.output_pdb_path,
-            properties=properties)
+    nolb_nma(input_pdb_path=args.input_pdb_path,
+             output_pdb_path=args.output_pdb_path,
+             properties=properties)
+
 
 if __name__ == '__main__':
     main()

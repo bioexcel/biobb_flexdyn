@@ -4,15 +4,15 @@
 import argparse
 import shutil
 from pathlib import Path
-from biobb_common.tools import file_utils as fu
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.configuration import  settings
+from biobb_common.configuration import settings
 from biobb_common.tools.file_utils import launchlogger
+
 
 class ImodImode(BiobbObject):
     """
     | biobb_flexdyn imod_imode
-    | Wrapper of the imode tool 
+    | Wrapper of the imode tool
     | Compute the normal modes of a macromolecule using the imode tool from the iMODS package.
 
     Args:
@@ -21,7 +21,7 @@ class ImodImode(BiobbObject):
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
             * **cg** (*int*) - (2) Coarse-Grained model. Values: 0 (CA), 1 (C5), 2 (Heavy atoms).
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
-            * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist. 
+            * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
     Examples:
         This is a use example of how to use the building block from Python::
@@ -36,7 +36,7 @@ class ImodImode(BiobbObject):
 
     Info:
         * wrapped_software:
-            * name: iMODS 
+            * name: iMODS
             * version: >=1.0.4
             * license: other
         * ontology:
@@ -45,7 +45,7 @@ class ImodImode(BiobbObject):
 
     """
     def __init__(self, input_pdb_path: str, output_dat_path: str,
-    properties: dict = None, **kwargs) -> None:
+                 properties: dict = None, **kwargs) -> None:
 
         properties = properties or {}
 
@@ -55,8 +55,8 @@ class ImodImode(BiobbObject):
 
         # Input/Output files
         self.io_dict = {
-            'in': { 'input_pdb_path': input_pdb_path },
-            'out': { 'output_dat_path': output_dat_path }
+            'in': {'input_pdb_path': input_pdb_path},
+            'out': {'output_dat_path': output_dat_path}
         }
 
         # Properties specific for BB
@@ -74,20 +74,21 @@ class ImodImode(BiobbObject):
         """Launches the execution of the FlexDyn iMOD imode module."""
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         # Output temporary file
-        out_file_prefix = Path(self.stage_io_dict.get("unique_dir")).joinpath("imods_evecs") 
-        out_file = Path(self.stage_io_dict.get("unique_dir")).joinpath("imods_evecs_ic.evec") 
+        out_file_prefix = Path(self.stage_io_dict.get("unique_dir")).joinpath("imods_evecs")
+        out_file = Path(self.stage_io_dict.get("unique_dir")).joinpath("imods_evecs_ic.evec")
 
         # Command line
         # imode_gcc  1ake_backbone.pdb -m 0 -o patata.evec
-        self.cmd = [self.binary_path, 
-                str(Path(self.stage_io_dict["in"]["input_pdb_path"]).relative_to(Path.cwd())),
-                "-o", str(out_file_prefix),
-                "-m", str(self.cg) 
-                ]
+        self.cmd = [self.binary_path,
+                    str(Path(self.stage_io_dict["in"]["input_pdb_path"]).relative_to(Path.cwd())),
+                    "-o", str(out_file_prefix),
+                    "-m", str(self.cg)
+                    ]
 
         # Run Biobb block
         self.run_biobb()
@@ -108,14 +109,16 @@ class ImodImode(BiobbObject):
 
         return self.return_code
 
-def imod_imode(input_pdb_path: str, output_dat_path: str, 
-            properties: dict = None, **kwargs) -> int:
+
+def imod_imode(input_pdb_path: str, output_dat_path: str,
+               properties: dict = None, **kwargs) -> int:
     """Create :class:`ImodImode <flexdyn.imod_imode.ImodImode>`flexdyn.imod_imode.ImodImode class and
     execute :meth:`launch() <flexdyn.imod_imode.ImodImode.launch>` method"""
 
-    return ImodImode(    input_pdb_path=input_pdb_path,
-                        output_dat_path=output_dat_path,
-                        properties=properties).launch()
+    return ImodImode(input_pdb_path=input_pdb_path,
+                     output_dat_path=output_dat_path,
+                     properties=properties).launch()
+
 
 def main():
     parser = argparse.ArgumentParser(description='Compute the normal modes of a macromolecule using the imode tool from the iMODS package.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
@@ -131,9 +134,10 @@ def main():
     properties = settings.ConfReader(config=args.config).get_prop_dic()
 
     # Specific call
-    imod_imode(  input_pdb_path=args.input_pdb_path,
-            output_dat_path=args.output_dat_path,
-            properties=properties)
+    imod_imode(input_pdb_path=args.input_pdb_path,
+               output_dat_path=args.output_dat_path,
+               properties=properties)
+
 
 if __name__ == '__main__':
     main()

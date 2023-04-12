@@ -3,11 +3,10 @@
 """Module containing the prody_anm class and the command line interface."""
 import argparse
 import prody
-from pathlib import Path
-from biobb_common.tools import file_utils as fu
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.configuration import  settings
+from biobb_common.configuration import settings
 from biobb_common.tools.file_utils import launchlogger
+
 
 class ProdyANM(BiobbObject):
     """
@@ -41,7 +40,7 @@ class ProdyANM(BiobbObject):
 
     Info:
         * wrapped_software:
-            * name: Prody 
+            * name: Prody
             * version: >=2.2.0
             * license: MIT
         * ontology:
@@ -50,7 +49,7 @@ class ProdyANM(BiobbObject):
 
     """
     def __init__(self, input_pdb_path: str, output_pdb_path: str,
-    properties: dict = None, **kwargs) -> None:
+                 properties: dict = None, **kwargs) -> None:
 
         properties = properties or {}
 
@@ -60,8 +59,8 @@ class ProdyANM(BiobbObject):
 
         # Input/Output files
         self.io_dict = {
-            'in': { 'input_pdb_path': input_pdb_path },
-            'out': { 'output_pdb_path': output_pdb_path }
+            'in': {'input_pdb_path': input_pdb_path},
+            'out': {'output_pdb_path': output_pdb_path}
         }
 
         # Properties specific for BB
@@ -82,7 +81,8 @@ class ProdyANM(BiobbObject):
         """Launches the execution of the FlexDyn ConcoordDist module."""
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         prot = prody.parsePDB(self.stage_io_dict["in"]["input_pdb_path"],)
@@ -102,7 +102,7 @@ class ProdyANM(BiobbObject):
 
         nmastruct = bb_atoms.copy()
         nmastruct.addCoordset(ensemble)
-                
+
         prody.writePDB(self.stage_io_dict["out"]["output_pdb_path"], nmastruct)
 
         # Copy files to host
@@ -118,14 +118,16 @@ class ProdyANM(BiobbObject):
 
         return self.return_code
 
-def prody_anm(input_pdb_path: str, output_pdb_path: str, 
-            properties: dict = None, **kwargs) -> int:
+
+def prody_anm(input_pdb_path: str, output_pdb_path: str,
+              properties: dict = None, **kwargs) -> int:
     """Create :class:`ProdyANM <flexdyn.prody_anm.ProdyANM>`flexdyn.prody_anm.ProdyANM class and
     execute :meth:`launch() <flexdyn.prody_anm.ProdyANM.launch>` method"""
 
-    return ProdyANM(    input_pdb_path=input_pdb_path,
-                        output_pdb_path=output_pdb_path,
-                        properties=properties).launch()
+    return ProdyANM(input_pdb_path=input_pdb_path,
+                    output_pdb_path=output_pdb_path,
+                    properties=properties).launch()
+
 
 def main():
     parser = argparse.ArgumentParser(description='Generate an ensemble of structures using the Prody Anisotropic Network Model (ANM), for coarse-grained NMA.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
@@ -141,9 +143,10 @@ def main():
     properties = settings.ConfReader(config=args.config).get_prop_dic()
 
     # Specific call
-    prody_anm(  input_pdb_path=args.input_pdb_path,
-                output_pdb_path=args.output_pdb_path,
-                properties=properties)
+    prody_anm(input_pdb_path=args.input_pdb_path,
+              output_pdb_path=args.output_pdb_path,
+              properties=properties)
+
 
 if __name__ == '__main__':
     main()
