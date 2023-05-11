@@ -7,7 +7,7 @@
     "docker": "https://quay.io/biocontainers/biobb_flexdyn:4.0.1--pyhdfd78af_0",
     "singularity": "https://depot.galaxyproject.org/singularity/biobb_flexdyn:4.0.1--pyhdfd78af_0",
     "version": "4.0.1",
-    "rest": true,
+    "rest": false,
     "tools" : [
         {
             "block" : "ConcoordDisco", 
@@ -15,7 +15,7 @@
             "desc" : "Wrapper of the Concoord_disco software.",
             "exec" : "concoord_disco",
             "docs": "https://biobb-flexdyn.readthedocs.io/en/latest/flexdyn.html#module-flexdyn.concoord_disco",
-            "rest": true
+            "rest": false
         },
         {
             "block" : "ConcoordDist", 
@@ -23,7 +23,7 @@
             "desc" : "Wrapper of the Concoord_dist software.",
             "exec" : "concoord_dist",
             "docs": "https://biobb-flexdyn.readthedocs.io/en/latest/flexdyn.html#module-flexdyn.concoord_dist",
-            "rest": true
+            "rest": false
         },
         {
             "block" : "ImodImode", 
@@ -31,7 +31,7 @@
             "desc" : "Wrapper of the imods_imode software.",
             "exec" : "imod_imode",
             "docs": "https://biobb-flexdyn.readthedocs.io/en/latest/flexdyn.html#module-flexdyn.imod_imode",
-            "rest": true
+            "rest": false
         },
         {
             "block" : "ImodImove", 
@@ -39,7 +39,7 @@
             "desc" : "Wrapper of the imods_imove software.",
             "exec" : "imod_imove",
             "docs": "https://biobb-flexdyn.readthedocs.io/en/latest/flexdyn.html#module-flexdyn.imod_imove",
-            "rest": true
+            "rest": false
         },
         {
             "block" : "Nolb_nma", 
@@ -47,7 +47,7 @@
             "desc" : "Wrapper of the Nolb software.",
             "exec" : "nolb_nma",
             "docs": "https://biobb-flexdyn.readthedocs.io/en/latest/flexdyn.html#module-flexdyn.nolb",
-            "rest": true
+            "rest": false
         },
         {
             "block" : "ProdyANM", 
@@ -55,7 +55,7 @@
             "desc" : "Wrapper of the Prody software.",
             "exec" : "prody_anm",
             "docs": "https://biobb-flexdyn.readthedocs.io/en/latest/flexdyn.html#module-flexdyn.prody_anm",
-            "rest": true
+            "rest": false
         }
     ],
     "dep_pypi" : [
