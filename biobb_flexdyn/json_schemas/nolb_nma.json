@@ -1,0 +1,93 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://bioexcel.eu/biobb_flexdyn/json_schemas/1.0/nolb_nma",
+    "name": "biobb_flexdyn Nolb_nma",
+    "title": "Wrapper of the NOLB tool",
+    "description": "Generate an ensemble of structures using the NOLB (NOn-Linear rigid Block) NMA tool.",
+    "type": "object",
+    "info": {
+        "wrapped_software": {
+            "name": "NOLB",
+            "version": ">=1.9",
+            "license": "other"
+        },
+        "ontology": {
+            "name": "EDAM",
+            "schema": "http://edamontology.org/EDAM.owl"
+        }
+    },
+    "required": [
+        "input_pdb_path",
+        "output_pdb_path"
+    ],
+    "properties": {
+        "input_pdb_path": {
+            "type": "string",
+            "description": "Input PDB file",
+            "filetype": "input",
+            "sample": "https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/data/flexdyn/structure.pdb",
+            "enum": [
+                ".*\\.pdb$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.pdb$",
+                    "description": "Input PDB file",
+                    "edam": "format_1476"
+                }
+            ]
+        },
+        "output_pdb_path": {
+            "type": "string",
+            "description": "Output multi-model PDB file with the generated ensemble",
+            "filetype": "output",
+            "sample": "https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/flexdyn/nolb_output.pdb",
+            "enum": [
+                ".*\\.pdb$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.pdb$",
+                    "description": "Output multi-model PDB file with the generated ensemble",
+                    "edam": "format_1476"
+                }
+            ]
+        },
+        "properties": {
+            "type": "object",
+            "properties": {
+                "num_structs": {
+                    "type": "integer",
+                    "default": 500,
+                    "wf_prop": false,
+                    "description": "Number of structures to be generated"
+                },
+                "cutoff": {
+                    "type": "number",
+                    "default": 5.0,
+                    "wf_prop": false,
+                    "description": "This options specifies the interaction cutoff distance for the elastic network models (in angstroms), 5 by default. The Hessian matrix is constructed according to this interaction distance. Some artifacts should be expected for too short distances (< 5 \u00c5)."
+                },
+                "rmsd": {
+                    "type": "number",
+                    "default": 1.0,
+                    "wf_prop": false,
+                    "description": "Maximum RMSd for decoy generation."
+                },
+                "remove_tmp": {
+                    "type": "boolean",
+                    "default": true,
+                    "wf_prop": true,
+                    "description": "Remove temporal files."
+                },
+                "restart": {
+                    "type": "boolean",
+                    "default": false,
+                    "wf_prop": true,
+                    "description": "Do not execute if output files exist."
+                }
+            }
+        }
+    },
+    "additionalProperties": false
+}
