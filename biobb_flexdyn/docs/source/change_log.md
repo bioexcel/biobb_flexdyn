@@ -1,5 +1,12 @@
 # Biobb FlexDyn changelog
 
+## What's new in version [4.0.2](https://github.com/bioexcel/biobb_flexdyn/releases/tag/v4.0.2)?
+In version 4.0.2 some minor bugs have been fixed.
+
+### New features
+
+* Minor bug fixes
+
 ## What's new in version [4.0.1](https://github.com/bioexcel/biobb_flexdyn/releases/tag/v4.0.1)?
 In version 4.0.1 the imod_imc tool has been added.
 
