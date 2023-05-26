@@ -130,8 +130,9 @@ class ConcoordDisco(BiobbObject):
         # MARGINS_li.DAT, MARGINS_oplsaa.DAT, MARGINS_oplsua.DAT, MARGINS_oplsx.DAT, MARGINS_repel.DAT, MARGINS_yamber2.DAT
         # 1 (OPLS-UA -united atoms- parameters), 2 (OPLS-AA -all atoms- parameters), 3 (PROLSQ repel parameters), 4 (Yamber2 parameters), 5 (Li et al. parameters), 6 (OPLS-X parameters -recommended for NMR structure determination-).
         vdw_values = ["vdw_values", "oplsua", "oplsaa", "repel", "yamber2", "li", "oplsx"]
-        margins_file = concoord_lib + "/MARGINS_" + vdw_values[self.vdw] + ".DAT"
-        atoms_file = concoord_lib + "/ATOMS_" + vdw_values[self.vdw] + ".DAT"
+        vdw_index = int(self.vdw)
+        margins_file = concoord_lib + "/MARGINS_" + vdw_values[vdw_index] + ".DAT"
+        atoms_file = concoord_lib + "/ATOMS_" + vdw_values[vdw_index] + ".DAT"
         bonds_file = concoord_lib + "/BONDS.DAT"
         shutil.copy2(margins_file, self.stage_io_dict.get("unique_dir"))
         shutil.copy2(margins_file, self.stage_io_dict.get("unique_dir")+"/MARGINS.DAT")
