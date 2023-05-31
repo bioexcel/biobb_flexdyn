@@ -13,7 +13,21 @@ Command:
 ```python
 imod_imc -h
 ```
-    /bin/sh: imod_imc: command not found
+    usage: imod_imc [-h] [--config CONFIG] --input_pdb_path INPUT_PDB_PATH --input_dat_path INPUT_DAT_PATH --output_traj_path OUTPUT_TRAJ_PATH
+    
+    Compute a Monte-Carlo IC-NMA based conformational ensemble using the imc tool from the iMODS package.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      --config CONFIG       Configuration file
+    
+    required arguments:
+      --input_pdb_path INPUT_PDB_PATH
+                            Input structure file. Accepted formats: pdb
+      --input_dat_path INPUT_DAT_PATH
+                            Input evecs file. Accepted formats: dat
+      --output_traj_path OUTPUT_TRAJ_PATH
+                            Output traj file. Accepted formats: pdb.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -66,7 +80,19 @@ Command:
 ```python
 imod_imode -h
 ```
-    /bin/sh: imod_imode: command not found
+    usage: imod_imode [-h] [--config CONFIG] --input_pdb_path INPUT_PDB_PATH --output_dat_path OUTPUT_DAT_PATH
+    
+    Compute the normal modes of a macromolecule using the imode tool from the iMODS package.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      --config CONFIG       Configuration file
+    
+    required arguments:
+      --input_pdb_path INPUT_PDB_PATH
+                            Input structure file. Accepted formats: pdb
+      --output_dat_path OUTPUT_DAT_PATH
+                            Output evecs dat file. Accepted formats: dat.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -112,7 +138,19 @@ Command:
 ```python
 nolb_nma -h
 ```
-    /bin/sh: nolb_nma: command not found
+    usage: nolb_nma [-h] [--config CONFIG] --input_pdb_path INPUT_PDB_PATH --output_pdb_path OUTPUT_PDB_PATH
+    
+    Generate an ensemble of structures using the NOLB (NOn-Linear rigid Block) NMA tool.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      --config CONFIG       Configuration file
+    
+    required arguments:
+      --input_pdb_path INPUT_PDB_PATH
+                            Input structure file. Accepted formats: pdb
+      --output_pdb_path OUTPUT_PDB_PATH
+                            Output pdb file. Accepted formats: pdb.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -160,7 +198,25 @@ Command:
 ```python
 concoord_disco -h
 ```
-    /bin/sh: concoord_disco: command not found
+    usage: concoord_disco [-h] [--config CONFIG] --input_pdb_path INPUT_PDB_PATH --input_dat_path INPUT_DAT_PATH --output_traj_path OUTPUT_TRAJ_PATH --output_rmsd_path OUTPUT_RMSD_PATH --output_bfactor_path OUTPUT_BFACTOR_PATH
+    
+    Structure generation based on a set of geometric constraints extracted with the Concoord Dist tool.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      --config CONFIG       Configuration file
+    
+    required arguments:
+      --input_pdb_path INPUT_PDB_PATH
+                            Input structure file in PDB format. Accepted formats: pdb
+      --input_dat_path INPUT_DAT_PATH
+                            Input dat with structure interpretation and bond definitions. Accepted formats: dat, txt
+      --output_traj_path OUTPUT_TRAJ_PATH
+                            Output trajectory file. Accepted formats: pdb, gro, xtc.
+      --output_rmsd_path OUTPUT_RMSD_PATH
+                            Output RMSd file. Accepted formats: dat.
+      --output_bfactor_path OUTPUT_BFACTOR_PATH
+                            Output B-factor file. Accepted formats: pdb.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -228,7 +284,23 @@ Command:
 ```python
 concoord_dist -h
 ```
-    /bin/sh: concoord_dist: command not found
+    usage: concoord_dist [-h] [--config CONFIG] --input_structure_path INPUT_STRUCTURE_PATH --output_pdb_path OUTPUT_PDB_PATH --output_gro_path OUTPUT_GRO_PATH --output_dat_path OUTPUT_DAT_PATH
+    
+    Structure interpretation and bond definitions from a PDB/GRO file.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      --config CONFIG       Configuration file
+    
+    required arguments:
+      --input_structure_path INPUT_STRUCTURE_PATH
+                            Input structure file. Accepted formats: pdb, gro.
+      --output_pdb_path OUTPUT_PDB_PATH
+                            Output pdb file. Accepted formats: pdb.
+      --output_gro_path OUTPUT_GRO_PATH
+                            Output gro file. Accepted formats: gro.
+      --output_dat_path OUTPUT_DAT_PATH
+                            Output dat file with structure interpretation and bond definitions. Accepted formats: dat, txt.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -286,7 +358,21 @@ Command:
 ```python
 imod_imove -h
 ```
-    /bin/sh: imod_imove: command not found
+    usage: imod_imove [-h] [--config CONFIG] --input_pdb_path INPUT_PDB_PATH --input_dat_path INPUT_DAT_PATH --output_pdb_path OUTPUT_PDB_PATH
+    
+    Animate the normal modes of a macromolecule using the imove tool from the iMODS package.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      --config CONFIG       Configuration file
+    
+    required arguments:
+      --input_pdb_path INPUT_PDB_PATH
+                            Input structure file. Accepted formats: pdb
+      --input_dat_path INPUT_DAT_PATH
+                            Input evecs file. Accepted formats: dat
+      --output_pdb_path OUTPUT_PDB_PATH
+                            Output pdb file. Accepted formats: pdb.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -334,7 +420,19 @@ Command:
 ```python
 prody_anm -h
 ```
-    /bin/sh: prody_anm: command not found
+    usage: prody_anm [-h] [--config CONFIG] --input_pdb_path INPUT_PDB_PATH --output_pdb_path OUTPUT_PDB_PATH
+    
+    Generate an ensemble of structures using the Prody Anisotropic Network Model (ANM), for coarse-grained NMA.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      --config CONFIG       Configuration file
+    
+    required arguments:
+      --input_pdb_path INPUT_PDB_PATH
+                            Input structure file. Accepted formats: pdb
+      --output_pdb_path OUTPUT_PDB_PATH
+                            Output pdb file. Accepted formats: pdb.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
