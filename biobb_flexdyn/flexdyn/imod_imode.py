@@ -3,7 +3,8 @@
 """Module containing the imode class and the command line interface."""
 import argparse
 import shutil
-from pathlib import Path
+from pathlib import PurePath
+from biobb_common.tools import file_utils as fu
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import settings
 from biobb_common.tools.file_utils import launchlogger
@@ -76,32 +77,57 @@ class ImodImode(BiobbObject):
         # Setup Biobb
         if self.check_restart():
             return 0
-        self.stage_files()
+        # self.stage_files()
+
+        # Manually creating a Sandbox to avoid issues with input parameters buffer overflow:
+        #   Long strings defining a file path makes Fortran or C compiled programs crash if the string
+        #   declared is shorter than the input parameter path (string) length.
+        #   Generating a temporary folder and working inside this folder (sandbox) fixes this problem.
+        #   The problem was found in Galaxy executions, launching Singularity containers (May 2023).
+
+        # Creating temporary folder
+        self.tmp_folder = fu.create_unique_dir()
+        fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
+
+        shutil.copy2(self.io_dict["in"]["input_pdb_path"], self.tmp_folder)
 
         # Output temporary file
-        out_file_prefix = Path(self.stage_io_dict.get("unique_dir")).joinpath("imods_evecs")
-        out_file = Path(self.stage_io_dict.get("unique_dir")).joinpath("imods_evecs_ic.evec")
+        # out_file_prefix = Path(self.stage_io_dict.get("unique_dir")).joinpath("imods_evecs")
+        # out_file = Path(self.stage_io_dict.get("unique_dir")).joinpath("imods_evecs_ic.evec")
+        out_file_prefix = "imods_evecs"  # Needed as imod is appending the _ic.evec extension
+        out_file = "imods_evecs_ic.evec"
 
         # Command line
         # imode_gcc  1ake_backbone.pdb -m 0 -o patata.evec
-        self.cmd = [self.binary_path,
-                    str(Path(self.stage_io_dict["in"]["input_pdb_path"]).relative_to(Path.cwd())),
-                    "-o", str(out_file_prefix),
-                    "-m", str(self.cg)
+        # self.cmd = [self.binary_path,
+        #             str(Path(self.stage_io_dict["in"]["input_pdb_path"]).relative_to(Path.cwd())),
+        #             "-o", str(out_file_prefix),
+        #             "-m", str(self.cg)
+        #             ]
+
+        self.cmd = ['cd', self.tmp_folder, ';',
+                    self.binary_path,
+                    PurePath(self.io_dict["in"]["input_pdb_path"]).name,
+                    '-o', out_file_prefix,
+                    '-m', str(self.cg)
                     ]
 
         # Run Biobb block
         self.run_biobb()
 
         # Copying generated output file to the final (user-given) file name
-        shutil.copy2(out_file, self.stage_io_dict["out"]["output_dat_path"])
+        # shutil.copy2(out_file, self.stage_io_dict["out"]["output_dat_path"])
+
+        # Copy outputs from temporary folder to output path
+        shutil.copy2(PurePath(self.tmp_folder).joinpath(out_file), PurePath(self.io_dict["out"]["output_dat_path"]))
 
         # Copy files to host
-        self.copy_to_host()
+        # self.copy_to_host()
 
         # remove temporary folder(s)
         self.tmp_files.extend([
-            self.stage_io_dict.get("unique_dir")
+            # self.stage_io_dict.get("unique_dir")
+            self.tmp_folder
         ])
         self.remove_tmp_files()
 

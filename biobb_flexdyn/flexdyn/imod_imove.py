@@ -2,7 +2,9 @@
 
 """Module containing the imode class and the command line interface."""
 import argparse
-from pathlib import Path
+import shutil
+from pathlib import PurePath
+from biobb_common.tools import file_utils as fu
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import settings
 from biobb_common.tools.file_utils import launchlogger
@@ -79,14 +81,35 @@ class ImodImove(BiobbObject):
         # Setup Biobb
         if self.check_restart():
             return 0
-        self.stage_files()
+        # self.stage_files()
+
+        # Manually creating a Sandbox to avoid issues with input parameters buffer overflow:
+        #   Long strings defining a file path makes Fortran or C compiled programs crash if the string
+        #   declared is shorter than the input parameter path (string) length.
+        #   Generating a temporary folder and working inside this folder (sandbox) fixes this problem.
+        #   The problem was found in Galaxy executions, launching Singularity containers (May 2023).
+
+        # Creating temporary folder
+        self.tmp_folder = fu.create_unique_dir()
+        fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
+
+        shutil.copy2(self.io_dict["in"]["input_pdb_path"], self.tmp_folder)
+        shutil.copy2(self.io_dict["in"]["input_dat_path"], self.tmp_folder)
 
         # Command line
         # imove 1ake_backbone.pdb  1ake_backbone_evecs.dat -o 1ake_backbone.ensemble.pdb 1 -c 500
-        self.cmd = [self.binary_path,
-                    str(Path(self.stage_io_dict["in"]["input_pdb_path"]).relative_to(Path.cwd())),
-                    str(Path(self.stage_io_dict["in"]["input_dat_path"]).relative_to(Path.cwd())),
-                    str(Path(self.stage_io_dict["out"]["output_pdb_path"]).relative_to(Path.cwd())),
+        # self.cmd = [self.binary_path,
+        #             str(Path(self.stage_io_dict["in"]["input_pdb_path"]).relative_to(Path.cwd())),
+        #             str(Path(self.stage_io_dict["in"]["input_dat_path"]).relative_to(Path.cwd())),
+        #             str(Path(self.stage_io_dict["out"]["output_pdb_path"]).relative_to(Path.cwd())),
+        #             str(self.pc)
+        #             ]
+
+        self.cmd = ['cd', self.tmp_folder, ';',
+                    self.binary_path,
+                    PurePath(self.io_dict["in"]["input_pdb_path"]).name,
+                    PurePath(self.io_dict["in"]["input_dat_path"]).name,
+                    PurePath(self.io_dict["out"]["output_pdb_path"]).name,
                     str(self.pc)
                     ]
 
@@ -98,12 +121,16 @@ class ImodImove(BiobbObject):
         # Run Biobb block
         self.run_biobb()
 
+        # Copy outputs from temporary folder to output path
+        shutil.copy2(PurePath(self.tmp_folder).joinpath(PurePath(self.io_dict["out"]["output_pdb_path"]).name), PurePath(self.io_dict["out"]["output_pdb_path"]))
+
         # Copy files to host
-        self.copy_to_host()
+        # self.copy_to_host()
 
         # remove temporary folder(s)
         self.tmp_files.extend([
-            self.stage_io_dict.get("unique_dir")
+            # self.stage_io_dict.get("unique_dir")
+            self.tmp_folder
         ])
         self.remove_tmp_files()
 
