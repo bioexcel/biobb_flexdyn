@@ -1,5 +1,12 @@
 # Biobb FlexDyn changelog
 
+## What's new in version [4.1.0](https://github.com/bioexcel/biobb_flexdyn/releases/tag/v4.1.0)?
+In version 4.1.0 the dependency biobb_common has been updated to 4.1.0 version.
+
+### New features
+
+* Update to biobb_common 4.1.0 (general)
+
 ## What's new in version [4.0.3](https://github.com/bioexcel/biobb_flexdyn/releases/tag/v4.0.3)?
 In version 4.0.3 some minor bugs have been fixed.
 
