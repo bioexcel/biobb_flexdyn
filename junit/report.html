@@ -253,9 +253,9 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
 }
 </script>
     <h1>report.html</h1>
-    <p>Report generated on 07-Sep-2023 at 11:19:02 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.2.0</p>
+    <p>Report generated on 07-Sep-2023 at 11:27:30 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.2.0</p>
     <h2>Summary</h2>
-    <p>7 tests ran in 11.12 seconds. </p>
+    <p>7 tests ran in 8.40 seconds. </p>
     <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">7 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">0 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
     <h2>Results</h2>
     <table id="results-table">
@@ -271,25 +271,25 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_flexdyn/test/unitests/test_flexdyn/test_concoord_disco.py::TestConcoordDisco::test_concoord_disco</td>
-          <td class="col-duration">8.87</td>
+          <td class="col-duration">6.06</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-07 11:18:52,170 [MainThread  ] [INFO ]  Executing biobb_flexdyn.flexdyn.concoord_disco Version: 4.0.3
-2023-09-07 11:18:52,170 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_flexdyn/biobb_flexdyn/biobb_flexdyn/test/data/flexdyn/structure.pdb to /tmp/biobb/unitests/concoord_disco/bc388d82-6e56-445b-8abf-4834f812542f
-2023-09-07 11:18:52,172 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_flexdyn/biobb_flexdyn/biobb_flexdyn/test/data/flexdyn/dist.dat to /tmp/biobb/unitests/concoord_disco/bc388d82-6e56-445b-8abf-4834f812542f
-2023-09-07 11:18:52,172 [MainThread  ] [INFO ]  cd  /tmp/biobb/unitests/concoord_disco/bc388d82-6e56-445b-8abf-4834f812542f ; disco -p structure.pdb -d dist.dat -or concoord_disco_rmsd.dat -of concoord_disco_bfactor.pdb -on concoord_disco.pdb -n 20
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-07 11:27:22,810 [MainThread  ] [INFO ]  Executing biobb_flexdyn.flexdyn.concoord_disco Version: 4.1.0
+2023-09-07 11:27:22,811 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_flexdyn/biobb_flexdyn/biobb_flexdyn/test/data/flexdyn/structure.pdb to /tmp/biobb/unitests/concoord_disco/020a5503-5406-45b8-84bd-7c48d534b1aa
+2023-09-07 11:27:22,813 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_flexdyn/biobb_flexdyn/biobb_flexdyn/test/data/flexdyn/dist.dat to /tmp/biobb/unitests/concoord_disco/020a5503-5406-45b8-84bd-7c48d534b1aa
+2023-09-07 11:27:22,813 [MainThread  ] [INFO ]  cd  /tmp/biobb/unitests/concoord_disco/020a5503-5406-45b8-84bd-7c48d534b1aa ; disco -p structure.pdb -d dist.dat -or concoord_disco_rmsd.dat -of concoord_disco_bfactor.pdb -on concoord_disco.pdb -n 20
 
-2023-09-07 11:19:01,019 [MainThread  ] [INFO ]  Exit code 0
+2023-09-07 11:27:28,852 [MainThread  ] [INFO ]  Exit code 0
 
-2023-09-07 11:19:01,020 [MainThread  ] [INFO ]  Determining system size...
+2023-09-07 11:27:28,852 [MainThread  ] [INFO ]  Determining system size...
 -------------------------------------------------
 disco - version 2.1.2 - build date: Thu Jan 24 11:26:08 CET 2013                                
-Process started with PID:    79505
+Process started with PID:    80424
 on host: biobb-runners
 number of threads =    4
-in directory: /tmp/biobb/unitests/concoord_disco/bc388d82-6e56-445b-8abf-4834f812542f
-on: 07/09/0023 at: 11:18:52
+in directory: /tmp/biobb/unitests/concoord_disco/020a5503-5406-45b8-84bd-7c48d534b1aa
+on: 07/09/0023 at: 11:27:22
 -------------------------------------------------
 command line options:
 input coordinates...................: structure.pdb                           
@@ -329,10 +329,10 @@ Sum of violations...................:    0.32294
 generated structure.................:       3 with RMSD  2.14 A
 Nr. of violations...................:     180
 Sum of violations...................:    0.33313
-Giving up, best violation sum was...:  12.66167
-structure rejected (no convergence after    606 steps)
 Giving up, best violation sum was...:   0.89863
 structure rejected (no convergence after    603 steps)
+Giving up, best violation sum was...:  12.66167
+structure rejected (no convergence after    606 steps)
 Giving up, best violation sum was...:  13.30915
 structure rejected (no convergence after    940 steps)
 generated structure.................:       4 with RMSD  2.47 A
@@ -364,20 +364,20 @@ structure rejected (no convergence after    601 steps)
 generated structure.................:      10 with RMSD  1.77 A
 Nr. of violations...................:     189
 Sum of violations...................:    0.31135
-Giving up, best violation sum was...:  14.66847
-structure rejected (no convergence after   1159 steps)
 Giving up, best violation sum was...:  12.75521
 structure rejected (no convergence after    750 steps)
+Giving up, best violation sum was...:  14.66847
+structure rejected (no convergence after   1159 steps)
 generated structure.................:      11 with RMSD  3.39 A
 Nr. of violations...................:     211
 Sum of violations...................:    0.30720
 generated structure.................:      12 with RMSD  1.74 A
 Nr. of violations...................:     189
 Sum of violations...................:    0.34857
-Giving up, best violation sum was...:   1.02614
-structure rejected (no convergence after    606 steps)
 Giving up, best violation sum was...:   0.94540
 structure rejected (no convergence after    609 steps)
+Giving up, best violation sum was...:   1.02614
+structure rejected (no convergence after    606 steps)
 Giving up, best violation sum was...:   1.17588
 structure rejected (no convergence after    609 steps)
 generated structure.................:      13 with RMSD  2.39 A
@@ -416,39 +416,31 @@ Nr. of violations...................:     189
 Sum of violations...................:    0.31926
 Giving up, best violation sum was...:  11.34416
 structure rejected (no convergence after   1530 steps)
-Giving up, best violation sum was...:  17.44204
-structure rejected (no convergence after    602 steps)
-Giving up, best violation sum was...:   8.21869
-structure rejected (no convergence after    830 steps)
-Giving up, best violation sum was...:  10.15503
-structure rejected (no convergence after    605 steps)
-Giving up, best violation sum was...:   5.97370
-structure rejected (no convergence after    602 steps)
-generated structure.................:      20 with RMSD  2.59 A
-Nr. of violations...................:     183
-Sum of violations...................:    0.37408
+generated structure.................:      20 with RMSD  2.03 A
+Nr. of violations...................:     197
+Sum of violations...................:    0.36505
 normal termination
-CPU time: user=     23.57s, system=      0.00s
+CPU time: user=     18.69s, system=      0.00s
 
-2023-09-07 11:19:01,022 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/concoord_disco/bc388d82-6e56-445b-8abf-4834f812542f&#x27;]
+2023-09-07 11:27:28,855 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/concoord_disco/020a5503-5406-45b8-84bd-7c48d534b1aa&#x27;]
 Checking if empty file: /tmp/biobb/unitests/concoord_disco/concoord_disco.pdb
 Checking if empty file: /tmp/biobb/unitests/concoord_disco/concoord_disco_rmsd.dat
 Checking if empty file: /tmp/biobb/unitests/concoord_disco/concoord_disco_bfactor.pdb
-<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests/concoord_disco/concoord_disco_log.out:file_utils.py:390 Executing biobb_flexdyn.flexdyn.concoord_disco Version: 4.0.3
-INFO     /tmp/biobb/unitests/concoord_disco/concoord_disco_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_flexdyn/biobb_flexdyn/biobb_flexdyn/test/data/flexdyn/structure.pdb to /tmp/biobb/unitests/concoord_disco/bc388d82-6e56-445b-8abf-4834f812542f
-INFO     /tmp/biobb/unitests/concoord_disco/concoord_disco_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_flexdyn/biobb_flexdyn/biobb_flexdyn/test/data/flexdyn/dist.dat to /tmp/biobb/unitests/concoord_disco/bc388d82-6e56-445b-8abf-4834f812542f
-INFO     /tmp/biobb/unitests/concoord_disco/concoord_disco_log.out:cmd_wrapper.py:33 cd  /tmp/biobb/unitests/concoord_disco/bc388d82-6e56-445b-8abf-4834f812542f ; disco -p structure.pdb -d dist.dat -or concoord_disco_rmsd.dat -of concoord_disco_bfactor.pdb -on concoord_disco.pdb -n 20
+<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests/concoord_disco/concoord_disco_log.out:file_utils.py:390 Executing biobb_flexdyn.flexdyn.concoord_disco Version: 4.1.0
+INFO     /tmp/biobb/unitests/concoord_disco/concoord_disco_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_flexdyn/biobb_flexdyn/biobb_flexdyn/test/data/flexdyn/structure.pdb to /tmp/biobb/unitests/concoord_disco/020a5503-5406-45b8-84bd-7c48d534b1aa
+INFO     /tmp/biobb/unitests/concoord_disco/concoord_disco_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_flexdyn/biobb_flexdyn/biobb_flexdyn/test/data/flexdyn/dist.dat to /tmp/biobb/unitests/concoord_disco/020a5503-5406-45b8-84bd-7c48d534b1aa
+INFO     /tmp/biobb/unitests/concoord_disco/concoord_disco_log.out:cmd_wrapper.py:33 cd  /tmp/biobb/unitests/concoord_disco/020a5503-5406-45b8-84bd-7c48d534b1aa ; disco -p structure.pdb -d dist.dat -or concoord_disco_rmsd.dat -of concoord_disco_bfactor.pdb -on concoord_disco.pdb -n 20
 
 INFO     /tmp/biobb/unitests/concoord_disco/concoord_disco_log.out:cmd_wrapper.py:50 Exit code 0
 
 INFO     /tmp/biobb/unitests/concoord_disco/concoord_disco_log.out:cmd_wrapper.py:52 Determining system size...
 -------------------------------------------------
 disco - version 2.1.2 - build date: Thu Jan 24 11:26:08 CET 2013                                
-Process started with PID:    79505
+Process started with PID:    80424
 on host: biobb-runners
 number of threads =    4
-in directory: /tmp/biobb/unitests/concoord_disco/bc388d82-6e56-445b-8abf-4834f812542f
-on: 07/09/0023 at: 11:18:52
+in directory: /tmp/biobb/unitests/concoord_disco/020a5503-5406-45b8-84bd-7c48d534b1aa
+on: 07/09/0023 at: 11:27:22
 -------------------------------------------------
 command line options:
 input coordinates...................: structure.pdb                           
@@ -488,10 +480,10 @@ Sum of violations...................:    0.32294
 generated structure.................:       3 with RMSD  2.14 A
 Nr. of violations...................:     180
 Sum of violations...................:    0.33313
-Giving up, best violation sum was...:  12.66167
-structure rejected (no convergence after    606 steps)
 Giving up, best violation sum was...:   0.89863
 structure rejected (no convergence after    603 steps)
+Giving up, best violation sum was...:  12.66167
+structure rejected (no convergence after    606 steps)
 Giving up, best violation sum was...:  13.30915
 structure rejected (no convergence after    940 steps)
 generated structure.................:       4 with RMSD  2.47 A
@@ -523,20 +515,20 @@ structure rejected (no convergence after    601 steps)
 generated structure.................:      10 with RMSD  1.77 A
 Nr. of violations...................:     189
 Sum of violations...................:    0.31135
-Giving up, best violation sum was...:  14.66847
-structure rejected (no convergence after   1159 steps)
 Giving up, best violation sum was...:  12.75521
 structure rejected (no convergence after    750 steps)
+Giving up, best violation sum was...:  14.66847
+structure rejected (no convergence after   1159 steps)
 generated structure.................:      11 with RMSD  3.39 A
 Nr. of violations...................:     211
 Sum of violations...................:    0.30720
 generated structure.................:      12 with RMSD  1.74 A
 Nr. of violations...................:     189
 Sum of violations...................:    0.34857
-Giving up, best violation sum was...:   1.02614
-structure rejected (no convergence after    606 steps)
 Giving up, best violation sum was...:   0.94540
 structure rejected (no convergence after    609 steps)
+Giving up, best violation sum was...:   1.02614
+structure rejected (no convergence after    606 steps)
 Giving up, best violation sum was...:   1.17588
 structure rejected (no convergence after    609 steps)
 generated structure.................:      13 with RMSD  2.39 A
@@ -575,21 +567,13 @@ Nr. of violations...................:     189
 Sum of violations...................:    0.31926
 Giving up, best violation sum was...:  11.34416
 structure rejected (no convergence after   1530 steps)
-Giving up, best violation sum was...:  17.44204
-structure rejected (no convergence after    602 steps)
-Giving up, best violation sum was...:   8.21869
-structure rejected (no convergence after    830 steps)
-Giving up, best violation sum was...:  10.15503
-structure rejected (no convergence after    605 steps)
-Giving up, best violation sum was...:   5.97370
-structure rejected (no convergence after    602 steps)
-generated structure.................:      20 with RMSD  2.59 A
-Nr. of violations...................:     183
-Sum of violations...................:    0.37408
+generated structure.................:      20 with RMSD  2.03 A
+Nr. of violations...................:     197
+Sum of violations...................:    0.36505
 normal termination
-CPU time: user=     23.57s, system=      0.00s
+CPU time: user=     18.69s, system=      0.00s
 
-INFO     /tmp/biobb/unitests/concoord_disco/concoord_disco_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/concoord_disco/bc388d82-6e56-445b-8abf-4834f812542f&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+INFO     /tmp/biobb/unitests/concoord_disco/concoord_disco_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/concoord_disco/020a5503-5406-45b8-84bd-7c48d534b1aa&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
 Removing: /tmp/biobb/unitests
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -600,14 +584,14 @@ Removing: /tmp/biobb/unitests
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-07 11:19:01,051 [MainThread  ] [INFO ]  Executing biobb_flexdyn.flexdyn.concoord_dist Version: 4.0.3
-2023-09-07 11:19:01,051 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_flexdyn/biobb_flexdyn/biobb_flexdyn/test/data/flexdyn/structure.pdb to /tmp/biobb/unitests/concoord_dist/23d8ab8f-a0ae-4478-838e-ec58882982fa
-2023-09-07 11:19:01,052 [MainThread  ] [INFO ]  Copy: /tmp/biobb/unitests/concoord_dist/c4b5e743-852b-496a-8a30-a652b32352d4.stdin to /tmp/biobb/unitests/concoord_dist/23d8ab8f-a0ae-4478-838e-ec58882982fa
-2023-09-07 11:19:01,052 [MainThread  ] [INFO ]  cd  /tmp/biobb/unitests/concoord_dist/23d8ab8f-a0ae-4478-838e-ec58882982fa ; dist -op concoord_dist.pdb -og concoord_dist.gro -od concoord_dist.dat -p structure.pdb -c 4.0 -m 50 -damp 1.0 &lt; c4b5e743-852b-496a-8a30-a652b32352d4.stdin
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-07 11:27:28,885 [MainThread  ] [INFO ]  Executing biobb_flexdyn.flexdyn.concoord_dist Version: 4.1.0
+2023-09-07 11:27:28,885 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_flexdyn/biobb_flexdyn/biobb_flexdyn/test/data/flexdyn/structure.pdb to /tmp/biobb/unitests/concoord_dist/a7e19ed6-0605-4f7c-b245-cc7395e8c133
+2023-09-07 11:27:28,886 [MainThread  ] [INFO ]  Copy: /tmp/biobb/unitests/concoord_dist/c1dabfd5-35f6-432a-8457-6d0ca536f6b8.stdin to /tmp/biobb/unitests/concoord_dist/a7e19ed6-0605-4f7c-b245-cc7395e8c133
+2023-09-07 11:27:28,886 [MainThread  ] [INFO ]  cd  /tmp/biobb/unitests/concoord_dist/a7e19ed6-0605-4f7c-b245-cc7395e8c133 ; dist -op concoord_dist.pdb -og concoord_dist.gro -od concoord_dist.dat -p structure.pdb -c 4.0 -m 50 -damp 1.0 &lt; c1dabfd5-35f6-432a-8457-6d0ca536f6b8.stdin
 
-2023-09-07 11:19:01,161 [MainThread  ] [INFO ]  Exit code 0
+2023-09-07 11:27:28,998 [MainThread  ] [INFO ]  Exit code 0
 
-2023-09-07 11:19:01,161 [MainThread  ] [INFO ]  Select a set of Van der Waals parameters:
+2023-09-07 11:27:28,998 [MainThread  ] [INFO ]  Select a set of Van der Waals parameters:
 1: OPLS-UA (united atoms) parameters
 2: OPLS-AA (all atoms) parameters
 3: PROLSQ repel parameters
@@ -624,10 +608,10 @@ Selected parameter set 1
 copying /home/user/micromamba/envs/test_environment/share/concoord/lib/BONDS.DAT.noeh to BONDS.DAT in current working directory
 -------------------------------------------------
 dist.exe - build date: Thu Jan 24 11:26:08 CET 2013                                
-Process started with PID:    79515
+Process started with PID:    80434
 on host: biobb-runners
-in directory: /tmp/biobb/unitests/concoord_dist/23d8ab8f-a0ae-4478-838e-ec58882982fa
-on: 07/09/0023 at: 11:19:01
+in directory: /tmp/biobb/unitests/concoord_dist/a7e19ed6-0605-4f7c-b245-cc7395e8c133
+on: 07/09/0023 at: 11:27:28
 -------------------------------------------------
 command line options:
 pdb input coordinate file...........: structure.pdb                           
@@ -665,7 +649,7 @@ total nr of non-bonded pairs:  19118
 total number of constraints :   26254
  1 warning(s) encountered. Please investigate!
 
-2023-09-07 11:19:01,161 [MainThread  ] [INFO ]  remark: distance between atom      31 and      27 (3.11) smaller than VdWsum (3.75)    C    C 0.290
+2023-09-07 11:27:28,999 [MainThread  ] [INFO ]  remark: distance between atom      31 and      27 (3.11) smaller than VdWsum (3.75)    C    C 0.290
 remark: distance between atom     124 and     122 (2.94) smaller than VdWsum (3.43) CH2E    O 0.141
 remark: distance between atom     159 and     157 (2.90) smaller than VdWsum (3.36)    C    O 0.102
 remark: distance between atom     328 and     324 (3.13) smaller than VdWsum (3.50)  NH1    C 0.022
@@ -730,7 +714,7 @@ remark: distance between atom     735 and     520 (2.58) smaller than VdWsum (3.
 remark: distance between atom     737 and      72 (2.58) smaller than VdWsum (3.01)  OH1   OC 0.084
 remark: distance between atom     744 and     125 (3.09) smaller than VdWsum (3.49)  OH1 CH2E 0.051
 
-2023-09-07 11:19:01,163 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/concoord_dist/23d8ab8f-a0ae-4478-838e-ec58882982fa&#x27;, &#x27;/tmp/biobb/unitests/concoord_dist/c4b5e743-852b-496a-8a30-a652b32352d4.stdin&#x27;]
+2023-09-07 11:27:29,001 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/concoord_dist/a7e19ed6-0605-4f7c-b245-cc7395e8c133&#x27;, &#x27;/tmp/biobb/unitests/concoord_dist/c1dabfd5-35f6-432a-8457-6d0ca536f6b8.stdin&#x27;]
 Checking if empty file: /tmp/biobb/unitests/concoord_dist/concoord_dist.pdb
 Checking if empty file: /tmp/biobb/unitests/concoord_dist/concoord_dist.gro
 Checking if empty file: /tmp/biobb/unitests/concoord_dist/concoord_dist.dat
@@ -743,10 +727,10 @@ Checking RMSD between:
      Atoms ALIGNED in PDB_B: 775
      RMS: 6.91545531105067e-15
      RMS_CUTOFF: 1
-<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests/concoord_dist/concoord_dist_log.out:file_utils.py:390 Executing biobb_flexdyn.flexdyn.concoord_dist Version: 4.0.3
-INFO     /tmp/biobb/unitests/concoord_dist/concoord_dist_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_flexdyn/biobb_flexdyn/biobb_flexdyn/test/data/flexdyn/structure.pdb to /tmp/biobb/unitests/concoord_dist/23d8ab8f-a0ae-4478-838e-ec58882982fa
-INFO     /tmp/biobb/unitests/concoord_dist/concoord_dist_log.out:file_utils.py:390 Copy: /tmp/biobb/unitests/concoord_dist/c4b5e743-852b-496a-8a30-a652b32352d4.stdin to /tmp/biobb/unitests/concoord_dist/23d8ab8f-a0ae-4478-838e-ec58882982fa
-INFO     /tmp/biobb/unitests/concoord_dist/concoord_dist_log.out:cmd_wrapper.py:33 cd  /tmp/biobb/unitests/concoord_dist/23d8ab8f-a0ae-4478-838e-ec58882982fa ; dist -op concoord_dist.pdb -og concoord_dist.gro -od concoord_dist.dat -p structure.pdb -c 4.0 -m 50 -damp 1.0 &lt; c4b5e743-852b-496a-8a30-a652b32352d4.stdin
+<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests/concoord_dist/concoord_dist_log.out:file_utils.py:390 Executing biobb_flexdyn.flexdyn.concoord_dist Version: 4.1.0
+INFO     /tmp/biobb/unitests/concoord_dist/concoord_dist_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_flexdyn/biobb_flexdyn/biobb_flexdyn/test/data/flexdyn/structure.pdb to /tmp/biobb/unitests/concoord_dist/a7e19ed6-0605-4f7c-b245-cc7395e8c133
+INFO     /tmp/biobb/unitests/concoord_dist/concoord_dist_log.out:file_utils.py:390 Copy: /tmp/biobb/unitests/concoord_dist/c1dabfd5-35f6-432a-8457-6d0ca536f6b8.stdin to /tmp/biobb/unitests/concoord_dist/a7e19ed6-0605-4f7c-b245-cc7395e8c133
+INFO     /tmp/biobb/unitests/concoord_dist/concoord_dist_log.out:cmd_wrapper.py:33 cd  /tmp/biobb/unitests/concoord_dist/a7e19ed6-0605-4f7c-b245-cc7395e8c133 ; dist -op concoord_dist.pdb -og concoord_dist.gro -od concoord_dist.dat -p structure.pdb -c 4.0 -m 50 -damp 1.0 &lt; c1dabfd5-35f6-432a-8457-6d0ca536f6b8.stdin
 
 INFO     /tmp/biobb/unitests/concoord_dist/concoord_dist_log.out:cmd_wrapper.py:50 Exit code 0
 
@@ -767,10 +751,10 @@ Selected parameter set 1
 copying /home/user/micromamba/envs/test_environment/share/concoord/lib/BONDS.DAT.noeh to BONDS.DAT in current working directory
 -------------------------------------------------
 dist.exe - build date: Thu Jan 24 11:26:08 CET 2013                                
-Process started with PID:    79515
+Process started with PID:    80434
 on host: biobb-runners
-in directory: /tmp/biobb/unitests/concoord_dist/23d8ab8f-a0ae-4478-838e-ec58882982fa
-on: 07/09/0023 at: 11:19:01
+in directory: /tmp/biobb/unitests/concoord_dist/a7e19ed6-0605-4f7c-b245-cc7395e8c133
+on: 07/09/0023 at: 11:27:28
 -------------------------------------------------
 command line options:
 pdb input coordinate file...........: structure.pdb                           
@@ -873,7 +857,7 @@ remark: distance between atom     735 and     520 (2.58) smaller than VdWsum (3.
 remark: distance between atom     737 and      72 (2.58) smaller than VdWsum (3.01)  OH1   OC 0.084
 remark: distance between atom     744 and     125 (3.09) smaller than VdWsum (3.49)  OH1 CH2E 0.051
 
-INFO     /tmp/biobb/unitests/concoord_dist/concoord_dist_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/concoord_dist/23d8ab8f-a0ae-4478-838e-ec58882982fa&#x27;, &#x27;/tmp/biobb/unitests/concoord_dist/c4b5e743-852b-496a-8a30-a652b32352d4.stdin&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+INFO     /tmp/biobb/unitests/concoord_dist/concoord_dist_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/concoord_dist/a7e19ed6-0605-4f7c-b245-cc7395e8c133&#x27;, &#x27;/tmp/biobb/unitests/concoord_dist/c1dabfd5-35f6-432a-8457-6d0ca536f6b8.stdin&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
 Removing: /tmp/biobb/unitests
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -884,13 +868,13 @@ Removing: /tmp/biobb/unitests
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-07 11:19:01,212 [MainThread  ] [INFO ]  Executing biobb_flexdyn.flexdyn.imod_imc Version: 4.0.3
-2023-09-07 11:19:01,212 [MainThread  ] [INFO ]  Creating bc41a1c2-56b0-48c6-9aa7-1cde35cfc6e8 temporary folder
-2023-09-07 11:19:01,213 [MainThread  ] [INFO ]  cd bc41a1c2-56b0-48c6-9aa7-1cde35cfc6e8 ; imc structure_cleaned.pdb imod_imode_evecs.dat -o imod_ensemble -c 10 -n 10 -a 6.0
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-07 11:27:29,052 [MainThread  ] [INFO ]  Executing biobb_flexdyn.flexdyn.imod_imc Version: 4.1.0
+2023-09-07 11:27:29,052 [MainThread  ] [INFO ]  Creating c3dbcd8b-a513-40a5-92de-c8d719e488e2 temporary folder
+2023-09-07 11:27:29,053 [MainThread  ] [INFO ]  cd c3dbcd8b-a513-40a5-92de-c8d719e488e2 ; imc structure_cleaned.pdb imod_imode_evecs.dat -o imod_ensemble -c 10 -n 10 -a 6.0
 
-2023-09-07 11:19:01,234 [MainThread  ] [INFO ]  Exit code 0
+2023-09-07 11:27:29,075 [MainThread  ] [INFO ]  Exit code 0
 
-2023-09-07 11:19:01,234 [MainThread  ] [INFO ]  imc&gt;
+2023-09-07 11:27:29,076 [MainThread  ] [INFO ]  imc&gt;
 imc&gt; Monte-Carlo IC-NMA based program v1.11
 imc&gt;
 imc&gt; Reading Input PDB file
@@ -921,20 +905,20 @@ imc&gt; Number of ICs predicted by seg_props(): 168
 imc&gt; Ptraj info: imod_imode_evecs.dat  vectors=20  components=168
 imc&gt; Number of used modes: 10
 imc&gt; Monte-Carlo stage using Ef= 1.000000
-imc&gt; Frame     1  Etot= 2.574668 0.00 secimc&gt; Frame     2  Etot= 3.485857 0.00 secimc&gt; Frame     3  Etot= 4.166642 0.00 secimc&gt; Frame     4  Etot= 2.514959 0.00 secimc&gt; Frame     5  Etot= 4.994107 0.01 secimc&gt; Frame     6  Etot= 4.289224 0.00 secimc&gt; Frame     7  Etot= 2.174891 0.00 secimc&gt; Frame     8  Etot= 1.928885 0.00 secimc&gt; Frame     9  Etot= 4.252397 0.00 secimc&gt; Frame    10  Etot= 1.513413 0.00 sec
+imc&gt; Frame     1  Etot= 2.197433 0.00 secimc&gt; Frame     2  Etot= 2.144701 0.00 secimc&gt; Frame     3  Etot= 2.029560 0.00 secimc&gt; Frame     4  Etot= 2.462485 0.00 secimc&gt; Frame     5  Etot= 3.962133 0.01 secimc&gt; Frame     6  Etot= 2.884035 0.00 secimc&gt; Frame     7  Etot= 3.060223 0.00 secimc&gt; Frame     8  Etot= 4.559098 0.00 secimc&gt; Frame     9  Etot= 3.011561 0.00 secimc&gt; Frame    10  Etot= 2.546211 0.00 sec
 imc&gt;           Total        0.01 sec
 imc&gt;
-imc&gt; ACEPTANCE RATIO(%): 40.215977
+imc&gt; ACEPTANCE RATIO(%): 40.465954
 imc&gt;
 imc&gt; Success!
 imc&gt; Written MC-trajectory: imod_ensemble.pdb (10 frames)
 imc&gt; Bye!
 
-2023-09-07 11:19:01,234 [MainThread  ] [INFO ]  Removed: [&#x27;bc41a1c2-56b0-48c6-9aa7-1cde35cfc6e8&#x27;]
+2023-09-07 11:27:29,076 [MainThread  ] [INFO ]  Removed: [&#x27;c3dbcd8b-a513-40a5-92de-c8d719e488e2&#x27;]
 Checking if empty file: /tmp/biobb/unitests/imod_imc/imod_imc_output.pdb
-<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests/imod_imc/imod_imc_log.out:file_utils.py:390 Executing biobb_flexdyn.flexdyn.imod_imc Version: 4.0.3
-INFO     /tmp/biobb/unitests/imod_imc/imod_imc_log.out:file_utils.py:390 Creating bc41a1c2-56b0-48c6-9aa7-1cde35cfc6e8 temporary folder
-INFO     /tmp/biobb/unitests/imod_imc/imod_imc_log.out:cmd_wrapper.py:33 cd bc41a1c2-56b0-48c6-9aa7-1cde35cfc6e8 ; imc structure_cleaned.pdb imod_imode_evecs.dat -o imod_ensemble -c 10 -n 10 -a 6.0
+<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests/imod_imc/imod_imc_log.out:file_utils.py:390 Executing biobb_flexdyn.flexdyn.imod_imc Version: 4.1.0
+INFO     /tmp/biobb/unitests/imod_imc/imod_imc_log.out:file_utils.py:390 Creating c3dbcd8b-a513-40a5-92de-c8d719e488e2 temporary folder
+INFO     /tmp/biobb/unitests/imod_imc/imod_imc_log.out:cmd_wrapper.py:33 cd c3dbcd8b-a513-40a5-92de-c8d719e488e2 ; imc structure_cleaned.pdb imod_imode_evecs.dat -o imod_ensemble -c 10 -n 10 -a 6.0
 
 INFO     /tmp/biobb/unitests/imod_imc/imod_imc_log.out:cmd_wrapper.py:50 Exit code 0
 
@@ -969,33 +953,33 @@ imc&gt; Number of ICs predicted by seg_props(): 168
 imc&gt; Ptraj info: imod_imode_evecs.dat  vectors=20  components=168
 imc&gt; Number of used modes: 10
 imc&gt; Monte-Carlo stage using Ef= 1.000000
-imc&gt; Frame     1  Etot= 2.574668 0.00 secimc&gt; Frame     2  Etot= 3.485857 0.00 secimc&gt; Frame     3  Etot= 4.166642 0.00 secimc&gt; Frame     4  Etot= 2.514959 0.00 secimc&gt; Frame     5  Etot= 4.994107 0.01 secimc&gt; Frame     6  Etot= 4.289224 0.00 secimc&gt; Frame     7  Etot= 2.174891 0.00 secimc&gt; Frame     8  Etot= 1.928885 0.00 secimc&gt; Frame     9  Etot= 4.252397 0.00 secimc&gt; Frame    10  Etot= 1.513413 0.00 sec
+imc&gt; Frame     1  Etot= 2.197433 0.00 secimc&gt; Frame     2  Etot= 2.144701 0.00 secimc&gt; Frame     3  Etot= 2.029560 0.00 secimc&gt; Frame     4  Etot= 2.462485 0.00 secimc&gt; Frame     5  Etot= 3.962133 0.01 secimc&gt; Frame     6  Etot= 2.884035 0.00 secimc&gt; Frame     7  Etot= 3.060223 0.00 secimc&gt; Frame     8  Etot= 4.559098 0.00 secimc&gt; Frame     9  Etot= 3.011561 0.00 secimc&gt; Frame    10  Etot= 2.546211 0.00 sec
 imc&gt;           Total        0.01 sec
 imc&gt;
-imc&gt; ACEPTANCE RATIO(%): 40.215977
+imc&gt; ACEPTANCE RATIO(%): 40.465954
 imc&gt;
 imc&gt; Success!
 imc&gt; Written MC-trajectory: imod_ensemble.pdb (10 frames)
 imc&gt; Bye!
 
-INFO     /tmp/biobb/unitests/imod_imc/imod_imc_log.out:file_utils.py:390 Removed: [&#x27;bc41a1c2-56b0-48c6-9aa7-1cde35cfc6e8&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+INFO     /tmp/biobb/unitests/imod_imc/imod_imc_log.out:file_utils.py:390 Removed: [&#x27;c3dbcd8b-a513-40a5-92de-c8d719e488e2&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
 Removing: /tmp/biobb/unitests
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_flexdyn/test/unitests/test_flexdyn/test_imod_imode.py::TestImodImode::test_imod_imode</td>
-          <td class="col-duration">0.05</td>
+          <td class="col-duration">0.04</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-07 11:19:01,252 [MainThread  ] [INFO ]  Executing biobb_flexdyn.flexdyn.imod_imode Version: 4.0.3
-2023-09-07 11:19:01,252 [MainThread  ] [INFO ]  Creating 00d68e0a-39fb-4383-8b42-69209ba70206 temporary folder
-2023-09-07 11:19:01,253 [MainThread  ] [INFO ]  cd 00d68e0a-39fb-4383-8b42-69209ba70206 ; imode_gcc structure.pdb -o imods_evecs -m 2
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-07 11:27:29,092 [MainThread  ] [INFO ]  Executing biobb_flexdyn.flexdyn.imod_imode Version: 4.1.0
+2023-09-07 11:27:29,092 [MainThread  ] [INFO ]  Creating c511efe4-ad0b-44d6-a156-09039497a65e temporary folder
+2023-09-07 11:27:29,092 [MainThread  ] [INFO ]  cd c511efe4-ad0b-44d6-a156-09039497a65e ; imode_gcc structure.pdb -o imods_evecs -m 2
 
-2023-09-07 11:19:01,286 [MainThread  ] [INFO ]  Exit code 0
+2023-09-07 11:27:29,125 [MainThread  ] [INFO ]  Exit code 0
 
-2023-09-07 11:19:01,286 [MainThread  ] [INFO ]  imode&gt;
+2023-09-07 11:27:29,125 [MainThread  ] [INFO ]  imode&gt;
 imode&gt; Welcome to the NMA in Internal Coordinates tool v1.20
 imode&gt;
 Parser&gt; Using eigensolver: 1 
@@ -1027,12 +1011,12 @@ imode&gt; Predicted number of ICs (Eckart): 168
 imode&gt; Number of ICs predicted by seg_props(): 168
 imode&gt; Range of computed modes: 1-20
 imode&gt; Creating pairwise interaction potential:
-imode&gt; Inverse Exponential (37284 nipas) cutoff= 10.0, k= 1.000000, x0= 3.8 (0.006511 s)
+imode&gt; Inverse Exponential (37284 nipas) cutoff= 10.0, k= 1.000000, x0= 3.8 (0.006796 s)
 imode&gt; Packed-Hessian/Kinetic matrices mem.= 0.114 Mb (rank= 168)
-imode&gt; Fast Hessian Matrix Building O(n^2) [hessianMFAx()] 0.005308 s
-imode&gt; Fast Kinetic-Energy matrix Building O(n^2) [kineticMFAx()] 0.000789 s
+imode&gt; Fast Hessian Matrix Building O(n^2) [hessianMFAx()] 0.005744 s
+imode&gt; Fast Kinetic-Energy matrix Building O(n^2) [kineticMFAx()] 0.000780 s
 imode&gt; Eigenvector matrix mem. = 0.027 Mb
-imode&gt; Diagonalization with ARPACK-based dsdrv1_AP_BP_W_mon()... 0.011614 s
+imode&gt; Diagonalization with ARPACK-based dsdrv1_AP_BP_W_mon()... 0.011786 s
 imode&gt; Showing the first 10 eigenvalues:
 imode&gt;
 imode&gt; MODE   EIGENVALUE
@@ -1055,11 +1039,11 @@ imode&gt; ICS eigenvectors:                                    imods_evecs_ic.ev
 imode&gt;
 imode&gt; Bye!
 
-2023-09-07 11:19:01,287 [MainThread  ] [INFO ]  Removed: [&#x27;00d68e0a-39fb-4383-8b42-69209ba70206&#x27;]
+2023-09-07 11:27:29,125 [MainThread  ] [INFO ]  Removed: [&#x27;c511efe4-ad0b-44d6-a156-09039497a65e&#x27;]
 Checking if empty file: /tmp/biobb/unitests/imod_imode/imod_imode_evecs.dat
-<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests/imod_imode/imod_imode_log.out:file_utils.py:390 Executing biobb_flexdyn.flexdyn.imod_imode Version: 4.0.3
-INFO     /tmp/biobb/unitests/imod_imode/imod_imode_log.out:file_utils.py:390 Creating 00d68e0a-39fb-4383-8b42-69209ba70206 temporary folder
-INFO     /tmp/biobb/unitests/imod_imode/imod_imode_log.out:cmd_wrapper.py:33 cd 00d68e0a-39fb-4383-8b42-69209ba70206 ; imode_gcc structure.pdb -o imods_evecs -m 2
+<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests/imod_imode/imod_imode_log.out:file_utils.py:390 Executing biobb_flexdyn.flexdyn.imod_imode Version: 4.1.0
+INFO     /tmp/biobb/unitests/imod_imode/imod_imode_log.out:file_utils.py:390 Creating c511efe4-ad0b-44d6-a156-09039497a65e temporary folder
+INFO     /tmp/biobb/unitests/imod_imode/imod_imode_log.out:cmd_wrapper.py:33 cd c511efe4-ad0b-44d6-a156-09039497a65e ; imode_gcc structure.pdb -o imods_evecs -m 2
 
 INFO     /tmp/biobb/unitests/imod_imode/imod_imode_log.out:cmd_wrapper.py:50 Exit code 0
 
@@ -1095,12 +1079,12 @@ imode&gt; Predicted number of ICs (Eckart): 168
 imode&gt; Number of ICs predicted by seg_props(): 168
 imode&gt; Range of computed modes: 1-20
 imode&gt; Creating pairwise interaction potential:
-imode&gt; Inverse Exponential (37284 nipas) cutoff= 10.0, k= 1.000000, x0= 3.8 (0.006511 s)
+imode&gt; Inverse Exponential (37284 nipas) cutoff= 10.0, k= 1.000000, x0= 3.8 (0.006796 s)
 imode&gt; Packed-Hessian/Kinetic matrices mem.= 0.114 Mb (rank= 168)
-imode&gt; Fast Hessian Matrix Building O(n^2) [hessianMFAx()] 0.005308 s
-imode&gt; Fast Kinetic-Energy matrix Building O(n^2) [kineticMFAx()] 0.000789 s
+imode&gt; Fast Hessian Matrix Building O(n^2) [hessianMFAx()] 0.005744 s
+imode&gt; Fast Kinetic-Energy matrix Building O(n^2) [kineticMFAx()] 0.000780 s
 imode&gt; Eigenvector matrix mem. = 0.027 Mb
-imode&gt; Diagonalization with ARPACK-based dsdrv1_AP_BP_W_mon()... 0.011614 s
+imode&gt; Diagonalization with ARPACK-based dsdrv1_AP_BP_W_mon()... 0.011786 s
 imode&gt; Showing the first 10 eigenvalues:
 imode&gt;
 imode&gt; MODE   EIGENVALUE
@@ -1123,7 +1107,7 @@ imode&gt; ICS eigenvectors:                                    imods_evecs_ic.ev
 imode&gt;
 imode&gt; Bye!
 
-INFO     /tmp/biobb/unitests/imod_imode/imod_imode_log.out:file_utils.py:390 Removed: [&#x27;00d68e0a-39fb-4383-8b42-69209ba70206&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+INFO     /tmp/biobb/unitests/imod_imode/imod_imode_log.out:file_utils.py:390 Removed: [&#x27;c511efe4-ad0b-44d6-a156-09039497a65e&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
 Removing: /tmp/biobb/unitests
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -1134,13 +1118,13 @@ Removing: /tmp/biobb/unitests
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-07 11:19:01,304 [MainThread  ] [INFO ]  Executing biobb_flexdyn.flexdyn.imod_imove Version: 4.0.3
-2023-09-07 11:19:01,304 [MainThread  ] [INFO ]  Creating 6a602ba3-3faf-4a8f-ac1c-0374903c5734 temporary folder
-2023-09-07 11:19:01,304 [MainThread  ] [INFO ]  cd 6a602ba3-3faf-4a8f-ac1c-0374903c5734 ; imove structure_cleaned.pdb imod_imode_evecs.dat imod_imove_output.pdb 1 -c 11
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-07 11:27:29,140 [MainThread  ] [INFO ]  Executing biobb_flexdyn.flexdyn.imod_imove Version: 4.1.0
+2023-09-07 11:27:29,140 [MainThread  ] [INFO ]  Creating 87455464-6dea-4694-9b7e-c12c4642fc2c temporary folder
+2023-09-07 11:27:29,141 [MainThread  ] [INFO ]  cd 87455464-6dea-4694-9b7e-c12c4642fc2c ; imove structure_cleaned.pdb imod_imode_evecs.dat imod_imove_output.pdb 1 -c 11
 
-2023-09-07 11:19:01,330 [MainThread  ] [INFO ]  Exit code 0
+2023-09-07 11:27:29,165 [MainThread  ] [INFO ]  Exit code 0
 
-2023-09-07 11:19:01,330 [MainThread  ] [INFO ]  imove&gt;
+2023-09-07 11:27:29,165 [MainThread  ] [INFO ]  imove&gt;
 imove&gt; Welcome to the Internal Coordinates Motion Tool v1.14
 imove&gt;
 imove&gt; Input PDB-file structure_cleaned.pdb
@@ -1190,7 +1174,7 @@ imove&gt; Success!
 imove&gt; Written movie: imod_imove_output.pdb (11 frames)
 imove&gt; Bye!
 
-2023-09-07 11:19:01,331 [MainThread  ] [INFO ]  Removed: [&#x27;6a602ba3-3faf-4a8f-ac1c-0374903c5734&#x27;]
+2023-09-07 11:27:29,166 [MainThread  ] [INFO ]  Removed: [&#x27;87455464-6dea-4694-9b7e-c12c4642fc2c&#x27;]
 Checking if empty file: /tmp/biobb/unitests/imod_imove/imod_imove_output.pdb
 Checking RMSD between:
      PDB_A: /tmp/biobb/unitests/imod_imove/imod_imove_output.pdb
@@ -1201,9 +1185,9 @@ Checking RMSD between:
      Atoms ALIGNED in PDB_B: 716
      RMS: 3.73364302621313e-05
      RMS_CUTOFF: 1
-<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests/imod_imove/imod_imove_log.out:file_utils.py:390 Executing biobb_flexdyn.flexdyn.imod_imove Version: 4.0.3
-INFO     /tmp/biobb/unitests/imod_imove/imod_imove_log.out:file_utils.py:390 Creating 6a602ba3-3faf-4a8f-ac1c-0374903c5734 temporary folder
-INFO     /tmp/biobb/unitests/imod_imove/imod_imove_log.out:cmd_wrapper.py:33 cd 6a602ba3-3faf-4a8f-ac1c-0374903c5734 ; imove structure_cleaned.pdb imod_imode_evecs.dat imod_imove_output.pdb 1 -c 11
+<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests/imod_imove/imod_imove_log.out:file_utils.py:390 Executing biobb_flexdyn.flexdyn.imod_imove Version: 4.1.0
+INFO     /tmp/biobb/unitests/imod_imove/imod_imove_log.out:file_utils.py:390 Creating 87455464-6dea-4694-9b7e-c12c4642fc2c temporary folder
+INFO     /tmp/biobb/unitests/imod_imove/imod_imove_log.out:cmd_wrapper.py:33 cd 87455464-6dea-4694-9b7e-c12c4642fc2c ; imove structure_cleaned.pdb imod_imode_evecs.dat imod_imove_output.pdb 1 -c 11
 
 INFO     /tmp/biobb/unitests/imod_imove/imod_imove_log.out:cmd_wrapper.py:50 Exit code 0
 
@@ -1257,24 +1241,24 @@ imove&gt; Success!
 imove&gt; Written movie: imod_imove_output.pdb (11 frames)
 imove&gt; Bye!
 
-INFO     /tmp/biobb/unitests/imod_imove/imod_imove_log.out:file_utils.py:390 Removed: [&#x27;6a602ba3-3faf-4a8f-ac1c-0374903c5734&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+INFO     /tmp/biobb/unitests/imod_imove/imod_imove_log.out:file_utils.py:390 Removed: [&#x27;87455464-6dea-4694-9b7e-c12c4642fc2c&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
 Removing: /tmp/biobb/unitests
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_flexdyn/test/unitests/test_flexdyn/test_nolb.py::TestNolb_nma::test_nolb_nma</td>
-          <td class="col-duration">0.41</td>
+          <td class="col-duration">0.48</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-07 11:19:01,677 [MainThread  ] [INFO ]  Executing biobb_flexdyn.flexdyn.nolb_nma Version: 4.0.3
-2023-09-07 11:19:01,677 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_flexdyn/biobb_flexdyn/biobb_flexdyn/test/data/flexdyn/structure.pdb to /tmp/biobb/unitests/nolb_nma/c881c2b5-8cf4-45e3-9e37-660b0fd38ed1
-2023-09-07 11:19:01,677 [MainThread  ] [INFO ]  NOLB c881c2b5-8cf4-45e3-9e37-660b0fd38ed1/structure.pdb -o /tmp/biobb/unitests/nolb_nma/c881c2b5-8cf4-45e3-9e37-660b0fd38ed1/nolb_ensemble -m -s 20 -c 5.0 --rmsd 1.0 --dist 1 --nSteps 5000 --tol 0.001
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-07 11:27:29,520 [MainThread  ] [INFO ]  Executing biobb_flexdyn.flexdyn.nolb_nma Version: 4.1.0
+2023-09-07 11:27:29,521 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_flexdyn/biobb_flexdyn/biobb_flexdyn/test/data/flexdyn/structure.pdb to /tmp/biobb/unitests/nolb_nma/a7a112a2-05e7-43ce-a320-841dd2d7dbd0
+2023-09-07 11:27:29,521 [MainThread  ] [INFO ]  NOLB a7a112a2-05e7-43ce-a320-841dd2d7dbd0/structure.pdb -o /tmp/biobb/unitests/nolb_nma/a7a112a2-05e7-43ce-a320-841dd2d7dbd0/nolb_ensemble -m -s 20 -c 5.0 --rmsd 1.0 --dist 1 --nSteps 5000 --tol 0.001
 
-2023-09-07 11:19:02,075 [MainThread  ] [INFO ]  Exit code 0
+2023-09-07 11:27:29,924 [MainThread  ] [INFO ]  Exit code 0
 
-2023-09-07 11:19:02,076 [MainThread  ] [INFO ]  *******************************************************************
+2023-09-07 11:27:29,992 [MainThread  ] [INFO ]  *******************************************************************
 *-----------------------------------------------------------------*
 *-----------NOLB : a Non-Linear rigid block NMA method------------*
 *----------Authors: Alexandre Hoffmann &amp; Sergei Grudinin----------*
@@ -1284,10 +1268,10 @@ Removing: /tmp/biobb/unitests
 *-----------------------------------------------------------------*
 *******************************************************************
 Hostname......................................................... : biobb-runners
-Run at........................................................... : Thu Sep  7 11:19:01 2023
-Command-line arguments........................................... : NOLB c881c2b5-8cf4-45e3-9e37-660b0fd38ed1/structure.pdb -o /tmp/biobb/unitests/nolb_nma/c881c2b5-8cf4-45e3-9e37-660b0fd38ed1/nolb_ensemble -m -s 20 -c 5.0 --rmsd 1.0 --dist 1 --nSteps 5000 --tol 0.001 
+Run at........................................................... : Thu Sep  7 11:27:29 2023
+Command-line arguments........................................... : NOLB a7a112a2-05e7-43ce-a320-841dd2d7dbd0/structure.pdb -o /tmp/biobb/unitests/nolb_nma/a7a112a2-05e7-43ce-a320-841dd2d7dbd0/nolb_ensemble -m -s 20 -c 5.0 --rmsd 1.0 --dist 1 --nSteps 5000 --tol 0.001 
 =====================Reading input PDB file======================
-Input PDB file................................................... : c881c2b5-8cf4-45e3-9e37-660b0fd38ed1/structure.pdb
+Input PDB file................................................... : a7a112a2-05e7-43ce-a320-841dd2d7dbd0/structure.pdb
 Number of chains read............................................ : 2
 Number of atoms read............................................. : 716
 Found............................................................ : 724 covalent bonds
@@ -1319,7 +1303,7 @@ Frequencies :
 ===================Writing output Decoy files====================
 Number of files.................................................. : 20
 Output RMSD...................................................... : 1 A
-Using outputfilename............................................. : /tmp/biobb/unitests/nolb_nma/c881c2b5-8cf4-45e3-9e37-660b0fd38ed1/nolb_ensemble_nlb_decoys.pdb
+Using outputfilename............................................. : /tmp/biobb/unitests/nolb_nma/a7a112a2-05e7-43ce-a320-841dd2d7dbd0/nolb_ensemble_nlb_decoys.pdb
 Current energy................................................... : 0.000802458
 N minimization steps............................................. : 17
 Current Gradient norm............................................ : 0.001
@@ -1423,13 +1407,13 @@ RMSD after minimization.......................................... : 0.0829017
 =================================================================
 =========================== Timing : ============================
 =================================================================
-Parsing arguments................................................ : 0.000201722 s
-Reading input PDB file........................................... : 0.00176274 s
-Constructing Hessian............................................. : 0.00932701 s
-Doing NMA........................................................ : 0.0508857 s
-Writing output Decoy files....................................... : 0.332423 s
+Parsing arguments................................................ : 0.000205767 s
+Reading input PDB file........................................... : 0.00180261 s
+Constructing Hessian............................................. : 0.00928535 s
+Doing NMA........................................................ : 0.0506449 s
+Writing output Decoy files....................................... : 0.338308 s
 .................................................................
-Total time : .................................................... : 0.394601 s
+Total time : .................................................... : 0.400248 s
 =================================================================
 
 Main Reference: Alexandre Hoffmann &amp; Sergei Grudinin. NOLB : Nonlinear rigid block normal mode analysis method. Journal of Chemical Theory and Computation, 2017, 13 (5), pp.2123-2134. DOI: 10.1021/acs.jctc.7b00197.
@@ -1437,11 +1421,11 @@ Main Reference: Alexandre Hoffmann &amp; Sergei Grudinin. NOLB : Nonlinear rigid
 Reference for clustering and decoy generation: Emilie Neveu, Petr Popov, Alexandre Hoffmann, Angelo Migliosi, Xavier Besseron, Gregoire Danoy, Pascal Bouvry, Sergei Grudinin. RapidRMSD: Rapid determination of RMSDs corresponding to motions of flexible molecules. Bioinformatics, Oxford University Press (OUP), 2018. DOI: 10.1093/bioinformatics/bty160.
 
 
-2023-09-07 11:19:02,078 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/nolb_nma/c881c2b5-8cf4-45e3-9e37-660b0fd38ed1&#x27;]
+2023-09-07 11:27:29,995 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/nolb_nma/a7a112a2-05e7-43ce-a320-841dd2d7dbd0&#x27;]
 Checking if empty file: /tmp/biobb/unitests/nolb_nma/nolb_output.pdb
-<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests/nolb_nma/nolb_nma_log.out:file_utils.py:390 Executing biobb_flexdyn.flexdyn.nolb_nma Version: 4.0.3
-INFO     /tmp/biobb/unitests/nolb_nma/nolb_nma_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_flexdyn/biobb_flexdyn/biobb_flexdyn/test/data/flexdyn/structure.pdb to /tmp/biobb/unitests/nolb_nma/c881c2b5-8cf4-45e3-9e37-660b0fd38ed1
-INFO     /tmp/biobb/unitests/nolb_nma/nolb_nma_log.out:cmd_wrapper.py:33 NOLB c881c2b5-8cf4-45e3-9e37-660b0fd38ed1/structure.pdb -o /tmp/biobb/unitests/nolb_nma/c881c2b5-8cf4-45e3-9e37-660b0fd38ed1/nolb_ensemble -m -s 20 -c 5.0 --rmsd 1.0 --dist 1 --nSteps 5000 --tol 0.001
+<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests/nolb_nma/nolb_nma_log.out:file_utils.py:390 Executing biobb_flexdyn.flexdyn.nolb_nma Version: 4.1.0
+INFO     /tmp/biobb/unitests/nolb_nma/nolb_nma_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_flexdyn/biobb_flexdyn/biobb_flexdyn/test/data/flexdyn/structure.pdb to /tmp/biobb/unitests/nolb_nma/a7a112a2-05e7-43ce-a320-841dd2d7dbd0
+INFO     /tmp/biobb/unitests/nolb_nma/nolb_nma_log.out:cmd_wrapper.py:33 NOLB a7a112a2-05e7-43ce-a320-841dd2d7dbd0/structure.pdb -o /tmp/biobb/unitests/nolb_nma/a7a112a2-05e7-43ce-a320-841dd2d7dbd0/nolb_ensemble -m -s 20 -c 5.0 --rmsd 1.0 --dist 1 --nSteps 5000 --tol 0.001
 
 INFO     /tmp/biobb/unitests/nolb_nma/nolb_nma_log.out:cmd_wrapper.py:50 Exit code 0
 
@@ -1455,10 +1439,10 @@ INFO     /tmp/biobb/unitests/nolb_nma/nolb_nma_log.out:cmd_wrapper.py:52 *******
 *-----------------------------------------------------------------*
 *******************************************************************
 Hostname......................................................... : biobb-runners
-Run at........................................................... : Thu Sep  7 11:19:01 2023
-Command-line arguments........................................... : NOLB c881c2b5-8cf4-45e3-9e37-660b0fd38ed1/structure.pdb -o /tmp/biobb/unitests/nolb_nma/c881c2b5-8cf4-45e3-9e37-660b0fd38ed1/nolb_ensemble -m -s 20 -c 5.0 --rmsd 1.0 --dist 1 --nSteps 5000 --tol 0.001 
+Run at........................................................... : Thu Sep  7 11:27:29 2023
+Command-line arguments........................................... : NOLB a7a112a2-05e7-43ce-a320-841dd2d7dbd0/structure.pdb -o /tmp/biobb/unitests/nolb_nma/a7a112a2-05e7-43ce-a320-841dd2d7dbd0/nolb_ensemble -m -s 20 -c 5.0 --rmsd 1.0 --dist 1 --nSteps 5000 --tol 0.001 
 =====================Reading input PDB file======================
-Input PDB file................................................... : c881c2b5-8cf4-45e3-9e37-660b0fd38ed1/structure.pdb
+Input PDB file................................................... : a7a112a2-05e7-43ce-a320-841dd2d7dbd0/structure.pdb
 Number of chains read............................................ : 2
 Number of atoms read............................................. : 716
 Found............................................................ : 724 covalent bonds
@@ -1490,7 +1474,7 @@ Frequencies :
 ===================Writing output Decoy files====================
 Number of files.................................................. : 20
 Output RMSD...................................................... : 1 A
-Using outputfilename............................................. : /tmp/biobb/unitests/nolb_nma/c881c2b5-8cf4-45e3-9e37-660b0fd38ed1/nolb_ensemble_nlb_decoys.pdb
+Using outputfilename............................................. : /tmp/biobb/unitests/nolb_nma/a7a112a2-05e7-43ce-a320-841dd2d7dbd0/nolb_ensemble_nlb_decoys.pdb
 Current energy................................................... : 0.000802458
 N minimization steps............................................. : 17
 Current Gradient norm............................................ : 0.001
@@ -1594,13 +1578,13 @@ RMSD after minimization.......................................... : 0.0829017
 =================================================================
 =========================== Timing : ============================
 =================================================================
-Parsing arguments................................................ : 0.000201722 s
-Reading input PDB file........................................... : 0.00176274 s
-Constructing Hessian............................................. : 0.00932701 s
-Doing NMA........................................................ : 0.0508857 s
-Writing output Decoy files....................................... : 0.332423 s
+Parsing arguments................................................ : 0.000205767 s
+Reading input PDB file........................................... : 0.00180261 s
+Constructing Hessian............................................. : 0.00928535 s
+Doing NMA........................................................ : 0.0506449 s
+Writing output Decoy files....................................... : 0.338308 s
 .................................................................
-Total time : .................................................... : 0.394601 s
+Total time : .................................................... : 0.400248 s
 =================================================================
 
 Main Reference: Alexandre Hoffmann &amp; Sergei Grudinin. NOLB : Nonlinear rigid block normal mode analysis method. Journal of Chemical Theory and Computation, 2017, 13 (5), pp.2123-2134. DOI: 10.1021/acs.jctc.7b00197.
@@ -1608,7 +1592,7 @@ Main Reference: Alexandre Hoffmann &amp; Sergei Grudinin. NOLB : Nonlinear rigid
 Reference for clustering and decoy generation: Emilie Neveu, Petr Popov, Alexandre Hoffmann, Angelo Migliosi, Xavier Besseron, Gregoire Danoy, Pascal Bouvry, Sergei Grudinin. RapidRMSD: Rapid determination of RMSDs corresponding to motions of flexible molecules. Bioinformatics, Oxford University Press (OUP), 2018. DOI: 10.1093/bioinformatics/bty160.
 
 
-INFO     /tmp/biobb/unitests/nolb_nma/nolb_nma_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/nolb_nma/c881c2b5-8cf4-45e3-9e37-660b0fd38ed1&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+INFO     /tmp/biobb/unitests/nolb_nma/nolb_nma_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/nolb_nma/a7a112a2-05e7-43ce-a320-841dd2d7dbd0&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
 Removing: /tmp/biobb/unitests
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -1619,9 +1603,9 @@ Removing: /tmp/biobb/unitests
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-07 11:19:02,093 [MainThread  ] [INFO ]  Executing biobb_flexdyn.flexdyn.prody_anm Version: 4.0.3
-2023-09-07 11:19:02,094 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_flexdyn/biobb_flexdyn/biobb_flexdyn/test/data/flexdyn/structure.pdb to /tmp/biobb/unitests/prody_anm/34eb5fbf-6a41-49af-81f2-148dbfb68716
-2023-09-07 11:19:02,196 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/prody_anm/34eb5fbf-6a41-49af-81f2-148dbfb68716&#x27;]
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-07 11:27:30,011 [MainThread  ] [INFO ]  Executing biobb_flexdyn.flexdyn.prody_anm Version: 4.1.0
+2023-09-07 11:27:30,011 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_flexdyn/biobb_flexdyn/biobb_flexdyn/test/data/flexdyn/structure.pdb to /tmp/biobb/unitests/prody_anm/7ff08341-c89e-4bd2-b654-4705bcc31eab
+2023-09-07 11:27:30,100 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/prody_anm/7ff08341-c89e-4bd2-b654-4705bcc31eab&#x27;]
 Checking if empty file: /tmp/biobb/unitests/prody_anm/prody_output.pdb
 Checking RMSD between:
      PDB_A: /tmp/biobb/unitests/prody_anm/prody_output.pdb
@@ -1634,18 +1618,18 @@ Checking RMSD between:
      RMS_CUTOFF: 1
 <br/> ------------------------------Captured stderr call------------------------------ <br/>@&gt; 775 atoms and 1 coordinate set(s) were parsed in 0.01s.
 @&gt; Hessian was built in 0.01s.
-@&gt; 20 modes were calculated in 0.03s.
+@&gt; 20 modes were calculated in 0.02s.
 @&gt; Parameter: rmsd = 4.00 A
 @&gt; Parameter: n_confs = 20
-@&gt; Modes are scaled by 2.2933078623642156.
-<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests/prody_anm/prody_anm_log.out:file_utils.py:390 Executing biobb_flexdyn.flexdyn.prody_anm Version: 4.0.3
-INFO     /tmp/biobb/unitests/prody_anm/prody_anm_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_flexdyn/biobb_flexdyn/biobb_flexdyn/test/data/flexdyn/structure.pdb to /tmp/biobb/unitests/prody_anm/34eb5fbf-6a41-49af-81f2-148dbfb68716
+@&gt; Modes are scaled by 2.8882338150215663.
+<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests/prody_anm/prody_anm_log.out:file_utils.py:390 Executing biobb_flexdyn.flexdyn.prody_anm Version: 4.1.0
+INFO     /tmp/biobb/unitests/prody_anm/prody_anm_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_flexdyn/biobb_flexdyn/biobb_flexdyn/test/data/flexdyn/structure.pdb to /tmp/biobb/unitests/prody_anm/7ff08341-c89e-4bd2-b654-4705bcc31eab
 DEBUG    .prody:logger.py:135 775 atoms and 1 coordinate set(s) were parsed in 0.01s.
 DEBUG    .prody:logger.py:135 Hessian was built in 0.01s.
-DEBUG    .prody:logger.py:135 20 modes were calculated in 0.03s.
+DEBUG    .prody:logger.py:135 20 modes were calculated in 0.02s.
 INFO     .prody:logger.py:123 Parameter: rmsd = 4.00 A
 INFO     .prody:logger.py:123 Parameter: n_confs = 20
-INFO     .prody:logger.py:123 Modes are scaled by 2.2933078623642156.
-INFO     /tmp/biobb/unitests/prody_anm/prody_anm_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/prody_anm/34eb5fbf-6a41-49af-81f2-148dbfb68716&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+INFO     .prody:logger.py:123 Modes are scaled by 2.8882338150215663.
+INFO     /tmp/biobb/unitests/prody_anm/prody_anm_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/prody_anm/7ff08341-c89e-4bd2-b654-4705bcc31eab&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
 Removing: /tmp/biobb/unitests
 <br/></div></td></tr></tbody></table></body></html>
