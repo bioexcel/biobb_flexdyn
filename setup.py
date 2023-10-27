@@ -14,7 +14,7 @@ setuptools.setup(
     keywords="3D-Bioinfo ELIXIR FlexDyn Bioinformatics Workflows BioExcel Compatibility Flexibility Ensembles Protein Structure",
     url="https://github.com/bioexcel/biobb_flexdyn",
     project_urls={
-        "Documentation": "http://biobb_flexdyn.readthedocs.io/en/latest/",
+        "Documentation": "http://biobb-flexdyn.readthedocs.io/en/latest/",
         "Bioexcel": "https://bioexcel.eu/"
     },
     packages=setuptools.find_packages(exclude=['docs', 'test']),
