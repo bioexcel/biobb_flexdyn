@@ -26,6 +26,7 @@ class ImodImc(BiobbObject):
             * **amplitude** (*int*) - (1) Amplitude linear factor to scale motion
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
+            * **sandbox_path** (*str*) - ("./") [WF property] Parent path to the sandbox directory.
 
     Examples:
         This is a use example of how to use the building block from Python::
@@ -49,6 +50,7 @@ class ImodImc(BiobbObject):
             * schema: http://edamontology.org/EDAM.owl
 
     """
+
     def __init__(self, input_pdb_path: str, input_dat_path: str, output_traj_path: str,
                  properties: dict = None, **kwargs) -> None:
 
