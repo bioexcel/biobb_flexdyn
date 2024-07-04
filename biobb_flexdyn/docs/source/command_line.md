@@ -44,6 +44,7 @@ Config parameters for this building block:
 * **amplitude** (*integer*): (1) Amplitude linear factor to scale motion.
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imc.yml)
 ```python
@@ -106,6 +107,7 @@ Config parameters for this building block:
 * **cg** (*integer*): (2) Coarse-Grained model. .
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imode.yml)
 ```python
@@ -166,6 +168,7 @@ Config parameters for this building block:
 * **rmsd** (*number*): (1.0) Maximum RMSd for decoy generation..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_nolb_nma.yml)
 ```python
@@ -250,6 +253,7 @@ Config parameters for this building block:
 * **scale** (*integer*): (1) Pre-scale coordinates with this factor.
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_concoord_disco.yml)
 ```python
@@ -324,6 +328,7 @@ Config parameters for this building block:
 * **fixed_atoms** (*boolean*): (False) Interpret zero occupancy as atoms to keep fixed.
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_concoord_dist.yml)
 ```python
@@ -388,6 +393,7 @@ Config parameters for this building block:
 * **num_frames** (*integer*): (11) Number of frames to be generated.
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imove.yml)
 ```python
@@ -450,6 +456,7 @@ Config parameters for this building block:
 * **rmsd** (*number*): (1.0) Average RMSD that the conformations will have with respect to the initial conformation.
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_prody_anm.yml)
 ```python
