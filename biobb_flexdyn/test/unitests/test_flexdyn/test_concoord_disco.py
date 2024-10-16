@@ -1,3 +1,4 @@
+# type: ignore
 from biobb_common.tools import test_fixtures as fx
 from biobb_flexdyn.flexdyn.concoord_disco import concoord_disco
 
