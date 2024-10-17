@@ -2,6 +2,7 @@
 
 """Module containing the prody_anm class and the command line interface."""
 import argparse
+from typing import Optional
 import prody
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import settings
@@ -51,7 +52,7 @@ class ProdyANM(BiobbObject):
     """
 
     def __init__(self, input_pdb_path: str, output_pdb_path: str,
-                 properties: dict = None, **kwargs) -> None:
+                 properties: Optional[dict] = None, **kwargs) -> None:
 
         properties = properties or {}
 
@@ -112,7 +113,7 @@ class ProdyANM(BiobbObject):
 
         # remove temporary folder(s)
         self.tmp_files.extend([
-            self.stage_io_dict.get("unique_dir")
+            self.stage_io_dict.get("unique_dir", "")
         ])
         self.remove_tmp_files()
 
@@ -122,7 +123,7 @@ class ProdyANM(BiobbObject):
 
 
 def prody_anm(input_pdb_path: str, output_pdb_path: str,
-              properties: dict = None, **kwargs) -> int:
+              properties: Optional[dict] = None, **kwargs) -> int:
     """Create :class:`ProdyANM <flexdyn.prody_anm.ProdyANM>`flexdyn.prody_anm.ProdyANM class and
     execute :meth:`launch() <flexdyn.prody_anm.ProdyANM.launch>` method"""
 

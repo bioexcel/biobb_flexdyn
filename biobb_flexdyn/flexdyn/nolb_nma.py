@@ -2,6 +2,7 @@
 
 """Module containing the nolb class and the command line interface."""
 import argparse
+from typing import Optional
 import shutil
 from pathlib import Path
 from biobb_common.generic.biobb_object import BiobbObject
@@ -49,7 +50,7 @@ class Nolb_nma(BiobbObject):
     """
 
     def __init__(self, input_pdb_path: str, output_pdb_path: str,
-                 properties: dict = None, **kwargs) -> None:
+                 properties: Optional[dict] = None, **kwargs) -> None:
 
         properties = properties or {}
 
@@ -130,7 +131,7 @@ class Nolb_nma(BiobbObject):
 
         # remove temporary folder(s)
         self.tmp_files.extend([
-            self.stage_io_dict.get("unique_dir")
+            self.stage_io_dict.get("unique_dir", "")
         ])
         self.remove_tmp_files()
 
@@ -140,7 +141,7 @@ class Nolb_nma(BiobbObject):
 
 
 def nolb_nma(input_pdb_path: str, output_pdb_path: str,
-             properties: dict = None, **kwargs) -> int:
+             properties: Optional[dict] = None, **kwargs) -> int:
     """Create :class:`Nolb_nma <flexdyn.nolb_nma.Nolb_nma>`flexdyn.nolb_nma.Nolb_nma class and
     execute :meth:`launch() <flexdyn.nolb_nma.Nolb_nma.launch>` method"""
 

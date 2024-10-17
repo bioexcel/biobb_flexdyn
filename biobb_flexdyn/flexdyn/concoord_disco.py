@@ -2,6 +2,7 @@
 
 """Module containing the concoord_disco class and the command line interface."""
 import argparse
+from typing import Optional
 import os
 import shutil
 from pathlib import Path
@@ -74,7 +75,7 @@ class ConcoordDisco(BiobbObject):
     """
 
     def __init__(self, input_pdb_path: str, input_dat_path: str, output_traj_path: str,
-                 output_rmsd_path: str, output_bfactor_path: str, properties: dict = None, **kwargs) -> None:
+                 output_rmsd_path: str, output_bfactor_path: str, properties: Optional[dict] = None, **kwargs) -> None:
 
         properties = properties or {}
 
@@ -242,7 +243,7 @@ class ConcoordDisco(BiobbObject):
 
         # remove temporary folder(s)
         self.tmp_files.extend([
-            self.stage_io_dict.get("unique_dir")
+            self.stage_io_dict.get("unique_dir", "")
         ])
         self.remove_tmp_files()
 
@@ -253,7 +254,7 @@ class ConcoordDisco(BiobbObject):
 
 def concoord_disco(input_pdb_path: str, input_dat_path: str,
                    output_traj_path: str, output_rmsd_path: str, output_bfactor_path: str,
-                   properties: dict = None, **kwargs) -> int:
+                   properties: Optional[dict] = None, **kwargs) -> int:
     """Create :class:`ConcoordDisco <flexdyn.concoord_disco.ConcoordDisco>`flexdyn.concoord_disco.ConcoordDisco class and
     execute :meth:`launch() <flexdyn.concoord_disco.ConcoordDisco.launch>` method"""
 

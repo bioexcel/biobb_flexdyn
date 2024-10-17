@@ -2,6 +2,7 @@
 
 """Module containing the imode class and the command line interface."""
 import argparse
+from typing import Optional
 import shutil
 from pathlib import PurePath
 from biobb_common.tools import file_utils as fu
@@ -51,7 +52,7 @@ class ImodImove(BiobbObject):
     """
 
     def __init__(self, input_pdb_path: str, input_dat_path: str, output_pdb_path: str,
-                 properties: dict = None, **kwargs) -> None:
+                 properties: Optional[dict] = None, **kwargs) -> None:
 
         properties = properties or {}
 
@@ -142,7 +143,7 @@ class ImodImove(BiobbObject):
 
 
 def imod_imove(input_pdb_path: str, input_dat_path: str, output_pdb_path: str,
-               properties: dict = None, **kwargs) -> int:
+               properties: Optional[dict] = None, **kwargs) -> int:
     """Create :class:`ImodImove <flexdyn.imod_imove.ImodImove>`flexdyn.imod_imove.ImodImove class and
     execute :meth:`launch() <flexdyn.imod_imove.ImodImove.launch>` method"""
 
