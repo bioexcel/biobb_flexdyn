@@ -20,8 +20,8 @@ setuptools.setup(
     packages=setuptools.find_packages(exclude=['docs', 'test']),
     package_data={'biobb_flexdyn': ['py.typed']},
     include_package_data=True,
-    install_requires=['biobb_common==5.0.0'],
-    python_requires='>=3.9',
+    install_requires=['biobb_common==5.0.0', 'scipy>=1.13.0,<1.14.0'],
+    python_requires='>=3.9,<3.12',
     entry_points={
         "console_scripts": [
             "concoord_dist = biobb_flexdyn.flexdyn.concoord_dist:main",
