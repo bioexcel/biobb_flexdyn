@@ -38,6 +38,6 @@ setuptools.setup(
         "Programming Language :: Python :: 3.9",
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: MacOS :: MacOS X",
-        "Operating System :: POSIX",
+        "Operating System :: POSIX"
     ],
 )
