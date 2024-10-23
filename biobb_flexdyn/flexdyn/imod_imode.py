@@ -95,8 +95,8 @@ class ImodImode(BiobbObject):
         shutil.copy2(self.io_dict["in"]["input_pdb_path"], self.tmp_folder)
 
         # Output temporary file
-        # out_file_prefix = Path(self.stage_io_dict.get("unique_dir")).joinpath("imods_evecs")
-        # out_file = Path(self.stage_io_dict.get("unique_dir")).joinpath("imods_evecs_ic.evec")
+        # out_file_prefix = Path(self.stage_io_dict.get("unique_dir", "")).joinpath("imods_evecs")
+        # out_file = Path(self.stage_io_dict.get("unique_dir", "")).joinpath("imods_evecs_ic.evec")
         out_file_prefix = "imods_evecs"  # Needed as imod is appending the _ic.evec extension
         out_file = "imods_evecs_ic.evec"
 
@@ -129,7 +129,7 @@ class ImodImode(BiobbObject):
 
         # remove temporary folder(s)
         self.tmp_files.extend([
-            # self.stage_io_dict.get("unique_dir")
+            # self.stage_io_dict.get("unique_dir", "")
             self.tmp_folder
         ])
         self.remove_tmp_files()

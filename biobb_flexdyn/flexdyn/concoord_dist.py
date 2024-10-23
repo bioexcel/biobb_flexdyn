@@ -111,8 +111,8 @@ class ConcoordDist(BiobbObject):
         # Copy auxiliary file (HBONDS) to the working dir
         concoord_lib = os.getenv("CONCOORDLIB")
 
-        hbonds_file = concoord_lib + "/HBONDS.DAT"
-        shutil.copy2(hbonds_file, self.stage_io_dict.get("unique_dir"))
+        hbonds_file = str(concoord_lib) + "/HBONDS.DAT"
+        shutil.copy2(hbonds_file, self.stage_io_dict.get("unique_dir", ""))
 
         # Command line
         # (concoord) OROZCO67:biobb_flexdyn hospital$ dist -p biobb_flexdyn/test/data/flexdyn/structure.pdb
@@ -135,25 +135,25 @@ class ConcoordDist(BiobbObject):
         # Selected parameter set 1
         # copying /opt/anaconda3/envs/concoord/share/concoord/lib/BONDS.DAT.noeh to BONDS.DAT in current working directory
 
-        self.cmd = ["cd ", self.stage_io_dict.get('unique_dir'), ";", self.binary_path,
+        self.cmd = ["cd ", self.stage_io_dict.get('unique_dir', ''), ";", self.binary_path,
                     #  "-op", self.stage_io_dict["out"]["output_pdb_path"],
                     #  "-og", self.stage_io_dict["out"]["output_gro_path"],
                     #  "-od", self.stage_io_dict["out"]["output_dat_path"]
-                    "-op", str(Path(self.stage_io_dict["out"]["output_pdb_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir')))),
-                    "-og", str(Path(self.stage_io_dict["out"]["output_gro_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir')))),
-                    "-od", str(Path(self.stage_io_dict["out"]["output_dat_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir'))))
+                    "-op", str(Path(self.stage_io_dict["out"]["output_pdb_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir', '')))),
+                    "-og", str(Path(self.stage_io_dict["out"]["output_gro_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir', '')))),
+                    "-od", str(Path(self.stage_io_dict["out"]["output_dat_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir', ''))))
                     ]
         # If input structure in pdb format:
         file_extension = Path(self.stage_io_dict["in"]["input_structure_path"]).suffix
         if file_extension == ".pdb":
             self.cmd.append('-p')
             # self.cmd.append(self.stage_io_dict["in"]["input_structure_path"])
-            self.cmd.append(str(Path(self.stage_io_dict["in"]["input_structure_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir')))))
+            self.cmd.append(str(Path(self.stage_io_dict["in"]["input_structure_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir', '')))))
 
         elif file_extension == ".gro":
             self.cmd.append('-g')
             # self.cmd.append(self.stage_io_dict["in"]["input_structure_path"])
-            self.cmd.append(str(Path(self.stage_io_dict["in"]["input_structure_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir')))))
+            self.cmd.append(str(Path(self.stage_io_dict["in"]["input_structure_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir', '')))))
 
         else:
             fu.log("ERROR: input_structure_path ({}) must be a PDB or a GRO formatted file ({})".format(self.io_dict["in"]["input_structure_path"], file_extension), self.out_log, self.global_log)
@@ -182,7 +182,7 @@ class ConcoordDist(BiobbObject):
         # Add stdin input file
         self.cmd.append('<')
         # self.cmd.append(self.stage_io_dict["in"]["stdin_file_path"])
-        self.cmd.append(str(Path(self.stage_io_dict["in"]["stdin_file_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir')))))
+        self.cmd.append(str(Path(self.stage_io_dict["in"]["stdin_file_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir', '')))))
 
         # Run Biobb block
         self.run_biobb()
@@ -193,7 +193,7 @@ class ConcoordDist(BiobbObject):
         # remove temporary folder(s)
         self.tmp_files.extend([
             self.stage_io_dict.get("unique_dir", ""),
-            self.io_dict['in'].get("stdin_file_path")
+            self.io_dict['in'].get("stdin_file_path", "")
         ])
         self.remove_tmp_files()
 

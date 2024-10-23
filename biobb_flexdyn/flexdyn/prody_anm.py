@@ -3,7 +3,7 @@
 """Module containing the prody_anm class and the command line interface."""
 import argparse
 from typing import Optional
-import prody
+import prody  # type: ignore
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import settings
 from biobb_common.tools.file_utils import launchlogger
@@ -91,7 +91,7 @@ class ProdyANM(BiobbObject):
         prot = prody.parsePDB(self.stage_io_dict["in"]["input_pdb_path"],)
 
         # http://prody.csb.pitt.edu/manual/reference/atomic/select.html
-        prot_sel = prot.select(self.selection)
+        prot_sel = prot.select(self.selection)  # type: ignore
 
         enm = prody.ANM('BioBB_flexdyn Prody ANM ensemble generator')
 

@@ -133,27 +133,29 @@ class ConcoordDisco(BiobbObject):
         # MARGINS_li.DAT, MARGINS_oplsaa.DAT, MARGINS_oplsua.DAT, MARGINS_oplsx.DAT, MARGINS_repel.DAT, MARGINS_yamber2.DAT
         # 1 (OPLS-UA -united atoms- parameters), 2 (OPLS-AA -all atoms- parameters), 3 (PROLSQ repel parameters), 4 (Yamber2 parameters), 5 (Li et al. parameters), 6 (OPLS-X parameters -recommended for NMR structure determination-).
         vdw_values = ["vdw_values", "oplsua", "oplsaa", "repel", "yamber2", "li", "oplsx"]
+        if self.vdw is None:
+            raise ValueError("The 'vdw' property cannot be None")
         vdw_index = int(self.vdw)
-        margins_file = concoord_lib + "/MARGINS_" + vdw_values[vdw_index] + ".DAT"
-        atoms_file = concoord_lib + "/ATOMS_" + vdw_values[vdw_index] + ".DAT"
-        bonds_file = concoord_lib + "/BONDS.DAT"
-        shutil.copy2(margins_file, self.stage_io_dict.get("unique_dir"))
-        shutil.copy2(margins_file, self.stage_io_dict.get("unique_dir")+"/MARGINS.DAT")
-        shutil.copy2(atoms_file, self.stage_io_dict.get("unique_dir"))
-        shutil.copy2(bonds_file, self.stage_io_dict.get("unique_dir"))
+        margins_file = str(concoord_lib) + "/MARGINS_" + vdw_values[vdw_index] + ".DAT"
+        atoms_file = str(concoord_lib) + "/ATOMS_" + vdw_values[vdw_index] + ".DAT"
+        bonds_file = str(concoord_lib) + "/BONDS.DAT"
+        shutil.copy2(margins_file, self.stage_io_dict.get("unique_dir", ""))
+        shutil.copy2(margins_file, self.stage_io_dict.get("unique_dir", "")+"/MARGINS.DAT")
+        shutil.copy2(atoms_file, self.stage_io_dict.get("unique_dir", ""))
+        shutil.copy2(bonds_file, self.stage_io_dict.get("unique_dir", ""))
 
         # Command line
         # (concoord) OROZCO67:biobb_flexdyn hospital$ disco -d biobb_flexdyn/test/reference/flexdyn/dist.dat
         # -p biobb_flexdyn/test/reference/flexdyn/dist.pdb  -op patata.pdb
-        self.cmd = ["cd ", self.stage_io_dict.get('unique_dir'), ";", self.binary_path,
+        self.cmd = ["cd ", self.stage_io_dict.get('unique_dir', ''), ";", self.binary_path,
                     #  "-p", str(Path(self.stage_io_dict["in"]["input_pdb_path"]).relative_to(Path.cwd())),
                     #  "-d", str(Path(self.stage_io_dict["in"]["input_dat_path"]).relative_to(Path.cwd())),
                     #  "-or", str(Path(self.stage_io_dict["out"]["output_rmsd_path"]).relative_to(Path.cwd())),
                     #  "-of", str(Path(self.stage_io_dict["out"]["output_bfactor_path"]).relative_to(Path.cwd()))
-                    "-p", str(Path(self.stage_io_dict["in"]["input_pdb_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir')))),
-                    "-d", str(Path(self.stage_io_dict["in"]["input_dat_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir')))),
-                    "-or", str(Path(self.stage_io_dict["out"]["output_rmsd_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir')))),
-                    "-of", str(Path(self.stage_io_dict["out"]["output_bfactor_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir'))))
+                    "-p", str(Path(self.stage_io_dict["in"]["input_pdb_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir', '')))),
+                    "-d", str(Path(self.stage_io_dict["in"]["input_dat_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir', '')))),
+                    "-or", str(Path(self.stage_io_dict["out"]["output_rmsd_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir', '')))),
+                    "-of", str(Path(self.stage_io_dict["out"]["output_bfactor_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir', ''))))
                     ]
 
         # Output structure formats:
@@ -161,15 +163,15 @@ class ConcoordDisco(BiobbObject):
         if file_extension == ".pdb":
             self.cmd.append('-on')  # NMR-PDB format (multi-model)
 #            self.cmd.append(str(Path(self.stage_io_dict["out"]["output_traj_path"]).relative_to(Path.cwd())))
-            self.cmd.append(str(Path(self.stage_io_dict["out"]["output_traj_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir')))))
+            self.cmd.append(str(Path(self.stage_io_dict["out"]["output_traj_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir', '')))))
         elif file_extension == ".gro":
             self.cmd.append('-ot')
 #            self.cmd.append(str(Path(self.stage_io_dict["out"]["output_traj_path"]).relative_to(Path.cwd())))
-            self.cmd.append(str(Path(self.stage_io_dict["out"]["output_traj_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir')))))
+            self.cmd.append(str(Path(self.stage_io_dict["out"]["output_traj_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir', '')))))
         elif file_extension == ".xtc":
             self.cmd.append('-ox')
 #            self.cmd.append(str(Path(self.stage_io_dict["out"]["output_traj_path"]).relative_to(Path.cwd())))
-            self.cmd.append(str(Path(self.stage_io_dict["out"]["output_traj_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir')))))
+            self.cmd.append(str(Path(self.stage_io_dict["out"]["output_traj_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir', '')))))
         else:
             fu.log("ERROR: output_traj_path ({}) must be a PDB, GRO or XTC formatted file ({})".format(self.io_dict["out"]["output_traj_path"], file_extension), self.out_log, self.global_log)
 

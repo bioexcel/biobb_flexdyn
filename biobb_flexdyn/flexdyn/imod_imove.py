@@ -132,7 +132,7 @@ class ImodImove(BiobbObject):
 
         # remove temporary folder(s)
         self.tmp_files.extend([
-            # self.stage_io_dict.get("unique_dir")
+            # self.stage_io_dict.get("unique_dir", "")
             self.tmp_folder
         ])
         self.remove_tmp_files()

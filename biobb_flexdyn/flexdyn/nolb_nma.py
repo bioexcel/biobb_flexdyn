@@ -87,8 +87,8 @@ class Nolb_nma(BiobbObject):
         self.stage_files()
 
         # Output temporary file
-        out_file_prefix = Path(self.stage_io_dict.get("unique_dir")).joinpath("nolb_ensemble")
-        out_file = Path(self.stage_io_dict.get("unique_dir")).joinpath("nolb_ensemble_nlb_decoys.pdb")
+        out_file_prefix = Path(self.stage_io_dict.get("unique_dir", "")).joinpath("nolb_ensemble")
+        out_file = Path(self.stage_io_dict.get("unique_dir", "")).joinpath("nolb_ensemble_nlb_decoys.pdb")
 
         # Command line
         # ./NOLB 1ake_monomer.pdb -s 100 --rmsd 5 -m  -o patata # Output: patata_nlb_decoys.pdb
