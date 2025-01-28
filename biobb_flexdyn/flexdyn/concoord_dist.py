@@ -192,7 +192,7 @@ class ConcoordDist(BiobbObject):
 
         # remove temporary folder(s)
         self.tmp_files.extend([
-            self.stage_io_dict.get("unique_dir", ""),
+            # self.stage_io_dict.get("unique_dir", ""),
             self.io_dict['in'].get("stdin_file_path", "")
         ])
         self.remove_tmp_files()
@@ -213,6 +213,8 @@ def concoord_dist(input_structure_path: str,
                         output_gro_path=output_gro_path,
                         output_dat_path=output_dat_path,
                         properties=properties).launch()
+
+    concoord_dist.__doc__ = ConcoordDist.__doc__
 
 
 def main():

@@ -152,6 +152,8 @@ def imod_imove(input_pdb_path: str, input_dat_path: str, output_pdb_path: str,
                      output_pdb_path=output_pdb_path,
                      properties=properties).launch()
 
+    imod_imove.__doc__ = ImodImove.__doc__
+
 
 def main():
     parser = argparse.ArgumentParser(description='Animate the normal modes of a macromolecule using the imove tool from the iMODS package.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))

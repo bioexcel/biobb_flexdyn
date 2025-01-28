@@ -112,9 +112,9 @@ class ProdyANM(BiobbObject):
         self.copy_to_host()
 
         # remove temporary folder(s)
-        self.tmp_files.extend([
-            self.stage_io_dict.get("unique_dir", "")
-        ])
+        # self.tmp_files.extend([
+        #     self.stage_io_dict.get("unique_dir", "")
+        # ])
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)
@@ -130,6 +130,8 @@ def prody_anm(input_pdb_path: str, output_pdb_path: str,
     return ProdyANM(input_pdb_path=input_pdb_path,
                     output_pdb_path=output_pdb_path,
                     properties=properties).launch()
+
+    prody_anm.__doc__ = ProdyANM.__doc__
 
 
 def main():

@@ -169,6 +169,8 @@ def imod_imc(input_pdb_path: str, input_dat_path: str, output_traj_path: str,
                    output_traj_path=output_traj_path,
                    properties=properties).launch()
 
+    imod_imc.__doc__ = ImodImc.__doc__
+
 
 def main():
     parser = argparse.ArgumentParser(description='Compute a Monte-Carlo IC-NMA based conformational ensemble using the imc tool from the iMODS package.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))

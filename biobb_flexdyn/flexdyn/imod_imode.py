@@ -148,6 +148,8 @@ def imod_imode(input_pdb_path: str, output_dat_path: str,
                      output_dat_path=output_dat_path,
                      properties=properties).launch()
 
+    imod_imode.__doc__ = ImodImode.__doc__
+
 
 def main():
     parser = argparse.ArgumentParser(description='Compute the normal modes of a macromolecule using the imode tool from the iMODS package.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
