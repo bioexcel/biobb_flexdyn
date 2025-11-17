@@ -41,7 +41,7 @@
             "type": "string",
             "description": "Output multi-model PDB file with the generated ensemble",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/prody/prody_output.pdb",
+            "sample": "https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/flexdyn/prody_output.pdb",
             "enum": [
                 ".*\\.pdb$"
             ],

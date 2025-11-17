@@ -472,7 +472,7 @@ Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
 * **input_pdb_path** (*string*): Input PDB file. File type: input. [Sample file](https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/data/flexdyn/structure.pdb). Accepted formats: PDB
-* **output_pdb_path** (*string*): Output multi-model PDB file with the generated ensemble. File type: output. [Sample file](https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/prody/prody_output.pdb). Accepted formats: PDB
+* **output_pdb_path** (*string*): Output multi-model PDB file with the generated ensemble. File type: output. [Sample file](https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/flexdyn/prody_output.pdb). Accepted formats: PDB
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition
 
