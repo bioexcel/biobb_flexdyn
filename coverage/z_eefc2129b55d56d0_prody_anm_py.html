@@ -4,8 +4,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Coverage for biobb_flexdyn/flexdyn/prody_anm.py: 79%</title>
     <link rel="icon" sizes="32x32" href="favicon_32_cb_58284776.png">
-    <link rel="stylesheet" href="style_cb_81f8c14c.css" type="text/css">
-    <script src="coverage_html_cb_6fb7b396.js" defer></script>
+    <link rel="stylesheet" href="style_cb_a37fa487.css" type="text/css">
+    <script src="coverage_html_cb_cadff66e.js" defer></script>
 </head>
 <body class="pyfile">
 <header>
@@ -64,8 +64,8 @@
             <a id="indexLink" class="nav" href="index.html">&Hat; index</a> &nbsp; &nbsp;
             <a id="nextFileLink" class="nav" href="z_68fa7e1546d8c55d_test_concoord_disco_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
-            <a class="nav" href="https://coverage.readthedocs.io/en/7.9.1">coverage.py v7.9.1</a>,
-            created at 2025-06-19 14:25 +0000
+            <a class="nav" href="https://coverage.readthedocs.io/en/7.11.3">coverage.py v7.11.3</a>,
+            created at 2025-11-17 15:26 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"></button>
@@ -99,7 +99,7 @@
     <p class="pln"><span class="n"><a id="t17" href="#t17">17</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t18" href="#t18">18</a></span><span class="t"><span class="str">    Args:</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t19" href="#t19">19</a></span><span class="t"><span class="str">        input_pdb_path (str): Input PDB file. File type: input. `Sample file &lt;https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/data/flexdyn/structure.pdb>`_. Accepted formats: pdb (edam:format_1476).</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t20" href="#t20">20</a></span><span class="t"><span class="str">        output_pdb_path (str): Output multi-model PDB file with the generated ensemble. File type: output. `Sample file &lt;https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/prody/prody_output.pdb>`_. Accepted formats: pdb (edam:format_1476).</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t20" href="#t20">20</a></span><span class="t"><span class="str">        output_pdb_path (str): Output multi-model PDB file with the generated ensemble. File type: output. `Sample file &lt;https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/flexdyn/prody_output.pdb>`_. Accepted formats: pdb (edam:format_1476).</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t21" href="#t21">21</a></span><span class="t"><span class="str">        properties (dict - Python dictionary object containing the tool parameters, not input/output files):</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t22" href="#t22">22</a></span><span class="t"><span class="str">            * **num_structs** (*int*) - (500) Number of structures to be generated</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t23" href="#t23">23</a></span><span class="t"><span class="str">            * **selection** (*str*) - (calpha) Atoms selection (Prody syntax: http://prody.csb.pitt.edu/manual/reference/atomic/select.html)</span>&nbsp;</span><span class="r"></span></p>
@@ -134,7 +134,7 @@
     <p class="pln"><span class="n"><a id="t52" href="#t52">52</a></span><span class="t"><span class="str">    """</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t53" href="#t53">53</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t54" href="#t54">54</a></span><span class="t">    <span class="key">def</span> <span class="nam">__init__</span><span class="op">(</span><span class="nam">self</span><span class="op">,</span> <span class="nam">input_pdb_path</span><span class="op">:</span> <span class="nam">str</span><span class="op">,</span> <span class="nam">output_pdb_path</span><span class="op">:</span> <span class="nam">str</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t55" href="#t55">55</a></span><span class="t">                 <span class="nam">properties</span><span class="op">:</span> <span class="nam">Optional</span><span class="op">[</span><span class="nam">dict</span><span class="op">]</span> <span class="op">=</span> <span class="key">None</span><span class="op">,</span> <span class="op">**</span><span class="nam">kwargs</span><span class="op">)</span> <span class="op">-></span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t55" href="#t55">55</a></span><span class="t">                 <span class="nam">properties</span><span class="op">:</span> <span class="nam">Optional</span><span class="op">[</span><span class="nam">dict</span><span class="op">]</span> <span class="op">=</span> <span class="key">None</span><span class="op">,</span> <span class="op">**</span><span class="nam">kwargs</span><span class="op">)</span> <span class="op">-></span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t56" href="#t56">56</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t57" href="#t57">57</a></span><span class="t">        <span class="nam">properties</span> <span class="op">=</span> <span class="nam">properties</span> <span class="key">or</span> <span class="op">{</span><span class="op">}</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t58" href="#t58">58</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
@@ -144,9 +144,9 @@
     <p class="pln"><span class="n"><a id="t62" href="#t62">62</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t63" href="#t63">63</a></span><span class="t">        <span class="com"># Input/Output files</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t64" href="#t64">64</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">io_dict</span> <span class="op">=</span> <span class="op">{</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t65" href="#t65">65</a></span><span class="t">            <span class="str">'in'</span><span class="op">:</span> <span class="op">{</span><span class="str">'input_pdb_path'</span><span class="op">:</span> <span class="nam">input_pdb_path</span><span class="op">}</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t66" href="#t66">66</a></span><span class="t">            <span class="str">'out'</span><span class="op">:</span> <span class="op">{</span><span class="str">'output_pdb_path'</span><span class="op">:</span> <span class="nam">output_pdb_path</span><span class="op">}</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t67" href="#t67">67</a></span><span class="t">        <span class="op">}</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t65" href="#t65">65</a></span><span class="t">            <span class="str">'in'</span><span class="op">:</span> <span class="op">{</span><span class="str">'input_pdb_path'</span><span class="op">:</span> <span class="nam">input_pdb_path</span><span class="op">}</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t66" href="#t66">66</a></span><span class="t">            <span class="str">'out'</span><span class="op">:</span> <span class="op">{</span><span class="str">'output_pdb_path'</span><span class="op">:</span> <span class="nam">output_pdb_path</span><span class="op">}</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t67" href="#t67">67</a></span><span class="t">        <span class="op">}</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t68" href="#t68">68</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t69" href="#t69">69</a></span><span class="t">        <span class="com"># Properties specific for BB</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t70" href="#t70">70</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">properties</span> <span class="op">=</span> <span class="nam">properties</span>&nbsp;</span><span class="r"></span></p>
@@ -205,13 +205,13 @@
     <p class="pln"><span class="n"><a id="t123" href="#t123">123</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t124" href="#t124">124</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t125" href="#t125">125</a></span><span class="t"><span class="key">def</span> <span class="nam">prody_anm</span><span class="op">(</span><span class="nam">input_pdb_path</span><span class="op">:</span> <span class="nam">str</span><span class="op">,</span> <span class="nam">output_pdb_path</span><span class="op">:</span> <span class="nam">str</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t126" href="#t126">126</a></span><span class="t">              <span class="nam">properties</span><span class="op">:</span> <span class="nam">Optional</span><span class="op">[</span><span class="nam">dict</span><span class="op">]</span> <span class="op">=</span> <span class="key">None</span><span class="op">,</span> <span class="op">**</span><span class="nam">kwargs</span><span class="op">)</span> <span class="op">-></span> <span class="nam">int</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t126" href="#t126">126</a></span><span class="t">              <span class="nam">properties</span><span class="op">:</span> <span class="nam">Optional</span><span class="op">[</span><span class="nam">dict</span><span class="op">]</span> <span class="op">=</span> <span class="key">None</span><span class="op">,</span> <span class="op">**</span><span class="nam">kwargs</span><span class="op">)</span> <span class="op">-></span> <span class="nam">int</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t127" href="#t127">127</a></span><span class="t">    <span class="str">"""Create :class:`ProdyANM &lt;flexdyn.prody_anm.ProdyANM>`flexdyn.prody_anm.ProdyANM class and</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t128" href="#t128">128</a></span><span class="t"><span class="str">    execute :meth:`launch() &lt;flexdyn.prody_anm.ProdyANM.launch>` method"""</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t129" href="#t129">129</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t130" href="#t130">130</a></span><span class="t">    <span class="key">return</span> <span class="nam">ProdyANM</span><span class="op">(</span><span class="nam">input_pdb_path</span><span class="op">=</span><span class="nam">input_pdb_path</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t131" href="#t131">131</a></span><span class="t">                    <span class="nam">output_pdb_path</span><span class="op">=</span><span class="nam">output_pdb_path</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t132" href="#t132">132</a></span><span class="t">                    <span class="nam">properties</span><span class="op">=</span><span class="nam">properties</span><span class="op">)</span><span class="op">.</span><span class="nam">launch</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t131" href="#t131">131</a></span><span class="t">                    <span class="nam">output_pdb_path</span><span class="op">=</span><span class="nam">output_pdb_path</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t132" href="#t132">132</a></span><span class="t">                    <span class="nam">properties</span><span class="op">=</span><span class="nam">properties</span><span class="op">)</span><span class="op">.</span><span class="nam">launch</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t133" href="#t133">133</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t134" href="#t134">134</a></span><span class="t">    <span class="nam">prody_anm</span><span class="op">.</span><span class="nam">__doc__</span> <span class="op">=</span> <span class="nam">ProdyANM</span><span class="op">.</span><span class="nam">__doc__</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t135" href="#t135">135</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
@@ -231,8 +231,8 @@
     <p class="pln"><span class="n"><a id="t149" href="#t149">149</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t150" href="#t150">150</a></span><span class="t">    <span class="com"># Specific call</span>&nbsp;</span><span class="r"></span></p>
     <p class="mis show_mis"><span class="n"><a id="t151" href="#t151">151</a></span><span class="t">    <span class="nam">prody_anm</span><span class="op">(</span><span class="nam">input_pdb_path</span><span class="op">=</span><span class="nam">args</span><span class="op">.</span><span class="nam">input_pdb_path</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t152" href="#t152">152</a></span><span class="t">              <span class="nam">output_pdb_path</span><span class="op">=</span><span class="nam">args</span><span class="op">.</span><span class="nam">output_pdb_path</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t153" href="#t153">153</a></span><span class="t">              <span class="nam">properties</span><span class="op">=</span><span class="nam">properties</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="mis mis2 show_mis"><span class="n"><a id="t152" href="#t152">152</a></span><span class="t">              <span class="nam">output_pdb_path</span><span class="op">=</span><span class="nam">args</span><span class="op">.</span><span class="nam">output_pdb_path</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="mis mis2 show_mis"><span class="n"><a id="t153" href="#t153">153</a></span><span class="t">              <span class="nam">properties</span><span class="op">=</span><span class="nam">properties</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t154" href="#t154">154</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t155" href="#t155">155</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t156" href="#t156">156</a></span><span class="t"><span class="key">if</span> <span class="nam">__name__</span> <span class="op">==</span> <span class="str">'__main__'</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
@@ -245,8 +245,8 @@
             <a class="nav" href="index.html">&Hat; index</a> &nbsp; &nbsp;
             <a class="nav" href="z_68fa7e1546d8c55d_test_concoord_disco_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
-            <a class="nav" href="https://coverage.readthedocs.io/en/7.9.1">coverage.py v7.9.1</a>,
-            created at 2025-06-19 14:25 +0000
+            <a class="nav" href="https://coverage.readthedocs.io/en/7.11.3">coverage.py v7.11.3</a>,
+            created at 2025-11-17 15:26 +0000
         </p>
     </div>
 </footer>
