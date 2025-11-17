@@ -6,194 +6,6 @@ biobb_command [-h] --config CONFIG --input_file(s) <input_file(s)> --output_file
 -----------------
 
 
-## Imod_imc
-Wrapper of the imc tool
-### Get help
-Command:
-```python
-imod_imc -h
-```
-    usage: imod_imc [-h] [--config CONFIG] --input_pdb_path INPUT_PDB_PATH --input_dat_path INPUT_DAT_PATH --output_traj_path OUTPUT_TRAJ_PATH
-    
-    Compute a Monte-Carlo IC-NMA based conformational ensemble using the imc tool from the iMODS package.
-    
-    optional arguments:
-      -h, --help            show this help message and exit
-      --config CONFIG       Configuration file
-    
-    required arguments:
-      --input_pdb_path INPUT_PDB_PATH
-                            Input structure file. Accepted formats: pdb
-      --input_dat_path INPUT_DAT_PATH
-                            Input evecs file. Accepted formats: dat
-      --output_traj_path OUTPUT_TRAJ_PATH
-                            Output traj file. Accepted formats: pdb.
-### I / O Arguments
-Syntax: input_argument (datatype) : Definition
-
-Config input / output arguments for this building block:
-* **input_pdb_path** (*string*): Input PDB file. File type: input. [Sample file](https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/data/flexdyn/structure_cleaned.pdb). Accepted formats: PDB
-* **input_dat_path** (*string*): Input dat with normal modes. File type: input. [Sample file](https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/data/flexdyn/imod_imode_evecs.dat). Accepted formats: DAT, TXT
-* **output_traj_path** (*string*): Output multi-model PDB file with the generated ensemble. File type: output. [Sample file](https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/flexdyn/imod_imc_output.pdb). Accepted formats: PDB
-### Config
-Syntax: input_parameter (datatype) - (default_value) Definition
-
-Config parameters for this building block:
-* **num_structs** (*integer*): (500) Number of structures to be generated.
-* **num_modes** (*integer*): (5) Number of eigenvectors to be employed.
-* **amplitude** (*integer*): (1) Amplitude linear factor to scale motion.
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-### YAML
-#### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imc.yml)
-```python
-properties:
-  amplitude: 6.0
-  num_modes: 10
-  num_structs: 10
-
-```
-#### Command line
-```python
-imod_imc --config config_imod_imc.yml --input_pdb_path structure_cleaned.pdb --input_dat_path imod_imode_evecs.dat --output_traj_path imod_imc_output.pdb
-```
-### JSON
-#### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imc.json)
-```python
-{
-  "properties": {
-    "num_structs": 10,
-    "num_modes": 10,
-    "amplitude": 6.0
-  }
-}
-```
-#### Command line
-```python
-imod_imc --config config_imod_imc.json --input_pdb_path structure_cleaned.pdb --input_dat_path imod_imode_evecs.dat --output_traj_path imod_imc_output.pdb
-```
-
-## Imod_imode
-Wrapper of the imode tool
-### Get help
-Command:
-```python
-imod_imode -h
-```
-    usage: imod_imode [-h] [--config CONFIG] --input_pdb_path INPUT_PDB_PATH --output_dat_path OUTPUT_DAT_PATH
-    
-    Compute the normal modes of a macromolecule using the imode tool from the iMODS package.
-    
-    optional arguments:
-      -h, --help            show this help message and exit
-      --config CONFIG       Configuration file
-    
-    required arguments:
-      --input_pdb_path INPUT_PDB_PATH
-                            Input structure file. Accepted formats: pdb
-      --output_dat_path OUTPUT_DAT_PATH
-                            Output evecs dat file. Accepted formats: dat.
-### I / O Arguments
-Syntax: input_argument (datatype) : Definition
-
-Config input / output arguments for this building block:
-* **input_pdb_path** (*string*): Input PDB file. File type: input. [Sample file](https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/data/flexdyn/structure.pdb). Accepted formats: PDB
-* **output_dat_path** (*string*): Output dat with normal modes. File type: output. [Sample file](https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/flexdyn/imod_imode_evecs.dat). Accepted formats: DAT, TXT
-### Config
-Syntax: input_parameter (datatype) - (default_value) Definition
-
-Config parameters for this building block:
-* **cg** (*integer*): (2) Coarse-Grained model. .
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-### YAML
-#### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imode.yml)
-```python
-properties:
-  cg: 2
-
-```
-#### Command line
-```python
-imod_imode --config config_imod_imode.yml --input_pdb_path structure.pdb --output_dat_path imod_imode_evecs.dat
-```
-### JSON
-#### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imode.json)
-```python
-{
-  "properties": {
-    "cg": 2
-  }
-}
-```
-#### Command line
-```python
-imod_imode --config config_imod_imode.json --input_pdb_path structure.pdb --output_dat_path imod_imode_evecs.dat
-```
-
-## Nolb_nma
-Wrapper of the NOLB tool
-### Get help
-Command:
-```python
-nolb_nma -h
-```
-    usage: nolb_nma [-h] [--config CONFIG] --input_pdb_path INPUT_PDB_PATH --output_pdb_path OUTPUT_PDB_PATH
-    
-    Generate an ensemble of structures using the NOLB (NOn-Linear rigid Block) NMA tool.
-    
-    optional arguments:
-      -h, --help            show this help message and exit
-      --config CONFIG       Configuration file
-    
-    required arguments:
-      --input_pdb_path INPUT_PDB_PATH
-                            Input structure file. Accepted formats: pdb
-      --output_pdb_path OUTPUT_PDB_PATH
-                            Output pdb file. Accepted formats: pdb.
-### I / O Arguments
-Syntax: input_argument (datatype) : Definition
-
-Config input / output arguments for this building block:
-* **input_pdb_path** (*string*): Input PDB file. File type: input. [Sample file](https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/data/flexdyn/structure.pdb). Accepted formats: PDB
-* **output_pdb_path** (*string*): Output multi-model PDB file with the generated ensemble. File type: output. [Sample file](https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/flexdyn/nolb_output.pdb). Accepted formats: PDB
-### Config
-Syntax: input_parameter (datatype) - (default_value) Definition
-
-Config parameters for this building block:
-* **num_structs** (*integer*): (500) Number of structures to be generated.
-* **cutoff** (*number*): (5.0) This options specifies the interaction cutoff distance for the elastic network models (in angstroms), 5 by default. The Hessian matrix is constructed according to this interaction distance. Some artifacts should be expected for too short distances (< 5 Å)..
-* **rmsd** (*number*): (1.0) Maximum RMSd for decoy generation..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-### YAML
-#### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_nolb_nma.yml)
-```python
-properties:
-  num_structs: 20
-
-```
-#### Command line
-```python
-nolb_nma --config config_nolb_nma.yml --input_pdb_path structure.pdb --output_pdb_path nolb_output.pdb
-```
-### JSON
-#### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_nolb_nma.json)
-```python
-{
-  "properties": {
-    "num_structs": 20
-  }
-}
-```
-#### Command line
-```python
-nolb_nma --config config_nolb_nma.json --input_pdb_path structure.pdb --output_pdb_path nolb_output.pdb
-```
-
 ## Concoord_disco
 Wrapper of the Disco tool from the Concoord package.
 ### Get help
@@ -201,11 +13,15 @@ Command:
 ```python
 concoord_disco -h
 ```
+    /home/rchaves/miniforge3/envs/biobb_all/lib/python3.10/site-packages/prody/utilities/misctools.py:424: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+      import pkg_resources
+    /home/rchaves/miniforge3/envs/biobb_all/lib/python3.10/site-packages/Bio/pairwise2.py:278: BiopythonDeprecationWarning: Bio.pairwise2 has been deprecated, and we intend to remove it in a future release of Biopython. As an alternative, please consider using Bio.Align.PairwiseAligner as a replacement, and contact the Biopython developers if you still need the Bio.pairwise2 module.
+      warnings.warn(
     usage: concoord_disco [-h] [--config CONFIG] --input_pdb_path INPUT_PDB_PATH --input_dat_path INPUT_DAT_PATH --output_traj_path OUTPUT_TRAJ_PATH --output_rmsd_path OUTPUT_RMSD_PATH --output_bfactor_path OUTPUT_BFACTOR_PATH
     
     Structure generation based on a set of geometric constraints extracted with the Concoord Dist tool.
     
-    optional arguments:
+    options:
       -h, --help            show this help message and exit
       --config CONFIG       Configuration file
     
@@ -288,11 +104,15 @@ Command:
 ```python
 concoord_dist -h
 ```
+    /home/rchaves/miniforge3/envs/biobb_all/lib/python3.10/site-packages/prody/utilities/misctools.py:424: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+      import pkg_resources
+    /home/rchaves/miniforge3/envs/biobb_all/lib/python3.10/site-packages/Bio/pairwise2.py:278: BiopythonDeprecationWarning: Bio.pairwise2 has been deprecated, and we intend to remove it in a future release of Biopython. As an alternative, please consider using Bio.Align.PairwiseAligner as a replacement, and contact the Biopython developers if you still need the Bio.pairwise2 module.
+      warnings.warn(
     usage: concoord_dist [-h] [--config CONFIG] --input_structure_path INPUT_STRUCTURE_PATH --output_pdb_path OUTPUT_PDB_PATH --output_gro_path OUTPUT_GRO_PATH --output_dat_path OUTPUT_DAT_PATH
     
     Structure interpretation and bond definitions from a PDB/GRO file.
     
-    optional arguments:
+    options:
       -h, --help            show this help message and exit
       --config CONFIG       Configuration file
     
@@ -356,6 +176,141 @@ concoord_dist --config config_concoord_dist.yml --input_structure_path structure
 concoord_dist --config config_concoord_dist.json --input_structure_path structure.pdb --output_pdb_path dist.pdb --output_gro_path dist.gro --output_dat_path dist.dat
 ```
 
+## Imod_imc
+Wrapper of the imc tool
+### Get help
+Command:
+```python
+imod_imc -h
+```
+    /home/rchaves/miniforge3/envs/biobb_all/lib/python3.10/site-packages/prody/utilities/misctools.py:424: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+      import pkg_resources
+    /home/rchaves/miniforge3/envs/biobb_all/lib/python3.10/site-packages/Bio/pairwise2.py:278: BiopythonDeprecationWarning: Bio.pairwise2 has been deprecated, and we intend to remove it in a future release of Biopython. As an alternative, please consider using Bio.Align.PairwiseAligner as a replacement, and contact the Biopython developers if you still need the Bio.pairwise2 module.
+      warnings.warn(
+    usage: imod_imc [-h] [--config CONFIG] --input_pdb_path INPUT_PDB_PATH --input_dat_path INPUT_DAT_PATH --output_traj_path OUTPUT_TRAJ_PATH
+    
+    Compute a Monte-Carlo IC-NMA based conformational ensemble using the imc tool from the iMODS package.
+    
+    options:
+      -h, --help            show this help message and exit
+      --config CONFIG       Configuration file
+    
+    required arguments:
+      --input_pdb_path INPUT_PDB_PATH
+                            Input structure file. Accepted formats: pdb
+      --input_dat_path INPUT_DAT_PATH
+                            Input evecs file. Accepted formats: dat
+      --output_traj_path OUTPUT_TRAJ_PATH
+                            Output traj file. Accepted formats: pdb.
+### I / O Arguments
+Syntax: input_argument (datatype) : Definition
+
+Config input / output arguments for this building block:
+* **input_pdb_path** (*string*): Input PDB file. File type: input. [Sample file](https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/data/flexdyn/structure_cleaned.pdb). Accepted formats: PDB
+* **input_dat_path** (*string*): Input dat with normal modes. File type: input. [Sample file](https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/data/flexdyn/imod_imode_evecs.dat). Accepted formats: DAT, TXT
+* **output_traj_path** (*string*): Output multi-model PDB file with the generated ensemble. File type: output. [Sample file](https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/flexdyn/imod_imc_output.pdb). Accepted formats: PDB
+### Config
+Syntax: input_parameter (datatype) - (default_value) Definition
+
+Config parameters for this building block:
+* **num_structs** (*integer*): (500) Number of structures to be generated.
+* **num_modes** (*integer*): (5) Number of eigenvectors to be employed.
+* **amplitude** (*integer*): (1) Amplitude linear factor to scale motion.
+* **remove_tmp** (*boolean*): (True) Remove temporal files..
+* **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
+### YAML
+#### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imc.yml)
+```python
+properties:
+  amplitude: 6.0
+  num_modes: 10
+  num_structs: 10
+
+```
+#### Command line
+```python
+imod_imc --config config_imod_imc.yml --input_pdb_path structure_cleaned.pdb --input_dat_path imod_imode_evecs.dat --output_traj_path imod_imc_output.pdb
+```
+### JSON
+#### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imc.json)
+```python
+{
+  "properties": {
+    "num_structs": 10,
+    "num_modes": 10,
+    "amplitude": 6.0
+  }
+}
+```
+#### Command line
+```python
+imod_imc --config config_imod_imc.json --input_pdb_path structure_cleaned.pdb --input_dat_path imod_imode_evecs.dat --output_traj_path imod_imc_output.pdb
+```
+
+## Imod_imode
+Wrapper of the imode tool
+### Get help
+Command:
+```python
+imod_imode -h
+```
+    /home/rchaves/miniforge3/envs/biobb_all/lib/python3.10/site-packages/prody/utilities/misctools.py:424: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+      import pkg_resources
+    /home/rchaves/miniforge3/envs/biobb_all/lib/python3.10/site-packages/Bio/pairwise2.py:278: BiopythonDeprecationWarning: Bio.pairwise2 has been deprecated, and we intend to remove it in a future release of Biopython. As an alternative, please consider using Bio.Align.PairwiseAligner as a replacement, and contact the Biopython developers if you still need the Bio.pairwise2 module.
+      warnings.warn(
+    usage: imod_imode [-h] [--config CONFIG] --input_pdb_path INPUT_PDB_PATH --output_dat_path OUTPUT_DAT_PATH
+    
+    Compute the normal modes of a macromolecule using the imode tool from the iMODS package.
+    
+    options:
+      -h, --help            show this help message and exit
+      --config CONFIG       Configuration file
+    
+    required arguments:
+      --input_pdb_path INPUT_PDB_PATH
+                            Input structure file. Accepted formats: pdb
+      --output_dat_path OUTPUT_DAT_PATH
+                            Output evecs dat file. Accepted formats: dat.
+### I / O Arguments
+Syntax: input_argument (datatype) : Definition
+
+Config input / output arguments for this building block:
+* **input_pdb_path** (*string*): Input PDB file. File type: input. [Sample file](https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/data/flexdyn/structure.pdb). Accepted formats: PDB
+* **output_dat_path** (*string*): Output dat with normal modes. File type: output. [Sample file](https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/flexdyn/imod_imode_evecs.dat). Accepted formats: DAT, TXT
+### Config
+Syntax: input_parameter (datatype) - (default_value) Definition
+
+Config parameters for this building block:
+* **cg** (*integer*): (2) Coarse-Grained model. .
+* **remove_tmp** (*boolean*): (True) Remove temporal files..
+* **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
+### YAML
+#### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imode.yml)
+```python
+properties:
+  cg: 2
+
+```
+#### Command line
+```python
+imod_imode --config config_imod_imode.yml --input_pdb_path structure.pdb --output_dat_path imod_imode_evecs.dat
+```
+### JSON
+#### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imode.json)
+```python
+{
+  "properties": {
+    "cg": 2
+  }
+}
+```
+#### Command line
+```python
+imod_imode --config config_imod_imode.json --input_pdb_path structure.pdb --output_dat_path imod_imode_evecs.dat
+```
+
 ## Imod_imove
 Wrapper of the imove tool
 ### Get help
@@ -363,11 +318,15 @@ Command:
 ```python
 imod_imove -h
 ```
+    /home/rchaves/miniforge3/envs/biobb_all/lib/python3.10/site-packages/prody/utilities/misctools.py:424: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+      import pkg_resources
+    /home/rchaves/miniforge3/envs/biobb_all/lib/python3.10/site-packages/Bio/pairwise2.py:278: BiopythonDeprecationWarning: Bio.pairwise2 has been deprecated, and we intend to remove it in a future release of Biopython. As an alternative, please consider using Bio.Align.PairwiseAligner as a replacement, and contact the Biopython developers if you still need the Bio.pairwise2 module.
+      warnings.warn(
     usage: imod_imove [-h] [--config CONFIG] --input_pdb_path INPUT_PDB_PATH --input_dat_path INPUT_DAT_PATH --output_pdb_path OUTPUT_PDB_PATH
     
     Animate the normal modes of a macromolecule using the imove tool from the iMODS package.
     
-    optional arguments:
+    options:
       -h, --help            show this help message and exit
       --config CONFIG       Configuration file
     
@@ -419,6 +378,71 @@ imod_imove --config config_imod_imove.yml --input_pdb_path structure_cleaned.pdb
 imod_imove --config config_imod_imove.json --input_pdb_path structure_cleaned.pdb --input_dat_path imod_imode_evecs.dat --output_pdb_path imod_imove_output.pdb
 ```
 
+## Nolb_nma
+Wrapper of the NOLB tool
+### Get help
+Command:
+```python
+nolb_nma -h
+```
+    /home/rchaves/miniforge3/envs/biobb_all/lib/python3.10/site-packages/prody/utilities/misctools.py:424: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+      import pkg_resources
+    /home/rchaves/miniforge3/envs/biobb_all/lib/python3.10/site-packages/Bio/pairwise2.py:278: BiopythonDeprecationWarning: Bio.pairwise2 has been deprecated, and we intend to remove it in a future release of Biopython. As an alternative, please consider using Bio.Align.PairwiseAligner as a replacement, and contact the Biopython developers if you still need the Bio.pairwise2 module.
+      warnings.warn(
+    usage: nolb_nma [-h] [--config CONFIG] --input_pdb_path INPUT_PDB_PATH --output_pdb_path OUTPUT_PDB_PATH
+    
+    Generate an ensemble of structures using the NOLB (NOn-Linear rigid Block) NMA tool.
+    
+    options:
+      -h, --help            show this help message and exit
+      --config CONFIG       Configuration file
+    
+    required arguments:
+      --input_pdb_path INPUT_PDB_PATH
+                            Input structure file. Accepted formats: pdb
+      --output_pdb_path OUTPUT_PDB_PATH
+                            Output pdb file. Accepted formats: pdb.
+### I / O Arguments
+Syntax: input_argument (datatype) : Definition
+
+Config input / output arguments for this building block:
+* **input_pdb_path** (*string*): Input PDB file. File type: input. [Sample file](https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/data/flexdyn/structure.pdb). Accepted formats: PDB
+* **output_pdb_path** (*string*): Output multi-model PDB file with the generated ensemble. File type: output. [Sample file](https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/flexdyn/nolb_output.pdb). Accepted formats: PDB
+### Config
+Syntax: input_parameter (datatype) - (default_value) Definition
+
+Config parameters for this building block:
+* **num_structs** (*integer*): (500) Number of structures to be generated.
+* **cutoff** (*number*): (5.0) This options specifies the interaction cutoff distance for the elastic network models (in angstroms), 5 by default. The Hessian matrix is constructed according to this interaction distance. Some artifacts should be expected for too short distances (< 5 Å)..
+* **rmsd** (*number*): (1.0) Maximum RMSd for decoy generation..
+* **remove_tmp** (*boolean*): (True) Remove temporal files..
+* **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
+### YAML
+#### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_nolb_nma.yml)
+```python
+properties:
+  num_structs: 20
+
+```
+#### Command line
+```python
+nolb_nma --config config_nolb_nma.yml --input_pdb_path structure.pdb --output_pdb_path nolb_output.pdb
+```
+### JSON
+#### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_nolb_nma.json)
+```python
+{
+  "properties": {
+    "num_structs": 20
+  }
+}
+```
+#### Command line
+```python
+nolb_nma --config config_nolb_nma.json --input_pdb_path structure.pdb --output_pdb_path nolb_output.pdb
+```
+
 ## Prody_anm
 Wrapper of the ANM tool from the Prody package.
 ### Get help
@@ -426,11 +450,15 @@ Command:
 ```python
 prody_anm -h
 ```
+    /home/rchaves/miniforge3/envs/biobb_all/lib/python3.10/site-packages/prody/utilities/misctools.py:424: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+      import pkg_resources
+    /home/rchaves/miniforge3/envs/biobb_all/lib/python3.10/site-packages/Bio/pairwise2.py:278: BiopythonDeprecationWarning: Bio.pairwise2 has been deprecated, and we intend to remove it in a future release of Biopython. As an alternative, please consider using Bio.Align.PairwiseAligner as a replacement, and contact the Biopython developers if you still need the Bio.pairwise2 module.
+      warnings.warn(
     usage: prody_anm [-h] [--config CONFIG] --input_pdb_path INPUT_PDB_PATH --output_pdb_path OUTPUT_PDB_PATH
     
     Generate an ensemble of structures using the Prody Anisotropic Network Model (ANM), for coarse-grained NMA.
     
-    optional arguments:
+    options:
       -h, --help            show this help message and exit
       --config CONFIG       Configuration file
     
