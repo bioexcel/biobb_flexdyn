@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
 
 """Module containing the prody_anm class and the command line interface."""
-import argparse
 from typing import Optional
 import prody  # type: ignore
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.configuration import settings
 from biobb_common.tools.file_utils import launchlogger
 
 
@@ -123,32 +121,11 @@ def prody_anm(input_pdb_path: str, output_pdb_path: str,
               properties: Optional[dict] = None, **kwargs) -> int:
     """Create :class:`ProdyANM <flexdyn.prody_anm.ProdyANM>`flexdyn.prody_anm.ProdyANM class and
     execute :meth:`launch() <flexdyn.prody_anm.ProdyANM.launch>` method"""
-
-    return ProdyANM(input_pdb_path=input_pdb_path,
-                    output_pdb_path=output_pdb_path,
-                    properties=properties).launch()
-
-    prody_anm.__doc__ = ProdyANM.__doc__
+    return ProdyANM(**dict(locals())).launch()
 
 
-def main():
-    parser = argparse.ArgumentParser(description='Generate an ensemble of structures using the Prody Anisotropic Network Model (ANM), for coarse-grained NMA.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
-    parser.add_argument('--config', required=False, help='Configuration file')
-
-    # Specific args
-    required_args = parser.add_argument_group('required arguments')
-    required_args.add_argument('--input_pdb_path', required=True, help='Input structure file. Accepted formats: pdb')
-    required_args.add_argument('--output_pdb_path', required=True, help='Output pdb file. Accepted formats: pdb.')
-
-    args = parser.parse_args()
-    args.config = args.config or "{}"
-    properties = settings.ConfReader(config=args.config).get_prop_dic()
-
-    # Specific call
-    prody_anm(input_pdb_path=args.input_pdb_path,
-              output_pdb_path=args.output_pdb_path,
-              properties=properties)
-
+prody_anm.__doc__ = ProdyANM.__doc__
+main = ProdyANM.get_main(prody_anm, "Generate an ensemble of structures using the Prody Anisotropic Network Model (ANM), for coarse-grained NMA.")
 
 if __name__ == '__main__':
     main()

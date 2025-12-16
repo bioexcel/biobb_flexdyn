@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
 
 """Module containing the imode class and the command line interface."""
-import argparse
 from typing import Optional
 import shutil
 from pathlib import PurePath
 from biobb_common.tools import file_utils as fu
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.configuration import settings
 from biobb_common.tools.file_utils import launchlogger
 
 
@@ -162,35 +160,11 @@ def imod_imc(input_pdb_path: str, input_dat_path: str, output_traj_path: str,
              properties: Optional[dict] = None, **kwargs) -> int:
     """Create :class:`ImodImc <flexdyn.imod_imc.ImodImc>`flexdyn.imod_imc.ImodImc class and
     execute :meth:`launch() <flexdyn.imod_imc.ImodImc.launch>` method"""
-
-    return ImodImc(input_pdb_path=input_pdb_path,
-                   input_dat_path=input_dat_path,
-                   output_traj_path=output_traj_path,
-                   properties=properties).launch()
-
-    imod_imc.__doc__ = ImodImc.__doc__
+    return ImodImc(**dict(locals())).launch()
 
 
-def main():
-    parser = argparse.ArgumentParser(description='Compute a Monte-Carlo IC-NMA based conformational ensemble using the imc tool from the iMODS package.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
-    parser.add_argument('--config', required=False, help='Configuration file')
-
-    # Specific args
-    required_args = parser.add_argument_group('required arguments')
-    required_args.add_argument('--input_pdb_path', required=True, help='Input structure file. Accepted formats: pdb')
-    required_args.add_argument('--input_dat_path', required=True, help='Input evecs file. Accepted formats: dat')
-    required_args.add_argument('--output_traj_path', required=True, help='Output traj file. Accepted formats: pdb.')
-
-    args = parser.parse_args()
-    args.config = args.config or "{}"
-    properties = settings.ConfReader(config=args.config).get_prop_dic()
-
-    # Specific call
-    imod_imc(input_pdb_path=args.input_pdb_path,
-             input_dat_path=args.input_dat_path,
-             output_traj_path=args.output_traj_path,
-             properties=properties)
-
+imod_imc.__doc__ = ImodImc.__doc__
+main = ImodImc.get_main(imod_imc, "Compute a Monte-Carlo IC-NMA based conformational ensemble using the imc tool from the iMODS package.")
 
 if __name__ == '__main__':
     main()

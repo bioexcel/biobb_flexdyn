@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
 
 """Module containing the nolb class and the command line interface."""
-import argparse
 from typing import Optional
 import shutil
 from pathlib import Path
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.configuration import settings
 from biobb_common.tools.file_utils import launchlogger
 
 
@@ -141,32 +139,11 @@ def nolb_nma(input_pdb_path: str, output_pdb_path: str,
              properties: Optional[dict] = None, **kwargs) -> int:
     """Create :class:`Nolb_nma <flexdyn.nolb_nma.Nolb_nma>`flexdyn.nolb_nma.Nolb_nma class and
     execute :meth:`launch() <flexdyn.nolb_nma.Nolb_nma.launch>` method"""
-
-    return Nolb_nma(input_pdb_path=input_pdb_path,
-                    output_pdb_path=output_pdb_path,
-                    properties=properties).launch()
-
-    nolb_nma.__doc__ = Nolb_nma.__doc__
+    return Nolb_nma(**dict(locals())).launch()
 
 
-def main():
-    parser = argparse.ArgumentParser(description='Generate an ensemble of structures using the NOLB (NOn-Linear rigid Block) NMA tool.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
-    parser.add_argument('--config', required=False, help='Configuration file')
-
-    # Specific args
-    required_args = parser.add_argument_group('required arguments')
-    required_args.add_argument('--input_pdb_path', required=True, help='Input structure file. Accepted formats: pdb')
-    required_args.add_argument('--output_pdb_path', required=True, help='Output pdb file. Accepted formats: pdb.')
-
-    args = parser.parse_args()
-    args.config = args.config or "{}"
-    properties = settings.ConfReader(config=args.config).get_prop_dic()
-
-    # Specific call
-    nolb_nma(input_pdb_path=args.input_pdb_path,
-             output_pdb_path=args.output_pdb_path,
-             properties=properties)
-
+nolb_nma.__doc__ = Nolb_nma.__doc__
+main = Nolb_nma.get_main(nolb_nma, "Generate an ensemble of structures using the NOLB (NOn-Linear rigid Block) NMA tool.")
 
 if __name__ == '__main__':
     main()

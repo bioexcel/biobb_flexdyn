@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
 
 """Module containing the imode class and the command line interface."""
-import argparse
 from typing import Optional
 import shutil
 from pathlib import PurePath
 from biobb_common.tools import file_utils as fu
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.configuration import settings
 from biobb_common.tools.file_utils import launchlogger
 
 
@@ -145,35 +143,11 @@ def imod_imove(input_pdb_path: str, input_dat_path: str, output_pdb_path: str,
                properties: Optional[dict] = None, **kwargs) -> int:
     """Create :class:`ImodImove <flexdyn.imod_imove.ImodImove>`flexdyn.imod_imove.ImodImove class and
     execute :meth:`launch() <flexdyn.imod_imove.ImodImove.launch>` method"""
-
-    return ImodImove(input_pdb_path=input_pdb_path,
-                     input_dat_path=input_dat_path,
-                     output_pdb_path=output_pdb_path,
-                     properties=properties).launch()
-
-    imod_imove.__doc__ = ImodImove.__doc__
+    return ImodImove(**dict(locals())).launch()
 
 
-def main():
-    parser = argparse.ArgumentParser(description='Animate the normal modes of a macromolecule using the imove tool from the iMODS package.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
-    parser.add_argument('--config', required=False, help='Configuration file')
-
-    # Specific args
-    required_args = parser.add_argument_group('required arguments')
-    required_args.add_argument('--input_pdb_path', required=True, help='Input structure file. Accepted formats: pdb')
-    required_args.add_argument('--input_dat_path', required=True, help='Input evecs file. Accepted formats: dat')
-    required_args.add_argument('--output_pdb_path', required=True, help='Output pdb file. Accepted formats: pdb.')
-
-    args = parser.parse_args()
-    args.config = args.config or "{}"
-    properties = settings.ConfReader(config=args.config).get_prop_dic()
-
-    # Specific call
-    imod_imove(input_pdb_path=args.input_pdb_path,
-               input_dat_path=args.input_dat_path,
-               output_pdb_path=args.output_pdb_path,
-               properties=properties)
-
+imod_imove.__doc__ = ImodImove.__doc__
+main = ImodImove.get_main(imod_imove, "Animate the normal modes of a macromolecule using the imove tool from the iMODS package.")
 
 if __name__ == '__main__':
     main()

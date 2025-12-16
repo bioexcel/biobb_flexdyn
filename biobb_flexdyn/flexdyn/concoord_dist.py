@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
 
 """Module containing the concoord_dist class and the command line interface."""
-import argparse
 from typing import Optional
 import os
 import shutil
 from pathlib import Path
 from biobb_common.tools import file_utils as fu
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.configuration import settings
 from biobb_common.tools.file_utils import launchlogger
 
 
@@ -206,38 +204,11 @@ def concoord_dist(input_structure_path: str,
                   properties: Optional[dict] = None, **kwargs) -> int:
     """Create :class:`ConcoordDist <flexdyn.concoord_dist.ConcoordDist>`flexdyn.concoord_dist.ConcoordDist class and
     execute :meth:`launch() <flexdyn.concoord_dist.ConcoordDist.launch>` method"""
-
-    return ConcoordDist(input_structure_path=input_structure_path,
-                        output_pdb_path=output_pdb_path,
-                        output_gro_path=output_gro_path,
-                        output_dat_path=output_dat_path,
-                        properties=properties).launch()
-
-    concoord_dist.__doc__ = ConcoordDist.__doc__
+    return ConcoordDist(**dict(locals())).launch()
 
 
-def main():
-    parser = argparse.ArgumentParser(description='Structure interpretation and bond definitions from a PDB/GRO file.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
-    parser.add_argument('--config', required=False, help='Configuration file')
-
-    # Specific args
-    required_args = parser.add_argument_group('required arguments')
-    required_args.add_argument('--input_structure_path', required=True, help='Input structure file. Accepted formats: pdb, gro.')
-    required_args.add_argument('--output_pdb_path', required=True, help='Output pdb file. Accepted formats: pdb.')
-    required_args.add_argument('--output_gro_path', required=True, help='Output gro file. Accepted formats: gro.')
-    required_args.add_argument('--output_dat_path', required=True, help='Output dat file with structure interpretation and bond definitions. Accepted formats: dat, txt.')
-
-    args = parser.parse_args()
-    args.config = args.config or "{}"
-    properties = settings.ConfReader(config=args.config).get_prop_dic()
-
-    # Specific call
-    concoord_dist(input_structure_path=args.input_structure_path,
-                  output_pdb_path=args.output_pdb_path,
-                  output_gro_path=args.output_gro_path,
-                  output_dat_path=args.output_dat_path,
-                  properties=properties)
-
+concoord_dist.__doc__ = ConcoordDist.__doc__
+main = ConcoordDist.get_main(concoord_dist, "Structure interpretation and bond definitions from a PDB/GRO file.")
 
 if __name__ == '__main__':
     main()

@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
 
 """Module containing the concoord_disco class and the command line interface."""
-import argparse
 from typing import Optional
 import os
 import shutil
 from pathlib import Path
 from biobb_common.tools import file_utils as fu
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.configuration import settings
 from biobb_common.tools.file_utils import launchlogger
 
 
@@ -256,41 +254,11 @@ def concoord_disco(input_pdb_path: str, input_dat_path: str,
                    properties: Optional[dict] = None, **kwargs) -> int:
     """Create :class:`ConcoordDisco <flexdyn.concoord_disco.ConcoordDisco>`flexdyn.concoord_disco.ConcoordDisco class and
     execute :meth:`launch() <flexdyn.concoord_disco.ConcoordDisco.launch>` method"""
-
-    return ConcoordDisco(input_pdb_path=input_pdb_path,
-                         input_dat_path=input_dat_path,
-                         output_traj_path=output_traj_path,
-                         output_rmsd_path=output_rmsd_path,
-                         output_bfactor_path=output_bfactor_path,
-                         properties=properties).launch()
-
-    concoord_disco.__doc__ = ConcoordDisco.__doc__
+    return ConcoordDisco(**dict(locals())).launch()
 
 
-def main():
-    parser = argparse.ArgumentParser(description='Structure generation based on a set of geometric constraints extracted with the Concoord Dist tool.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
-    parser.add_argument('--config', required=False, help='Configuration file')
-
-    # Specific args
-    required_args = parser.add_argument_group('required arguments')
-    required_args.add_argument('--input_pdb_path', required=True, help='Input structure file in PDB format. Accepted formats: pdb')
-    required_args.add_argument('--input_dat_path', required=True, help='Input dat with structure interpretation and bond definitions. Accepted formats: dat, txt')
-    required_args.add_argument('--output_traj_path', required=True, help='Output trajectory file. Accepted formats: pdb, gro, xtc.')
-    required_args.add_argument('--output_rmsd_path', required=True, help='Output RMSd file. Accepted formats: dat.')
-    required_args.add_argument('--output_bfactor_path', required=True, help='Output B-factor file. Accepted formats: pdb.')
-
-    args = parser.parse_args()
-    args.config = args.config or "{}"
-    properties = settings.ConfReader(config=args.config).get_prop_dic()
-
-    # Specific call
-    concoord_disco(input_pdb_path=args.input_pdb_path,
-                   input_dat_path=args.input_dat_path,
-                   output_traj_path=args.output_traj_path,
-                   output_rmsd_path=args.output_rmsd_path,
-                   output_bfactor_path=args.output_bfactor_path,
-                   properties=properties)
-
+concoord_disco.__doc__ = ConcoordDisco.__doc__
+main = ConcoordDisco.get_main(concoord_disco, "Structure generation based on a set of geometric constraints extracted with the Concoord Dist tool.")
 
 if __name__ == '__main__':
     main()
