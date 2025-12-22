@@ -93,11 +93,11 @@ class ImodImc(BiobbObject):
         #   The problem was found in Galaxy executions, launching Singularity containers (May 2023).
 
         # Creating temporary folder
-        self.tmp_folder = fu.create_unique_dir()
-        fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
+        tmp_folder = fu.create_unique_dir()
+        fu.log('Creating %s temporary folder' % tmp_folder, self.out_log)
 
-        shutil.copy2(self.io_dict["in"]["input_pdb_path"], self.tmp_folder)
-        shutil.copy2(self.io_dict["in"]["input_dat_path"], self.tmp_folder)
+        shutil.copy2(self.io_dict["in"]["input_pdb_path"], tmp_folder)
+        shutil.copy2(self.io_dict["in"]["input_dat_path"], tmp_folder)
 
         # Output temporary file
         # out_file_prefix = Path(self.stage_io_dict.get("unique_dir", "")).joinpath("imod_ensemble")
@@ -113,7 +113,7 @@ class ImodImc(BiobbObject):
         #             "-o", str(out_file_prefix)
         #             ]
 
-        self.cmd = ['cd', self.tmp_folder, ';',
+        self.cmd = ['cd', tmp_folder, ';',
                     self.binary_path,
                     PurePath(self.io_dict["in"]["input_pdb_path"]).name,
                     PurePath(self.io_dict["in"]["input_dat_path"]).name,
@@ -140,15 +140,13 @@ class ImodImc(BiobbObject):
         # shutil.copy2(out_file, self.stage_io_dict["out"]["output_traj_path"])
 
         # Copy outputs from temporary folder to output path
-        shutil.copy2(PurePath(self.tmp_folder).joinpath(out_file), PurePath(self.io_dict["out"]["output_traj_path"]))
+        shutil.copy2(PurePath(tmp_folder).joinpath(out_file), PurePath(self.io_dict["out"]["output_traj_path"]))
 
         # Copy files to host
         # self.copy_to_host()
 
         # remove temporary folder(s)
-        self.tmp_files.extend([
-            self.tmp_folder
-        ])
+        self.tmp_files.append(tmp_folder)
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)
