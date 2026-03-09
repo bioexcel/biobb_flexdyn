@@ -1,5 +1,11 @@
 # Biobb FlexDyn changelog
 
+## What's new in version [5.2.2](https://github.com/bioexcel/biobb_amber/releases/tag/v5.2.2)?
+
+### Changes
+
+* [UPDATE] Upgraded compatibility with python 3.12
+
 ## What's new in version [5.2.1](https://github.com/bioexcel/biobb_amber/releases/tag/v5.2.1)?
 
 ### Changes
