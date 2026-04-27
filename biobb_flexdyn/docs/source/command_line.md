@@ -46,27 +46,27 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **binary_path** (*string*): (disco) Concoord disco binary path to be used..
-* **vdw** (*integer*): (1) Select a set of Van der Waals parameters. .
-* **num_structs** (*integer*): (500) Number of structures to be generated.
-* **num_iterations** (*integer*): (2500) Maximum number of iterations per structure.
-* **chirality_check** (*integer*): (2) Chirality check. .
-* **bs** (*integer*): (0) Number of rounds of triangular bound smoothing (default 0), (if >= 6, tetragonal BS is activated).
-* **nofit** (*boolean*): (False) Do not fit generated structures to reference.
-* **seed** (*integer*): (741265) Initial random seed.
-* **violation** (*number*): (1.0) Maximal acceptable sum of violations (nm).
-* **convergence** (*integer*): (50) Consider convergence failed after this number of non-productive iterations.
-* **trials** (*integer*): (25) Maximum number of trials per run.
-* **damp** (*integer*): (1) Damping factor for distance corrections. .
-* **dyn** (*integer*): (1) Number of rounds to dynamically set tolerances.
-* **bump** (*boolean*): (False) Do extra bump check.
-* **pairlist_freq** (*integer*): (10) Pairlist update frequency in steps (only valid together with bump).
-* **cutoff** (*number*): (0.5) Cut-off radius for pairlist (nm) (only valid together with bump).
-* **ref** (*boolean*): (False) Use input coordinates instead of random starting coordinates.
-* **scale** (*integer*): (1) Pre-scale coordinates with this factor.
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
+* **binary_path** (*string*): (disco) Concoord disco binary path to be used.
+* **vdw** (*integer*): (1) Select a set of Van der Waals parameters. 
+* **num_structs** (*integer*): (500) Number of structures to be generated
+* **num_iterations** (*integer*): (2500) Maximum number of iterations per structure
+* **chirality_check** (*integer*): (2) Chirality check. 
+* **bs** (*integer*): (0) Number of rounds of triangular bound smoothing (default 0), (if >= 6, tetragonal BS is activated)
+* **nofit** (*boolean*): (False) Do not fit generated structures to reference
+* **seed** (*integer*): (741265) Initial random seed
+* **violation** (*number*): (1.0) Maximal acceptable sum of violations (nm)
+* **convergence** (*integer*): (50) Consider convergence failed after this number of non-productive iterations
+* **trials** (*integer*): (25) Maximum number of trials per run
+* **damp** (*integer*): (1) Damping factor for distance corrections. 
+* **dyn** (*integer*): (1) Number of rounds to dynamically set tolerances
+* **bump** (*boolean*): (False) Do extra bump check
+* **pairlist_freq** (*integer*): (10) Pairlist update frequency in steps (only valid together with bump)
+* **cutoff** (*number*): (0.5) Cut-off radius for pairlist (nm) (only valid together with bump)
+* **ref** (*boolean*): (False) Use input coordinates instead of random starting coordinates
+* **scale** (*integer*): (1) Pre-scale coordinates with this factor
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_concoord_disco.yml)
 ```python
@@ -131,18 +131,18 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **binary_path** (*string*): (dist) Concoord dist binary path to be used..
-* **vdw** (*integer*): (1) Select a set of Van der Waals parameters. .
-* **bond_angle** (*integer*): (1) Select a set of bond/angle parameters. .
-* **retain_hydrogens** (*boolean*): (False) Retain hydrogen atoms.
-* **nb_interactions** (*boolean*): (False) Try to find alternatives for non-bonded interactions (by default the native contacts will be preserved).
-* **cutoff** (*number*): (4.0) cut-off radius (Angstroms) for non-bonded interacting pairs (the cut-off distances are additional to the sum of VDW radii).
-* **min_distances** (*integer*): (50) Minimum number of distances to be defined for each atom.
-* **damp** (*number*): (1.0) Multiply each distance margin by this value.
-* **fixed_atoms** (*boolean*): (False) Interpret zero occupancy as atoms to keep fixed.
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
+* **binary_path** (*string*): (dist) Concoord dist binary path to be used.
+* **vdw** (*integer*): (1) Select a set of Van der Waals parameters. 
+* **bond_angle** (*integer*): (1) Select a set of bond/angle parameters. 
+* **retain_hydrogens** (*boolean*): (False) Retain hydrogen atoms
+* **nb_interactions** (*boolean*): (False) Try to find alternatives for non-bonded interactions (by default the native contacts will be preserved)
+* **cutoff** (*number*): (4.0) cut-off radius (Angstroms) for non-bonded interacting pairs (the cut-off distances are additional to the sum of VDW radii)
+* **min_distances** (*integer*): (50) Minimum number of distances to be defined for each atom
+* **damp** (*number*): (1.0) Multiply each distance margin by this value
+* **fixed_atoms** (*boolean*): (False) Interpret zero occupancy as atoms to keep fixed
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_concoord_dist.yml)
 ```python
@@ -204,12 +204,12 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **num_structs** (*integer*): (500) Number of structures to be generated.
-* **num_modes** (*integer*): (5) Number of eigenvectors to be employed.
-* **amplitude** (*integer*): (1) Amplitude linear factor to scale motion.
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
+* **num_structs** (*integer*): (500) Number of structures to be generated
+* **num_modes** (*integer*): (5) Number of eigenvectors to be employed
+* **amplitude** (*integer*): (1) Amplitude linear factor to scale motion
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imc.yml)
 ```python
@@ -270,10 +270,10 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **cg** (*integer*): (2) Coarse-Grained model. .
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
+* **cg** (*integer*): (2) Coarse-Grained model. 
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imode.yml)
 ```python
@@ -333,11 +333,11 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **pc** (*integer*): (1) Principal Component..
-* **num_frames** (*integer*): (11) Number of frames to be generated.
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
+* **pc** (*integer*): (1) Principal Component.
+* **num_frames** (*integer*): (11) Number of frames to be generated
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imove.yml)
 ```python
@@ -394,12 +394,12 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **num_structs** (*integer*): (500) Number of structures to be generated.
-* **cutoff** (*number*): (5.0) This options specifies the interaction cutoff distance for the elastic network models (in angstroms), 5 by default. The Hessian matrix is constructed according to this interaction distance. Some artifacts should be expected for too short distances (< 5 Å)..
-* **rmsd** (*number*): (1.0) Maximum RMSd for decoy generation..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
+* **num_structs** (*integer*): (500) Number of structures to be generated
+* **cutoff** (*number*): (5.0) This options specifies the interaction cutoff distance for the elastic network models (in angstroms), 5 by default. The Hessian matrix is constructed according to this interaction distance. Some artifacts should be expected for too short distances (< 5 Å).
+* **rmsd** (*number*): (1.0) Maximum RMSd for decoy generation.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_nolb_nma.yml)
 ```python
@@ -456,14 +456,14 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **num_structs** (*integer*): (500) Number of structures to be generated.
-* **selection** (*string*): (calpha) Atoms selection (Prody syntax: http://prody.csb.pitt.edu/manual/reference/atomic/select.html).
-* **cutoff** (*number*): (15.0) Cutoff distance (Å) for pairwise interactions, minimum is 4.0 Å.
-* **gamma** (*number*): (1.0) Spring constant.
-* **rmsd** (*number*): (1.0) Average RMSD that the conformations will have with respect to the initial conformation.
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
+* **num_structs** (*integer*): (500) Number of structures to be generated
+* **selection** (*string*): (calpha) Atoms selection (Prody syntax: http://prody.csb.pitt.edu/manual/reference/atomic/select.html)
+* **cutoff** (*number*): (15.0) Cutoff distance (Å) for pairwise interactions, minimum is 4.0 Å
+* **gamma** (*number*): (1.0) Spring constant
+* **rmsd** (*number*): (1.0) Average RMSD that the conformations will have with respect to the initial conformation
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_prody_anm.yml)
 ```python
