@@ -20,7 +20,7 @@ setuptools.setup(
     packages=setuptools.find_packages(exclude=['docs', 'test']),
     package_data={'biobb_flexdyn': ['py.typed']},
     include_package_data=True,
-    install_requires=['biobb_common==5.2.2', 'scipy>=1.13.0,<1.14.0'],
+    install_requires=['biobb_common==5.2.2', 'scipy>=1.13.0,<1.14.0', 'ProDy'],
     python_requires='>=3.10',
     entry_points={
         "console_scripts": [

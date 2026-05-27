@@ -131,11 +131,8 @@ jobs:
             pytest-cov
             pytest-html
             biobb_common${{ steps.biobb_common_version.outputs.version }}
-            imods
             prody
             sciPy>=1.13.0,<1.14.0
-            concoord==2.1.2=h9ee0642_4
-            nolb
 
       - name: List installed package versions
         shell: bash -l {0}
