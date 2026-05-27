@@ -1,0 +1,53 @@
+#parameters concerning hydrogen bonds in CONCOORD
+# 
+#lines starting with '#' are ignored by the program
+#
+#please keep the format of the rest of the lines intact
+#
+#
+Minimal Donor-Acceptor distance (A)
+3.5
+Donors
+GLY  N
+ALA  N
+TYR  N
+CYS  N
+ASP  N
+GLU  N
+PHE  N
+HIS  N
+ILE  N
+LYS  N
+LEU  N
+MET  N
+ASN  N
+GLN  N
+ARG  N
+SER  N
+THR  N
+VAL  N
+TRP  N
+#TYR  OH
+#TRP  NE1
+#HIS  NE2
+#SER  OG
+#THR  OG1
+#GLN  NE2
+#ASN  ND2
+#LYS  NZ
+#ARG  NH1
+#ARG  NH2
+#HOH  OW
+#SOL  OW
+
+Acceptors
+*    O
+#HIS  ND1
+#GLU  OE1
+#GLU  OE2
+#ASP  OD1
+#ASP  OD2
+#GLN  OE1
+#ASN  OD1
+#HOH  OW
+#SOL  OW

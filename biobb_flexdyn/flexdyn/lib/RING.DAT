@@ -1,0 +1,76 @@
+#parameters concerning ring systems in CONCOORD
+# 
+#lines starting with '#' are ignored by the program
+#
+#please keep the format of the rest of the lines intact
+#
+!Rings
+TYR     CB
+TYR     CG
+TYR    CD1
+TYR    CD2
+TYR    CE1
+TYR    CE2
+TYR     CZ
+PHE     CB
+PHE     CG
+PHE    CD1
+PHE    CD2
+PHE    CE1
+PHE    CE2
+PHE     CZ
+TRP     CG
+TRP    CD1
+TRP    CD2
+TRP    NE1
+TRP    HE1
+TRP    CE2
+TRP    CE3
+TRP    CZ2
+TRP    CZ3
+TRP    CH2
+HISB    CB
+HISB    CG
+HISB   ND1
+HISB   CD2
+HISB   CE1
+HISB   NE2
+HISA    CB
+HISA    CG
+HISA   ND1
+HISA   CD2
+HISA   CE1
+HISA   NE2
+HISH    CB
+HISH    CG
+HISH   ND1
+HISH   CD2
+HISH   CE1
+HISH   NE2
+HIS     CB
+HIS     CG
+HIS    ND1
+HIS    CD2
+HIS    CE1
+HIS    NE2
+
+!Quasi rings
+TYR     OH
+TYR    HD1
+TYR    HD2
+TYR    HE1
+TYR    HE2
+PHE    HD1
+PHE    HD2
+PHE    HE1
+PHE    HE2
+PHE     HZ
+TRP    HD1
+TRP    NE1
+TRP    HE1
+TRP    HE3
+TRP    HZ2
+TRP    HZ3
+TRP    HH2
+HIS    HD1
+HIS    HE2

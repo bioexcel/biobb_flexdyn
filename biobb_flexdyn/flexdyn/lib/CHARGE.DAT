@@ -1,0 +1,35 @@
+#parameters concerning salt bridges in CONCOORD
+# 
+#lines starting with '#' are ignored by the program
+#
+#please keep the format of the rest of the lines intact
+#
+#this parameter sets the distance criterion for salt bridges (A)
+Distance 4.5
+#
+#Atoms that can be involved in salt bridges
+LYSH    NZ  1.0
+LYS     NZ  1.0
+ARG    NH1  1.0
+ARG    NH2  1.0
+GLU    OE1 -1.0
+GLU    OE2 -1.0
+ASP    OD1 -1.0
+ASP    OD2 -1.0
+NTERM    N  1.0
+CTERM    O -1.0
+CTERM  OXT -1.0
+CTERM   O1 -1.0
+CTERM   O2 -1.0
+#
+#HIS    ND1  1.0
+#HIS    NE2  1.0
+#GLU     CD -1.0
+#ASP     CG -1.0
+#LYSH   HZ1  1.0
+#LYSH   HZ2  1.0
+#LYSH   HZ3  1.0
+#ARG   HH11  1.0
+#ARG   HH12  1.0
+#ARG   HH21  1.0
+#ARG   HH22  1.0

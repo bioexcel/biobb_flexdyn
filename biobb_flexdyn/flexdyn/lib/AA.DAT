@@ -1,0 +1,26 @@
+# Amino acids
+# h = hydrophobic
+# p = hydrophilic
+# third column contains DSSP accessibility in GLY-X-GLY
+#
+
+ALA h 113.
+ARG p 262.
+ASP p 177.
+ASN p 177.
+CYS h 144.
+GLN p 208.
+GLU p 207.
+GLY h  87.
+HIS p 205.
+ILE h 184.
+LEU h 187.
+LYS p 225.
+MET h 192.
+PHE h 225.
+PRO h 139.
+SER p 136.
+THR p 155.
+TRP h 269.
+TYR h 250.
+VAL h 156.

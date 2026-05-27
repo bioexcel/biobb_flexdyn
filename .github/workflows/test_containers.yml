@@ -147,6 +147,11 @@ jobs:
           singularity pull --name ${{ github.event.repository.name }}:${VERSION}.sif ${SINGULARITY_URL}
           ls -lh ${{ github.event.repository.name }}:${VERSION}.sif
 
+      - name: Set absolute paths in conf.yml
+        run: |
+          sed -i "s|path_to_concoord_lib|${{ github.workspace }}/${{ github.event.repository.name }}/flexdyn/lib|g" ${{ github.workspace }}/${{ github.event.repository.name }}/test/conf.yml
+          more ${{ github.workspace }}/${{ github.event.repository.name }}/test/conf.yml
+
       - name: Run container tests
         shell: bash -l {0}
         run: |

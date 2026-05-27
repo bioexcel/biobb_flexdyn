@@ -171,6 +171,12 @@
                         }
                     ]
                 },
+                "concoord_lib_path": {
+                    "type": "string",
+                    "default": null,
+                    "wf_prop": false,
+                    "description": "Path to Concoord library files. If not specified will look for CONCOORDLIB conda environment variable."
+                },
                 "num_structs": {
                     "type": "integer",
                     "default": 500,

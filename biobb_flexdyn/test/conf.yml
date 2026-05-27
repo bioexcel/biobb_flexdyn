@@ -30,6 +30,7 @@ concoord_dist_docker:
     container_image: quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
     container_volume_path: /tmp
     container_working_dir: /tmp
+    concoord_lib_path: path_to_concoord_lib  # Optional property to specify Concoord library path, if not set will use CONCOORDLIB env variable
 
 concoord_dist_singularity:
   paths:
@@ -47,6 +48,7 @@ concoord_dist_singularity:
     container_image: https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
     container_volume_path: /tmp
     container_working_dir: /tmp
+    concoord_lib_path: path_to_concoord_lib  # Optional property to specify Concoord library path, if not set will use CONCOORDLIB env variable
 
 concoord_disco:
   paths:
@@ -79,6 +81,7 @@ concoord_disco_docker:
     container_image: quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
     container_volume_path: /tmp
     container_working_dir: /tmp
+    concoord_lib_path: path_to_concoord_lib  # Optional property to specify Concoord library path, if not set will use CONCOORDLIB env variable
 
 concoord_disco_singularity:
   paths:
@@ -97,6 +100,7 @@ concoord_disco_singularity:
     container_image: https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
     container_volume_path: /tmp
     container_working_dir: /tmp
+    concoord_lib_path: path_to_concoord_lib  # Optional property to specify Concoord library path, if not set will use CONCOORDLIB env variable
 
 nolb_nma:
   paths:

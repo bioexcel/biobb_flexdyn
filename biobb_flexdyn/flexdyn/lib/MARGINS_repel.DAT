@@ -1,0 +1,72 @@
+!
+  0.03  0.03	# (1) bonds
+!
+  0.04  0.04	# (1) O-C-N,CA-C-O, angles in rings 
+  0.08  0.08	# (2) other angles
+!
+  0.05  0.05	# (1) Real rings
+  0.3   0.2	# (2) Quasi rings
+!
+  0.03  0.03	# (1) CA-CA (omega 1-4)
+  0.1   0.12	# (2) CA-O (omega 1-4)
+!
+  0.2   0.2	# (1)  C-C  (tight phi/psi 1-4)
+  0.15  0.1	# (2)  CB-C (tight phi/psi 1-4)
+  0.15  0.15	# (3)  N-N  (tight phi/psi 1-4)
+  0.3   0.3	# (4)  N-CB (tight phi/psi 1-4)
+  0.2   0.2	# (5)  O-N  (tight phi/psi 1-4)
+  0.2   0.2 	# (6)  O-CB (tight phi/psi 1-4)
+  0.3   0.4	# (7)  C-C  (other phi/psi 1-4)
+  0.3   0.3	# (8)  CB-C (other phi/psi 1-4)
+  0.3   0.3	# (9)  N-N  (other phi/psi 1-4)
+  0.4   0.4	# (10) N-CB (other phi/psi 1-4)
+  0.3   0.3	# (11) O-N  (other phi/psi 1-4)
+  0.3   0.3	# (12) O-CB (other phi/psi 1-4)
+  0.3   0.3	# (13) GLY/PRO in turn/coil (other phi/psi 1-4)
+  0.4   0.4	# (14) rest (other phi/psi 1-4)
+!
+  0.4   0.4	# (1) buried side chain 1-4
+  0.5   0.5	# (2) exposed side chain 1-4
+!
+  0.2   0.2	# (1) helix/sheet i,i+1 (N,CA,C)
+  0.3   0.3 	# (2) helix/sheet i,i+2 (N,CA,C)
+  0.4   0.5	# (3) helix/sheet i,i+3 (N,CA,C)
+  0.4   0.6	# (4) helix       i,i+4 (N,CA,C)
+  0.3   0.5 	# (5) coil/turn   i,i+1 (N,CA,C)
+  0.6   0.9 	# (6) coil/turn   i,i+2 (N,CA,C)
+  0.8   1.2	# (7) coil/turn   i,i+3 (N,CA,C)
+  0.4   1.8	# (8) PRO coil/turn i,i+2 (N,CA,C)
+  0.9   1.8	# (9) PRO coil/turn i,i+3 (N,CA,C)
+  0.3   0.3	# (10) helix/sheet i,i+1 (backbone)
+  0.6   0.6	# (11) helix/sheet i,i+2 (backbone)
+  0.7   0.8	# (12) helix/sheet i,i+3 (backbone)
+  0.6   0.7	# (13) helix       i,i+4 (backbone)
+  0.6   1.0	# (14) coil/turn   i,i+1 (backbone)
+  1.0   1.5	# (15) coil/turn   i,i+2 (backbone)
+  1.1   2.0	# (16) coil/turn   i,i+3 (backbone)
+  1.0   2.5	# (17) PRO coil/turn i,i+2 (backbone)
+  1.5   2.8	# (18) PRO coil/turn i,i+3 (backbone)
+!
+  0.8   5.0     # (1) Salt bridges
+  0.3   0.8     # (2) Tight hydrogen bonds
+  0.8   1.0     # (3) Weak hydrogen bonds
+  0.8   0.8     # (4) Buried side chains
+  1.5   1.5     # (5) Exposed side chains
+  0.8   0.9     # (6) Sheet restrictions
+  1.0   1.0     # (7) Buried close sequential pairs
+  1.5   1.5     # (8) Exposed close sequential pairs
+  0.8   1.0     # (9) Other close buried pairs
+  1.0   1.5     # (9) Other close restricted pairs
+  1.5   4.0     # (10) Other close pairs
+!
+  1.5   1.5     # (1) non-bonded pairs (alternative pairs, option -nb)
+  0.1   1.0     # (2) tolerance for strong and weak H-bonds (work in progress)
+  0.1   10.     # (3) tolerance+weight for bumps
+  0.1   1.0     # (4) tolerance+weight for 1-4 bumps
+  1.0   1.0     # (5) penalty for lb for repulsive non-bonded pairs
+  0.4   1.0     # (6) tolerance+weight for NOE bounds (tol in A)
+  2.    0.0     # (7) tolerance+weight for bonds (tol in sigma)
+  2.    0.1     # (8) tolerance+weight for angles (tol in sigma)
+  0.2   0.2     # (9) tolerance+weight for planar groups (tol in A)
+!
+  8.0   8.0     # (1) other pairs

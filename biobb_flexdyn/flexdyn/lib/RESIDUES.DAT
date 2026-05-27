@@ -1,0 +1,256 @@
+#atom types for common residues. At the end are default types for atoms
+#present in those residues not present in this list
+
+#general types, common for many residues. Overruled by specific entries
+
+GEN      N  NH1
+GEN      H    H
+GEN     HN    H
+GEN     H1    HC
+GEN     H2    HC
+GEN     H3    HC
+GEN    HT1    HC
+GEN    HT2    HC
+GEN    HT3    HC
+GEN     HA   HA
+GEN    HA1   HA
+GEN    HA2   HA
+GEN    HA3   HA
+GEN     HB   H0
+GEN    HB1   H0
+GEN    HB2   H0
+GEN    HB3   H0
+GEN      C    C 
+GEN      O    O 
+GEN    OXT    O 
+GEN     O1    O 
+GEN     O2    O
+GEN    OT1    O 
+GEN    OT2    O
+GEN     O'    O 
+GEN    O''    O 
+GEN     CA   CA 
+GEN     CB CH2E 
+GEN     CU   CU 
+GEN     ZN   ZN 
+GEN     MG   MG
+GEN     HG   HG
+GEN      K    K 
+GEN     Na   Na 
+GEN     Cl   Cl
+
+#types specific for specific residues
+ALA     CB CH3E 
+
+ARG     CG CH2E 
+ARG     CD CH2E 
+ARG     NE  NH1 
+ARG     CZ   CZ 
+ARG    NH1  NC2 
+ARG    NH2  NC2
+ARG    HG2   H0
+ARG    HG3   H0
+ARG    HD2   H0
+ARG    HD3   H0
+ARG     HE    H
+ARG   HH11   HC
+ARG   HH12   HC
+ARG   HH21   HC
+ARG   HH22   HC
+
+ASN     CG    C 
+ASN    OD1   OC 
+ASN    ND2  NH2
+ASN   HD21    H
+ASN   HD22    H
+
+ASP     CG    C 
+ASP    OD1   OC
+ASP    OD2   OC 
+
+CYS     CB CH1E
+CYS     SG    S
+CYS     HG    H 
+
+GLN     CG CH2E 
+GLN     CD    C 
+GLN    OE1   OC 
+GLN    NE2  NH2
+GLN    HG2   H0
+GLN    HG3   H0
+GLN   HE21    H
+GLN   HE22    H
+
+GLU     CG CH2E 
+GLU     CD    C 
+GLU    OE1   OC 
+GLU    OE2   OC 
+GLU    HG2   H0
+GLU    HG3   H0
+
+GLY     CA CH2G 
+GLY    HA2   HA
+GLY    HA3   HA
+
+HIS     CG   C5 
+HIS    ND1  NH1 
+HIS    CD2 CR1H 
+HIS    CE1 CRHH 
+HIS    NE2  NH1
+HIS    HD1    H
+HIS    HD2   H0
+HIS    HE1   H0
+HIS    HE2    H
+
+ILE     CB CH1E 
+ILE    CG1 CH2E 
+ILE    CG2 CH3E 
+ILE     CD CH3E 
+ILE    CD1 CH3E
+ILE   HG12   H0
+ILE   HG13   H0
+ILE   HG21   H0
+ILE   HG22   H0
+ILE   HG23   H0
+ILE   HD11   H0
+ILE   HD12   H0
+ILE   HD13   H0
+ILE    HD1   H0
+ILE    HD2   H0
+ILE    HD3   H0
+
+LEU     CG CH1E 
+LEU    CD1 CH3E 
+LEU    CD2 CH3E 
+LEU     HG   H0
+LEU   HD11   H0
+LEU   HD12   H0
+LEU   HD13   H0
+LEU   HD21   H0
+LEU   HD22   H0
+LEU   HD23   H0
+
+LYS     CG CH2E 
+LYS     CD CH2E 
+LYS     CE CH2E 
+LYS     NZ  NH3 
+LYS    HG2   H0
+LYS    HG3   H0
+LYS    HD2   H0
+LYS    HD3   H0
+LYS    HE2   H0
+LYS    HE3   H0
+LYS    HZ1   HC
+LYS    HZ2   HC
+LYS    HZ3   HC
+
+MET     CG CH2E 
+MET     SD   SM 
+MET     CE CH3E
+MET    HG2   H0
+MET    HG3   H0
+MET    HE1   H0
+MET    HE2   H0
+MET    HE3   H0
+
+PHE     CG   CF 
+PHE    CD1 CR1E 
+PHE    CD2 CR1E
+PHE    CE1 CR1E
+PHE    CE2 CR1E
+PHE     CZ CR1E
+PHE    HD1   HR
+PHE    HD2   HR
+PHE    HE1   HR
+PHE    HE2   HR
+PHE     HZ   HR
+
+PRO      N    N
+PRO     CA  CAP
+PRO     HA   HA
+PRO     CG CH2P 
+PRO     CD CH2P 
+PRO    HG2   H0
+PRO    HG3   H0
+PRO    HD2   H0
+PRO    HD3   H0
+
+SER     OG  OH1 
+SER     HG    H
+
+THR     CB CH1E 
+THR    OG1  OH1 
+THR    CG2 CH3E
+THR    HG1    H
+THR   HG21   H0
+THR   HG22   H0
+THR   HG23   H0
+
+TRP     CG  C5W 
+TRP    CD1 CR1E 
+TRP    CD2   CW 
+TRP    NE1  NH1 
+TRP    CE2   CW 
+TRP    CE3 CR1E 
+TRP    CZ2 CR1W
+TRP    CZ3 CR1E
+TRP    CH2 CR1W
+TRP    HD1   HR
+TRP    HE1    H
+TRP    HE3   HR
+TRP    HZ2   HR
+TRP    HZ3   HR
+TRP    HH2   HR
+
+TYR     CG   CY
+TYR    CD1 CR1E 
+TYR    CD2 CR1E
+TYR    CE1 CR1E
+TYR    CE2 CR1E
+TYR     CZ  CY2
+TYR     OH  OH1 
+TYR    HD1   HR
+TYR    HD2   HR
+TYR    HE1   HR
+TYR    HE2   HR
+TYR     HH    H
+
+VAL     CB CH1E 
+VAL    CG1 CH3E 
+VAL    CG2 CH3E 
+VAL   HG11   H0
+VAL   HG12   H0
+VAL   HG13   H0
+VAL   HG21   H0
+VAL   HG22   H0
+VAL   HG23   H0
+
+HOH      O  OH1 
+HOH     OW  OH1
+HOH    OW1  OH1
+HOH    HW1    H
+HOH    HW2    H
+HOH    HW3    H
+SOL      O  OH1
+SOL     OW  OH1
+SOL    OW1  OH1
+SOL    HW1    H
+SOL    HW2    H
+SOL    HW3    H
+
+HEM     FE   FE
+
+# default types for remaining atoms
+OTH     H*   H* 
+OTH     N*   N* 
+OTH     C*   C* 
+OTH     O*   O* 
+OTH     S*   S* 
+OTH     P*   P* 
+OTH     1*   H* 
+OTH     2*   H* 
+OTH     3*   H* 
+OTH     V*   V* 
+OTH     A*   A*
+OTH     M*   M*
+OTH     F*   F*

@@ -1,0 +1,24 @@
+# definition of planar groups
+#
+# AA means any amino acid
+# + means next residue
+# - means previous residue
+
+# backbone carbonyl (omega = 180)
+AA CA C N+ O CA+ H+ HN+
+
+#Proline CD attached to backbone N
+#PRO C- N CA CD
+
+# side chains
+ASN CB CG ND2 OD1 HD21 HD22
+ASP CB CG OD1 OD2
+GLN CG CD NE2 OE1 HE21 HE22
+GLU CG CD OE1 OE2
+ARG CD NE CZ HE NH1 NH2 HH11 HH12 HH21 HH22
+
+#rings
+PHE CB CE1 CE2 CG  CD1 CD2 CZ  HD1 HD2 HE1 HE2 HZ
+TYR CB CE1 CE2 CG  CD1 CD2 CZ  HD1 HD2 HE1 HE2 OH
+TRP CB NE1 CZ3 CG  CD1 CE2 CD2 CZ2 CH2 CE3 HD1 HE1 HE3 HZ2 HZ3 HH2
+HIS CB CG  CD2 HD2 NE2 HE2 CE1 HE1 ND1 HD1 

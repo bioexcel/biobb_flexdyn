@@ -24,6 +24,7 @@ class ConcoordDist(BiobbObject):
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
             * **binary_path** (*str*) - ("dist") Concoord dist binary path to be used.
             * **vdw** (*int*) - (1) Select a set of Van der Waals parameters. Values: 1 (OPLS-UA -united atoms- parameters), 2 (OPLS-AA -all atoms- parameters), 3 (PROLSQ repel parameters), 4 (Yamber2 parameters), 5 (Li et al. parameters), 6 (OPLS-X parameters -recommended for NMR structure determination-).
+            * **concoord_lib_path** (*str*) - (None) Path to Concoord library files. If not specified will look for CONCOORDLIB conda environment variable.
             * **bond_angle** (*int*) - (1) Select a set of bond/angle parameters. Values: 1 (Concoord default parameters), 2 (Engh-Huber parameters).
             * **retain_hydrogens** (*bool*) - (False) Retain hydrogen atoms
             * **nb_interactions** (*bool*) - (False) Try to find alternatives for non-bonded interactions (by default the native contacts will be preserved)
@@ -94,6 +95,7 @@ class ConcoordDist(BiobbObject):
         self.fixed_atoms = properties.get('fixed_atoms', False)
 
         self.vdw = properties.get('vdw', 1)
+        self.concoord_lib_path = properties.get('concoord_lib_path', None)
         self.bond_angle = properties.get('bond_angle', 1)
 
         # Check the properties
@@ -113,7 +115,10 @@ class ConcoordDist(BiobbObject):
         self.stage_files()
 
         # Copy auxiliary file (HBONDS) to the working dir
-        concoord_lib = os.getenv("CONCOORDLIB")
+        if self.concoord_lib_path is None:
+            concoord_lib = os.getenv("CONCOORDLIB")
+        else:
+            concoord_lib = self.concoord_lib_path
 
         hbonds_file = str(concoord_lib) + "/HBONDS.DAT"
         shutil.copy2(hbonds_file, self.stage_io_dict.get("unique_dir", ""))

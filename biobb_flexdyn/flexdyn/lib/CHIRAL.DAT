@@ -1,0 +1,88 @@
+# definition of chiral groups in CONCOORD
+#
+# chirality is implemented a posteriori, as distance information
+# cannot distinguish between mirror images.
+#
+# checking of the chirality is done via the usual method of improper
+# dihedrals (first four atoms in the list below), which should be defined 
+# such that in the specified atom ordering the target angle should be 
+# about +35 degrees, ie with the tetrahedron oriented with the three 
+# substituents of interest (the last 3 entries of the improper) pointing 
+# TOWARDS you, the three should appear counter-clockwise in the order that 
+# they appear. If in special cases the other mirror image is desired, 
+# change the atom ordering accordingly.
+# The corrections are carried out by swapping the last specified substiuent
+# that makes up the improper with the fourth substituent. This is done
+# by mirroring all atoms 4..N with respect to the plane spanned by atoms 1,2,3
+#
+# AA means any amino acid
+# SS means any side chain atom, including HA and CB
+
+# L- amino acids - if D: swap the side chain with the HA position
+ALA   CA N C CB SS
+SER   CA N C CB SS
+THR   CA N C CB SS
+VAL   CA N C CB SS
+LEU   CA N C CB SS
+ILE   CA N C CB SS
+TYR   CA N C CB SS
+PHE   CA N C CB SS
+TRP   CA N C CB SS
+CYS   CA N C CB SS
+MET   CA N C CB SS
+ARG   CA N C CB SS
+LYS   CA N C CB SS
+GLU   CA N C CB SS
+ASP   CA N C CB SS
+GLN   CA N C CB SS
+ASN   CA N C CB SS
+HIS   CA N C CB SS
+
+#side chains
+LEU  CG CD1 CB CD2 HD21 HD22 HD23 HG
+VAL  CB CG1 CA CG2 HG21 HG22 HG23 HB
+ILE  CB CA CG1 CG2 HG21 HG22 HG23 HB
+THR  CB CG2 CA OG1 HG1  CG2  HG21 HG22 HG23 HB
+
+#'stereo specific' protons
+ALA CB CA HB2 HB1 HB3
+ARG CB CG CA HB2 HB3
+ARG CG CD CB HG2 HG3
+ARG CD NE CG HD2 HD3
+ASN CB CG CA HB2 HB3
+ASP CB CG CA HB2 HB3
+CYS CB SG CA HB2 HB3
+GLN CB CG CA HB2 HB3
+GLN CG CD CB HG2 HG3
+GLU CB CG CA HB2 HB3
+GLU CG CD CB HG2 HG3
+GLY CA C N HA2 HA3
+HIS CB CG CA HB2 HB3
+ILE CG1 CD1 CB HG12 HG13
+ILE CD1 CG1 HD12 HD11 HD13
+ILE CG2 CB HG22 HG21 HG23
+LEU CB CG CA HB2 HB3
+LEU CD1 CG HD12 HD11 HD13
+LEU CD2 CG HD22 HD21 HD23
+LYS NZ CE HZ2 HZ1 HZ3
+LYS CB CG CA HB2 HB3
+LYS CG CD CB HG2 HG3
+LYS CD CE CG HD2 HD3
+LYS CE NZ CD HE2 HE3
+MET CB CG CA HB2 HB3
+MET CG SD CB HG2 HG3
+MET CE SD HE2 HE1 HE3
+PHE CB CG CA HB2 HB3
+PRO CB CG CA HB2 HB3
+PRO CG CD CB HG2 HG3
+PRO CD N CG HD2 HD3
+SER CB OG CA HB2 HB3
+THR CG2 CB HG22 HG21 HG23
+TRP CB CG CA HB2 HB3
+TYR CB CG CA HB2 HB3
+VAL CG1 CB HG12 HG11 HG13
+VAL CG2 CB HG22 HG21 HG23
+
+#N-terminal hydrogens
+AA   N CA H2 H1 H3
+AA   N CA HT2 HT1 HT3

@@ -1,0 +1,70 @@
+# Pseudo atom definitions, for use in NMR structure determination
+# Adapted from AQUA's PseudoLIB
+
+ALA    MB    HB1   HB2   HB3   
+ARG    QB    HB2   HB3   
+ARG    QG    HG2   HG3   
+ARG    QD    HD2   HD3   
+ARG    QH1   HH11  HH12  
+ARG    QH2   HH21  HH22  
+ARG    QH    HH11  HH12  HH21  HH22  
+ARG    QZ    HH11  HH12  HH21  HH22  
+ASN    QB    HB2   HB3   
+ASN    QD    HD21  HD22  
+ASP    QB    HB2   HB3   
+CYS    QB    HB2   HB3
+GLN    QB    HB2   HB3   
+GLN    QE    HE21  HE22  
+GLN    QG    HG2   HG3   
+GLU    QB    HB2   HB3   
+GLU    QG    HG2   HG3   
+GLY    QA    HA2   HA3   
+HIS    QB    HB2   HB3   
+ILE    MD    HD11  HD12  HD13  
+ILE    QG    HG12  HG13  
+ILE    MG    HG21  HG22  HG23  
+LEU    QB    HB2   HB3   
+LEU    MD1   HD11  HD12  HD13  
+LEU    MD2   HD21  HD22  HD23  
+LEU    QD    HD11  HD12  HD13  HD21  HD22  HD23  
+LYS    QB    HB2   HB3   
+LYS    QG    HG2   HG3   
+LYS    QD    HD2   HD3   
+LYS    QE    HE2   HE3   
+LYS    QZ    HZ1   HZ2   HZ3  
+MET    QB    HB2   HB3   
+MET    QG    HG2   HG3   
+MET    ME    HE1   HE2   HE3   
+PHE    QB    HB2   HB3   
+PHE    QD    HD1   HD2   
+PHE    QE    HE1   HE2   
+PHE    QR    HD1   HD2   HE1   HE2 
+PRO    QB    HB2   HB3   
+PRO    QG    HG2   HG3   
+PRO    QD    HD2   HD3   
+SER    QB    HB2   HB3   
+THR    MG    HG21  HG22  HG23  
+TRP    QB    HB2   HB3   
+TYR    QB    HB2   HB3   
+TYR    QD    HD1   HD2   
+TYR    QE    HE1   HE2   
+TYR    QR    HD1   HD2   HE1   HE2
+VAL    MG1   HG11  HG12  HG13  
+VAL    MG2   HG21  HG22  HG23  
+VAL    QG    HG11  HG12  HG13  HG21  HG22  HG23  
+  A    Q5'   H5'   H5''
+  A    Q6    H61   H62
+  C    Q5'   H5'   H5''
+  C    Q4    H41   H42
+  G    Q5'   H5'   H5''
+  G    Q2    H21   H22
+  T    Q5'   H5'   H5''
+  T    M7    H71   H72   H73
+  U    Q5'   H5'   H5''
+  A    Q2'   H2'   H2''
+  C    Q2'   H2'   H2''
+  G    Q2'   H2'   H2''
+  T    Q2'   H2'   H2''
+  U    Q2'   H2'   H2''
+  DUR  Q2'   H2'   H2''
+  DUR  Q5'   H5'   H5''

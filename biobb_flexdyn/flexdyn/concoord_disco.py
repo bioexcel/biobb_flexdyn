@@ -25,6 +25,7 @@ class ConcoordDisco(BiobbObject):
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
             * **binary_path** (*str*) - ("disco") Concoord disco binary path to be used.
             * **vdw** (*int*) - (1) Select a set of Van der Waals parameters. Values: 1 (OPLS-UA -united atoms- parameters), 2 (OPLS-AA -all atoms- parameters), 3 (PROLSQ repel parameters), 4 (Yamber2 parameters), 5 (Li et al. parameters), 6 (OPLS-X parameters -recommended for NMR structure determination-)
+            * **concoord_lib_path** (*str*) - (None) Path to Concoord library files. If not specified will look for CONCOORDLIB conda environment variable.
             * **num_structs** (*int*) - (500) Number of structures to be generated
             * **num_iterations** (*int*) - (2500) Maximum number of iterations per structure
             * **chirality_check** (*int*) - (2) Chirality check. Values: 0 (no chirality checks), 1 (only check afterwards), 2 (check on the fly)
@@ -101,6 +102,7 @@ class ConcoordDisco(BiobbObject):
         self.binary_path = properties.get('binary_path', 'disco')
 
         self.vdw = properties.get('vdw')
+        self.concoord_lib_path = properties.get('concoord_lib_path', None)
         self.num_structs = properties.get('num_structs')
         self.num_iterations = properties.get('num_iterations')
         self.chirality_check = properties.get('chirality_check')
@@ -132,7 +134,10 @@ class ConcoordDisco(BiobbObject):
         self.stage_files()
 
         # Copy auxiliary files (MARGINS, ATOMS, BONDS) according to the VdW property to the working dir
-        concoord_lib = os.getenv("CONCOORDLIB")
+        if self.concoord_lib_path is None:
+            concoord_lib = os.getenv("CONCOORDLIB")
+        else:
+            concoord_lib = self.concoord_lib_path
 
         # MARGINS_li.DAT, MARGINS_oplsaa.DAT, MARGINS_oplsua.DAT, MARGINS_oplsx.DAT, MARGINS_repel.DAT, MARGINS_yamber2.DAT
         # 1 (OPLS-UA -united atoms- parameters), 2 (OPLS-AA -all atoms- parameters), 3 (PROLSQ repel parameters), 4 (Yamber2 parameters), 5 (Li et al. parameters), 6 (OPLS-X parameters -recommended for NMR structure determination-).

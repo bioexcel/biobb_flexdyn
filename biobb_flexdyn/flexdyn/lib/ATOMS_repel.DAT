@@ -1,0 +1,100 @@
+# parameters concerning atomic radii in CONCOORD
+# 
+# lines starting with '#' are ignored by the program
+#
+#
+
+#
+# general types. Sum of Van Der Waals radii is calculated from sum of VDW
+# radii of involved atom types, if no entry for combination is available
+# (see below)
+# 
+# first column is atom type (see RESIDUES.DAT)
+# second column is VDW radius (A)
+# third column is atom's contribution to a covalent bond (upper bound, A)
+#
+
+types:
+H     1.07    0.65  0.94
+HC    1.07    0.65  0.94
+H0    1.07    0.65  0.94
+HA    1.07    0.65  0.94
+HR    1.07    0.65  0.94
+C     1.65    0.95  1.51
+C5W   1.65    0.9   1.51
+CW    1.65    0.9   1.51
+CF    1.65    0.9   1.51
+CY    1.65    0.9   1.51
+CY2   1.65    0.9   1.51
+CZ    1.65    0.9   1.51
+C5    1.65    0.9   1.51
+CH1E  1.65    0.9   1.51
+CA    1.65    0.9   1.51
+CAP   1.65    0.9   1.51
+CH2E  1.65    0.9   1.51
+CH2P  1.65    0.9   1.51
+CH2G  1.65    0.9   1.51
+CH3E  1.65    0.9   1.51
+CR1E  1.65    0.9   1.51
+CR1W  1.65    0.9   1.51
+CRH   1.65    0.9   1.51
+CRHH  1.65    0.9   1.51
+CR1H  1.65    0.9   1.51
+N     1.34    0.9   1.20
+NR    1.34    0.9   1.20
+NP    1.34    0.9   1.20
+NH1   1.34    0.9   1.20
+NH2   1.34    0.9   1.20
+NH3   1.34    0.9   1.20
+NC2   1.34    0.9   1.20
+O     1.29    0.9   1.16
+OC    1.29    0.95  1.16
+OH1   1.29    0.9   1.16
+S     1.60    1.1   1.47
+SM    1.60    1.1   1.47
+SH1E  1.60    1.1   1.47
+FE    1.07    1.30  0.94
+CU    2.00    1.20  2.0
+ZN    2.00    1.20  2.0
+H*    1.07    0.65  0.94 
+1*    1.07    0.65  0.94
+2*    1.07    0.65  0.94
+3*    1.07    0.65  0.94
+N*    1.34    0.90  1.20
+O*    1.29   0.90  1.16
+C*    1.65   0.90  1.51
+S*    1.60    1.10  1.47
+P*    1.70    1.10  1.7
+V*    2.00    1.20  2.0
+
+#
+# Sums of Van Der Waals radii formed by specific combinations of atom types
+#
+
+combinations:
+#Hydrogen bonds
+
+O    HC  1.8
+OC   HC  1.8
+OH1  HC  1.8
+OC   H   1.8
+O    H   1.8
+OH1  H   1.8
+
+NH1 O   3.0
+NC2 O   3.0
+NH2 O   3.0
+NH3 O   3.0
+NH1 OC  3.0
+NC2 OC  3.0
+NH2 OC  3.0
+NH3 OC  3.0
+NH1 OH1 3.0
+NC2 OH1 3.0
+NH2 OH1 3.0
+NH3 OH1 3.0
+
+#patches
+#CR1E H   2.5
+#CR1E HC  2.5
+
