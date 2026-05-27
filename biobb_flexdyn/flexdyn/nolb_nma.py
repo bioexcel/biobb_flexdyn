@@ -3,7 +3,7 @@
 """Module containing the nolb class and the command line interface."""
 from typing import Optional
 import shutil
-from pathlib import Path
+from pathlib import Path, PurePath
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools.file_utils import launchlogger
 
@@ -18,12 +18,19 @@ class Nolb_nma(BiobbObject):
         input_pdb_path (str): Input PDB file. File type: input. `Sample file <https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/data/flexdyn/structure.pdb>`_. Accepted formats: pdb (edam:format_1476).
         output_pdb_path (str): Output multi-model PDB file with the generated ensemble. File type: output. `Sample file <https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/flexdyn/nolb_output.pdb>`_. Accepted formats: pdb (edam:format_1476).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
+            * **binary_path** (*str*) - ("NOLB") NOLB binary path to be used.
             * **num_structs** (*int*) - (500) Number of structures to be generated
             * **cutoff** (*float*) - (5.0) This options specifies the interaction cutoff distance for the elastic network models (in angstroms), 5 by default. The Hessian matrix is constructed according to this interaction distance. Some artifacts should be expected for too short distances (< 5 Å).
             * **rmsd** (*float*) - (1.0) Maximum RMSd for decoy generation.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
             * **sandbox_path** (*str*) - ("./") [WF property] Parent path to the sandbox directory.
+            * **container_path** (*str*) - (None)  Path to the binary executable of your container.
+            * **container_image** (*str*) - ("cmip/cmip:latest") Container Image identifier.
+            * **container_volume_path** (*str*) - ("/data") Path to an internal directory in the container.
+            * **container_working_dir** (*str*) - (None) Path to the internal CWD in the container.
+            * **container_user_id** (*str*) - (None) User number id to be mapped inside the container.
+            * **container_shell_path** (*str*) - ("/bin/bash") Path to the binary executable of the container shell.
 
     Examples:
         This is a use example of how to use the building block from Python::
@@ -84,15 +91,21 @@ class Nolb_nma(BiobbObject):
             return 0
         self.stage_files()
 
+        # Determine working directory (host unique_dir or container volume path)
+        if self.container_path:
+            working_dir = self.container_volume_path if self.container_volume_path else "/data"
+        else:
+            working_dir = self.stage_io_dict.get('unique_dir', '')
+
         # Output temporary file
-        out_file_prefix = Path(self.stage_io_dict.get("unique_dir", "")).joinpath("nolb_ensemble")
-        out_file = Path(self.stage_io_dict.get("unique_dir", "")).joinpath("nolb_ensemble_nlb_decoys.pdb")
+        out_file_prefix = "nolb_ensemble"
+        out_file = "nolb_ensemble_nlb_decoys.pdb"
 
         # Command line
         # ./NOLB 1ake_monomer.pdb -s 100 --rmsd 5 -m  -o patata # Output: patata_nlb_decoys.pdb
-        self.cmd = [self.binary_path,
-                    str(Path(self.stage_io_dict["in"]["input_pdb_path"]).relative_to(Path.cwd())),
-                    "-o", str(out_file_prefix),
+        self.cmd = ["cd", working_dir, ";", self.binary_path,
+                    PurePath(self.stage_io_dict["in"]["input_pdb_path"]).name,
+                    "-o", out_file_prefix,
                     "-m"  # Minimizing the generated structures by default
                     ]
 
@@ -121,8 +134,13 @@ class Nolb_nma(BiobbObject):
         # Run Biobb block
         self.run_biobb()
 
-        # Copying generated output file to the final (user-given) file name
-        shutil.copy2(out_file, self.stage_io_dict["out"]["output_pdb_path"])
+        # Rename generated output file to staged output path inside the sandbox.
+        # stage_io_dict output paths are container-internal when running in containers.
+        generated_output = Path(self.stage_io_dict.get("unique_dir", "")).joinpath(out_file)
+        staged_output = Path(self.stage_io_dict.get("unique_dir", "")).joinpath(
+            Path(self.stage_io_dict["out"]["output_pdb_path"]).name
+        )
+        shutil.copy2(generated_output, staged_output)
 
         # Copy files to host
         self.copy_to_host()

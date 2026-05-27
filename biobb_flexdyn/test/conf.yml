@@ -14,6 +14,40 @@ concoord_dist:
     vdw: 1
     bond_angle: 1
 
+concoord_dist_docker:
+  paths:
+    input_structure_path: file:test_data_dir/flexdyn/structure.pdb
+    output_pdb_path: concoord_dist.pdb
+    output_gro_path: concoord_dist.gro
+    output_dat_path: concoord_dist.dat
+    ref_output_pdb_path: file:test_reference_dir/flexdyn/dist.pdb
+    ref_output_gro_path: file:test_reference_dir/flexdyn/dist.gro
+    ref_output_dat_path: file:test_reference_dir/flexdyn/dist.dat
+  properties:
+    vdw: 1
+    bond_angle: 1
+    container_path: docker
+    container_image: quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
+    container_volume_path: /tmp
+    container_working_dir: /tmp
+
+concoord_dist_singularity:
+  paths:
+    input_structure_path: file:test_data_dir/flexdyn/structure.pdb
+    output_pdb_path: concoord_dist.pdb
+    output_gro_path: concoord_dist.gro
+    output_dat_path: concoord_dist.dat
+    ref_output_pdb_path: file:test_reference_dir/flexdyn/dist.pdb
+    ref_output_gro_path: file:test_reference_dir/flexdyn/dist.gro
+    ref_output_dat_path: file:test_reference_dir/flexdyn/dist.dat
+  properties:
+    vdw: 1
+    bond_angle: 1
+    container_path: singularity
+    container_image: https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
+    container_volume_path: /tmp
+    container_working_dir: /tmp
+
 concoord_disco:
   paths:
     input_pdb_path: file:test_data_dir/flexdyn/structure.pdb
@@ -28,6 +62,42 @@ concoord_disco:
     vdw : 4
     num_structs : 20
 
+concoord_disco_docker:
+  paths:
+    input_pdb_path: file:test_data_dir/flexdyn/structure.pdb
+    input_dat_path: file:test_data_dir/flexdyn/dist.dat
+    output_traj_path: concoord_disco.pdb
+    output_rmsd_path: concoord_disco_rmsd.dat
+    output_bfactor_path: concoord_disco_bfactor.pdb
+    ref_output_traj_path: file:test_reference_dir/flexdyn/disco_trj.pdb
+    ref_output_rmsd_path: file:test_reference_dir/flexdyn/disco_rmsd.dat
+    ref_output_bfactor_path: file:test_reference_dir/flexdyn/disco_bfactor.pdb
+  properties:
+    vdw : 4
+    num_structs : 20
+    container_path: docker
+    container_image: quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
+    container_volume_path: /tmp
+    container_working_dir: /tmp
+
+concoord_disco_singularity:
+  paths:
+    input_pdb_path: file:test_data_dir/flexdyn/structure.pdb
+    input_dat_path: file:test_data_dir/flexdyn/dist.dat
+    output_traj_path: concoord_disco.pdb
+    output_rmsd_path: concoord_disco_rmsd.dat
+    output_bfactor_path: concoord_disco_bfactor.pdb
+    ref_output_traj_path: file:test_reference_dir/flexdyn/disco_trj.pdb
+    ref_output_rmsd_path: file:test_reference_dir/flexdyn/disco_rmsd.dat
+    ref_output_bfactor_path: file:test_reference_dir/flexdyn/disco_bfactor.pdb
+  properties:
+    vdw : 4
+    num_structs : 20
+    container_path: singularity
+    container_image: https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
+    container_volume_path: /tmp
+    container_working_dir: /tmp
+
 nolb_nma:
   paths:
     input_pdb_path: file:test_data_dir/flexdyn/structure.pdb
@@ -35,6 +105,30 @@ nolb_nma:
     ref_output_pdb_path: file:test_reference_dir/flexdyn/nolb_output.pdb
   properties:
     num_structs : 20
+
+nolb_nma_docker:
+  paths:
+    input_pdb_path: file:test_data_dir/flexdyn/structure.pdb
+    output_pdb_path: nolb_output.pdb
+    ref_output_pdb_path: file:test_reference_dir/flexdyn/nolb_output.pdb
+  properties:
+    num_structs : 20
+    container_path: docker
+    container_image: quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
+    container_volume_path: /tmp
+    container_working_dir: /tmp
+
+nolb_nma_singularity:
+  paths:
+    input_pdb_path: file:test_data_dir/flexdyn/structure.pdb
+    output_pdb_path: nolb_output.pdb
+    ref_output_pdb_path: file:test_reference_dir/flexdyn/nolb_output.pdb
+  properties:
+    num_structs : 20
+    container_path: singularity
+    container_image: https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
+    container_volume_path: /tmp
+    container_working_dir: /tmp
 
 prody_anm:
   paths:
@@ -53,6 +147,30 @@ imod_imode:
   properties:
     cg : 2
 
+imod_imode_docker:
+  paths:
+    input_pdb_path: file:test_data_dir/flexdyn/structure.pdb
+    output_dat_path: imod_imode_evecs.dat
+    ref_output_dat_path: file:test_reference_dir/flexdyn/imod_imode_evecs.dat
+  properties:
+    cg : 2
+    container_path: docker
+    container_image: quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
+    container_volume_path: /tmp
+    container_working_dir: /tmp
+
+imod_imode_singularity:
+  paths:
+    input_pdb_path: file:test_data_dir/flexdyn/structure.pdb
+    output_dat_path: imod_imode_evecs.dat
+    ref_output_dat_path: file:test_reference_dir/flexdyn/imod_imode_evecs.dat
+  properties:
+    cg : 2
+    container_path: singularity
+    container_image: https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
+    container_volume_path: /tmp
+    container_working_dir: /tmp
+
 imod_imove:
   paths:
     input_pdb_path: file:test_data_dir/flexdyn/structure_cleaned.pdb
@@ -61,6 +179,32 @@ imod_imove:
     ref_output_pdb_path: file:test_reference_dir/flexdyn/imod_imove_output.pdb
   properties:
     pc : 1
+
+imod_imove_docker:
+  paths:
+    input_pdb_path: file:test_data_dir/flexdyn/structure_cleaned.pdb
+    input_dat_path: file:test_data_dir/flexdyn/imod_imode_evecs.dat
+    output_pdb_path: imod_imove_output.pdb
+    ref_output_pdb_path: file:test_reference_dir/flexdyn/imod_imove_output.pdb
+  properties:
+    pc : 1
+    container_path: docker
+    container_image: quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
+    container_volume_path: /tmp
+    container_working_dir: /tmp
+
+imod_imove_singularity:
+  paths:
+    input_pdb_path: file:test_data_dir/flexdyn/structure_cleaned.pdb
+    input_dat_path: file:test_data_dir/flexdyn/imod_imode_evecs.dat
+    output_pdb_path: imod_imove_output.pdb
+    ref_output_pdb_path: file:test_reference_dir/flexdyn/imod_imove_output.pdb
+  properties:
+    pc : 1
+    container_path: singularity
+    container_image: https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
+    container_volume_path: /tmp
+    container_working_dir: /tmp
 
 imod_imc:
   paths:
@@ -72,3 +216,33 @@ imod_imc:
     num_structs: 10
     num_modes: 10
     amplitude: 6.0
+
+imod_imc_docker:
+  paths:
+    input_pdb_path: file:test_data_dir/flexdyn/structure_cleaned.pdb
+    input_dat_path: file:test_data_dir/flexdyn/imod_imode_evecs.dat
+    output_traj_path: imod_imc_output.pdb
+    ref_output_traj_path: file:test_reference_dir/flexdyn/imod_imc_output.pdb
+  properties:
+    num_structs: 10
+    num_modes: 10
+    amplitude: 6.0
+    container_path: docker
+    container_image: quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
+    container_volume_path: /tmp
+    container_working_dir: /tmp
+
+imod_imc_singularity:
+  paths:
+    input_pdb_path: file:test_data_dir/flexdyn/structure_cleaned.pdb
+    input_dat_path: file:test_data_dir/flexdyn/imod_imode_evecs.dat
+    output_traj_path: imod_imc_output.pdb
+    ref_output_traj_path: file:test_reference_dir/flexdyn/imod_imc_output.pdb
+  properties:
+    num_structs: 10
+    num_modes: 10
+    amplitude: 6.0
+    container_path: singularity
+    container_image: https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
+    container_volume_path: /tmp
+    container_working_dir: /tmp

@@ -4,7 +4,7 @@
 from typing import Optional
 import os
 import shutil
-from pathlib import Path
+from pathlib import Path, PurePath
 from biobb_common.tools import file_utils as fu
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools.file_utils import launchlogger
@@ -45,6 +45,12 @@ class ConcoordDisco(BiobbObject):
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
             * **sandbox_path** (*str*) - ("./") [WF property] Parent path to the sandbox directory.
+            * **container_path** (*str*) - (None)  Path to the binary executable of your container.
+            * **container_image** (*str*) - ("cmip/cmip:latest") Container Image identifier.
+            * **container_volume_path** (*str*) - ("/data") Path to an internal directory in the container.
+            * **container_working_dir** (*str*) - (None) Path to the internal CWD in the container.
+            * **container_user_id** (*str*) - (None) User number id to be mapped inside the container.
+            * **container_shell_path** (*str*) - ("/bin/bash") Path to the binary executable of the container shell.
 
     Examples:
         This is a use example of how to use the building block from Python::
@@ -142,34 +148,33 @@ class ConcoordDisco(BiobbObject):
         shutil.copy2(atoms_file, self.stage_io_dict.get("unique_dir", ""))
         shutil.copy2(bonds_file, self.stage_io_dict.get("unique_dir", ""))
 
+        # Determine working directory (host unique_dir or container volume path)
+        if self.container_path:
+            working_dir = self.container_volume_path if self.container_volume_path else "/data"
+        else:
+            working_dir = self.stage_io_dict.get('unique_dir', '')
+
         # Command line
         # (concoord) OROZCO67:biobb_flexdyn hospital$ disco -d biobb_flexdyn/test/reference/flexdyn/dist.dat
         # -p biobb_flexdyn/test/reference/flexdyn/dist.pdb  -op patata.pdb
-        self.cmd = ["cd ", self.stage_io_dict.get('unique_dir', ''), ";", self.binary_path,
-                    #  "-p", str(Path(self.stage_io_dict["in"]["input_pdb_path"]).relative_to(Path.cwd())),
-                    #  "-d", str(Path(self.stage_io_dict["in"]["input_dat_path"]).relative_to(Path.cwd())),
-                    #  "-or", str(Path(self.stage_io_dict["out"]["output_rmsd_path"]).relative_to(Path.cwd())),
-                    #  "-of", str(Path(self.stage_io_dict["out"]["output_bfactor_path"]).relative_to(Path.cwd()))
-                    "-p", str(Path(self.stage_io_dict["in"]["input_pdb_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir', '')))),
-                    "-d", str(Path(self.stage_io_dict["in"]["input_dat_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir', '')))),
-                    "-or", str(Path(self.stage_io_dict["out"]["output_rmsd_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir', '')))),
-                    "-of", str(Path(self.stage_io_dict["out"]["output_bfactor_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir', ''))))
+        self.cmd = ["cd", working_dir, ";", self.binary_path,
+                    "-p", PurePath(self.stage_io_dict["in"]["input_pdb_path"]).name,
+                    "-d", PurePath(self.stage_io_dict["in"]["input_dat_path"]).name,
+                    "-or", PurePath(self.stage_io_dict["out"]["output_rmsd_path"]).name,
+                    "-of", PurePath(self.stage_io_dict["out"]["output_bfactor_path"]).name
                     ]
 
         # Output structure formats:
         file_extension = Path(self.stage_io_dict["out"]["output_traj_path"]).suffix
         if file_extension == ".pdb":
             self.cmd.append('-on')  # NMR-PDB format (multi-model)
-#            self.cmd.append(str(Path(self.stage_io_dict["out"]["output_traj_path"]).relative_to(Path.cwd())))
-            self.cmd.append(str(Path(self.stage_io_dict["out"]["output_traj_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir', '')))))
+            self.cmd.append(PurePath(self.stage_io_dict["out"]["output_traj_path"]).name)
         elif file_extension == ".gro":
             self.cmd.append('-ot')
-#            self.cmd.append(str(Path(self.stage_io_dict["out"]["output_traj_path"]).relative_to(Path.cwd())))
-            self.cmd.append(str(Path(self.stage_io_dict["out"]["output_traj_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir', '')))))
+            self.cmd.append(PurePath(self.stage_io_dict["out"]["output_traj_path"]).name)
         elif file_extension == ".xtc":
             self.cmd.append('-ox')
-#            self.cmd.append(str(Path(self.stage_io_dict["out"]["output_traj_path"]).relative_to(Path.cwd())))
-            self.cmd.append(str(Path(self.stage_io_dict["out"]["output_traj_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir', '')))))
+            self.cmd.append(PurePath(self.stage_io_dict["out"]["output_traj_path"]).name)
         else:
             fu.log("ERROR: output_traj_path ({}) must be a PDB, GRO or XTC formatted file ({})".format(self.io_dict["out"]["output_traj_path"], file_extension), self.out_log, self.global_log)
 

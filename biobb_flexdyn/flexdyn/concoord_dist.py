@@ -4,7 +4,7 @@
 from typing import Optional
 import os
 import shutil
-from pathlib import Path
+from pathlib import Path, PurePath
 from biobb_common.tools import file_utils as fu
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools.file_utils import launchlogger
@@ -34,6 +34,12 @@ class ConcoordDist(BiobbObject):
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
             * **sandbox_path** (*str*) - ("./") [WF property] Parent path to the sandbox directory.
+            * **container_path** (*str*) - (None)  Path to the binary executable of your container.
+            * **container_image** (*str*) - ("cmip/cmip:latest") Container Image identifier.
+            * **container_volume_path** (*str*) - ("/data") Path to an internal directory in the container.
+            * **container_working_dir** (*str*) - (None) Path to the internal CWD in the container.
+            * **container_user_id** (*str*) - (None) User number id to be mapped inside the container.
+            * **container_shell_path** (*str*) - ("/bin/bash") Path to the binary executable of the container shell.
 
     Examples:
         This is a use example of how to use the building block from Python::
@@ -112,6 +118,12 @@ class ConcoordDist(BiobbObject):
         hbonds_file = str(concoord_lib) + "/HBONDS.DAT"
         shutil.copy2(hbonds_file, self.stage_io_dict.get("unique_dir", ""))
 
+        # Determine working directory (host unique_dir or container volume path)
+        if self.container_path:
+            working_dir = self.container_volume_path if self.container_volume_path else "/data"
+        else:
+            working_dir = self.stage_io_dict.get('unique_dir', '')
+
         # Command line
         # (concoord) OROZCO67:biobb_flexdyn hospital$ dist -p biobb_flexdyn/test/data/flexdyn/structure.pdb
         # -op dist.pdb -og dist.gro -od dist.dat
@@ -133,25 +145,21 @@ class ConcoordDist(BiobbObject):
         # Selected parameter set 1
         # copying /opt/anaconda3/envs/concoord/share/concoord/lib/BONDS.DAT.noeh to BONDS.DAT in current working directory
 
-        self.cmd = ["cd ", self.stage_io_dict.get('unique_dir', ''), ";", self.binary_path,
-                    #  "-op", self.stage_io_dict["out"]["output_pdb_path"],
-                    #  "-og", self.stage_io_dict["out"]["output_gro_path"],
-                    #  "-od", self.stage_io_dict["out"]["output_dat_path"]
-                    "-op", str(Path(self.stage_io_dict["out"]["output_pdb_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir', '')))),
-                    "-og", str(Path(self.stage_io_dict["out"]["output_gro_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir', '')))),
-                    "-od", str(Path(self.stage_io_dict["out"]["output_dat_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir', ''))))
-                    ]
+        self.cmd = [
+            "cd", working_dir, ";", self.binary_path,
+            "-op", PurePath(self.stage_io_dict["out"]["output_pdb_path"]).name,
+            "-og", PurePath(self.stage_io_dict["out"]["output_gro_path"]).name,
+            "-od", PurePath(self.stage_io_dict["out"]["output_dat_path"]).name
+        ]
         # If input structure in pdb format:
         file_extension = Path(self.stage_io_dict["in"]["input_structure_path"]).suffix
         if file_extension == ".pdb":
             self.cmd.append('-p')
-            # self.cmd.append(self.stage_io_dict["in"]["input_structure_path"])
-            self.cmd.append(str(Path(self.stage_io_dict["in"]["input_structure_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir', '')))))
+            self.cmd.append(PurePath(self.stage_io_dict["in"]["input_structure_path"]).name)
 
         elif file_extension == ".gro":
             self.cmd.append('-g')
-            # self.cmd.append(self.stage_io_dict["in"]["input_structure_path"])
-            self.cmd.append(str(Path(self.stage_io_dict["in"]["input_structure_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir', '')))))
+            self.cmd.append(PurePath(self.stage_io_dict["in"]["input_structure_path"]).name)
 
         else:
             fu.log("ERROR: input_structure_path ({}) must be a PDB or a GRO formatted file ({})".format(self.io_dict["in"]["input_structure_path"], file_extension), self.out_log, self.global_log)
@@ -179,8 +187,7 @@ class ConcoordDist(BiobbObject):
 
         # Add stdin input file
         self.cmd.append('<')
-        # self.cmd.append(self.stage_io_dict["in"]["stdin_file_path"])
-        self.cmd.append(str(Path(self.stage_io_dict["in"]["stdin_file_path"]).relative_to(Path(self.stage_io_dict.get('unique_dir', '')))))
+        self.cmd.append(PurePath(self.stage_io_dict["in"]["stdin_file_path"]).name)
 
         # Run Biobb block
         self.run_biobb()
