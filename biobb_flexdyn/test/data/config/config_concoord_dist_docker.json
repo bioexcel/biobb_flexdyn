@@ -1,0 +1,11 @@
+{
+  "properties": {
+    "vdw": 1,
+    "bond_angle": 1,
+    "container_path": "docker",
+    "container_image": "quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0",
+    "container_volume_path": "/tmp",
+    "container_working_dir": "/tmp",
+    "concoord_lib_path": "path_to_concoord_lib"
+  }
+}

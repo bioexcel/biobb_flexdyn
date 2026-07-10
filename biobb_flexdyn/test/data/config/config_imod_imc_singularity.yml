@@ -1,0 +1,8 @@
+properties:
+  amplitude: 6.0
+  container_image: https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
+  container_path: singularity
+  container_volume_path: /tmp
+  container_working_dir: /tmp
+  num_modes: 10
+  num_structs: 10

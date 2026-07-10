@@ -48,6 +48,7 @@ Syntax: input_parameter (datatype) - (default_value) Definition
 Config parameters for this building block:
 * **binary_path** (*string*): (disco) Concoord disco binary path to be used.
 * **vdw** (*integer*): (1) Select a set of Van der Waals parameters. 
+* **concoord_lib_path** (*string*): (None) Path to Concoord library files. If not specified will look for CONCOORDLIB conda environment variable.
 * **num_structs** (*integer*): (500) Number of structures to be generated
 * **num_iterations** (*integer*): (2500) Maximum number of iterations per structure
 * **chirality_check** (*integer*): (2) Chirality check. 
@@ -67,10 +68,40 @@ Config parameters for this building block:
 * **remove_tmp** (*boolean*): (True) Remove temporal files.
 * **restart** (*boolean*): (False) Do not execute if output files exist.
 * **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Path to the binary executable of your container.
+* **container_image** (*string*): (cmip/cmip:latest) Container Image identifier.
+* **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
+* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
+* **container_user_id** (*string*): (None) User number id to be mapped inside the container.
+* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_concoord_disco.yml)
 ```python
 properties:
+  num_structs: 20
+  vdw: 4
+
+```
+#### [Docker config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_concoord_disco_docker.yml)
+```python
+properties:
+  concoord_lib_path: path_to_concoord_lib
+  container_image: quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
+  container_path: docker
+  container_volume_path: /tmp
+  container_working_dir: /tmp
+  num_structs: 20
+  vdw: 4
+
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_concoord_disco_singularity.yml)
+```python
+properties:
+  concoord_lib_path: path_to_concoord_lib
+  container_image: https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
+  container_path: singularity
+  container_volume_path: /tmp
+  container_working_dir: /tmp
   num_structs: 20
   vdw: 4
 
@@ -86,6 +117,34 @@ concoord_disco --config config_concoord_disco.yml --input_pdb_path structure.pdb
   "properties": {
     "vdw": 4,
     "num_structs": 20
+  }
+}
+```
+#### [Docker config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_concoord_disco_docker.json)
+```python
+{
+  "properties": {
+    "vdw": 4,
+    "num_structs": 20,
+    "container_path": "docker",
+    "container_image": "quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0",
+    "container_volume_path": "/tmp",
+    "container_working_dir": "/tmp",
+    "concoord_lib_path": "path_to_concoord_lib"
+  }
+}
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_concoord_disco_singularity.json)
+```python
+{
+  "properties": {
+    "vdw": 4,
+    "num_structs": 20,
+    "container_path": "singularity",
+    "container_image": "https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0",
+    "container_volume_path": "/tmp",
+    "container_working_dir": "/tmp",
+    "concoord_lib_path": "path_to_concoord_lib"
   }
 }
 ```
@@ -133,6 +192,7 @@ Syntax: input_parameter (datatype) - (default_value) Definition
 Config parameters for this building block:
 * **binary_path** (*string*): (dist) Concoord dist binary path to be used.
 * **vdw** (*integer*): (1) Select a set of Van der Waals parameters. 
+* **concoord_lib_path** (*string*): (None) Path to Concoord library files. If not specified will look for CONCOORDLIB conda environment variable.
 * **bond_angle** (*integer*): (1) Select a set of bond/angle parameters. 
 * **retain_hydrogens** (*boolean*): (False) Retain hydrogen atoms
 * **nb_interactions** (*boolean*): (False) Try to find alternatives for non-bonded interactions (by default the native contacts will be preserved)
@@ -143,11 +203,41 @@ Config parameters for this building block:
 * **remove_tmp** (*boolean*): (True) Remove temporal files.
 * **restart** (*boolean*): (False) Do not execute if output files exist.
 * **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Path to the binary executable of your container.
+* **container_image** (*string*): (cmip/cmip:latest) Container Image identifier.
+* **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
+* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
+* **container_user_id** (*string*): (None) User number id to be mapped inside the container.
+* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_concoord_dist.yml)
 ```python
 properties:
   bond_angle: 1
+  vdw: 1
+
+```
+#### [Docker config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_concoord_dist_docker.yml)
+```python
+properties:
+  bond_angle: 1
+  concoord_lib_path: path_to_concoord_lib
+  container_image: quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
+  container_path: docker
+  container_volume_path: /tmp
+  container_working_dir: /tmp
+  vdw: 1
+
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_concoord_dist_singularity.yml)
+```python
+properties:
+  bond_angle: 1
+  concoord_lib_path: path_to_concoord_lib
+  container_image: https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
+  container_path: singularity
+  container_volume_path: /tmp
+  container_working_dir: /tmp
   vdw: 1
 
 ```
@@ -162,6 +252,34 @@ concoord_dist --config config_concoord_dist.yml --input_structure_path structure
   "properties": {
     "vdw": 1,
     "bond_angle": 1
+  }
+}
+```
+#### [Docker config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_concoord_dist_docker.json)
+```python
+{
+  "properties": {
+    "vdw": 1,
+    "bond_angle": 1,
+    "container_path": "docker",
+    "container_image": "quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0",
+    "container_volume_path": "/tmp",
+    "container_working_dir": "/tmp",
+    "concoord_lib_path": "path_to_concoord_lib"
+  }
+}
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_concoord_dist_singularity.json)
+```python
+{
+  "properties": {
+    "vdw": 1,
+    "bond_angle": 1,
+    "container_path": "singularity",
+    "container_image": "https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0",
+    "container_volume_path": "/tmp",
+    "container_working_dir": "/tmp",
+    "concoord_lib_path": "path_to_concoord_lib"
   }
 }
 ```
@@ -204,17 +322,48 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
+* **binary_path** (*string*): (imc) iMODS imc binary path to be used.
 * **num_structs** (*integer*): (500) Number of structures to be generated
 * **num_modes** (*integer*): (5) Number of eigenvectors to be employed
 * **amplitude** (*integer*): (1) Amplitude linear factor to scale motion
 * **remove_tmp** (*boolean*): (True) Remove temporal files.
 * **restart** (*boolean*): (False) Do not execute if output files exist.
 * **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Path to the binary executable of your container.
+* **container_image** (*string*): (cmip/cmip:latest) Container Image identifier.
+* **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
+* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
+* **container_user_id** (*string*): (None) User number id to be mapped inside the container.
+* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imc.yml)
 ```python
 properties:
   amplitude: 6.0
+  num_modes: 10
+  num_structs: 10
+
+```
+#### [Docker config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imc_docker.yml)
+```python
+properties:
+  amplitude: 6.0
+  container_image: quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
+  container_path: docker
+  container_volume_path: /tmp
+  container_working_dir: /tmp
+  num_modes: 10
+  num_structs: 10
+
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imc_singularity.yml)
+```python
+properties:
+  amplitude: 6.0
+  container_image: https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
+  container_path: singularity
+  container_volume_path: /tmp
+  container_working_dir: /tmp
   num_modes: 10
   num_structs: 10
 
@@ -231,6 +380,34 @@ imod_imc --config config_imod_imc.yml --input_pdb_path structure_cleaned.pdb --i
     "num_structs": 10,
     "num_modes": 10,
     "amplitude": 6.0
+  }
+}
+```
+#### [Docker config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imc_docker.json)
+```python
+{
+  "properties": {
+    "num_structs": 10,
+    "num_modes": 10,
+    "amplitude": 6.0,
+    "container_path": "docker",
+    "container_image": "quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0",
+    "container_volume_path": "/tmp",
+    "container_working_dir": "/tmp"
+  }
+}
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imc_singularity.json)
+```python
+{
+  "properties": {
+    "num_structs": 10,
+    "num_modes": 10,
+    "amplitude": 6.0,
+    "container_path": "singularity",
+    "container_image": "https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0",
+    "container_volume_path": "/tmp",
+    "container_working_dir": "/tmp"
   }
 }
 ```
@@ -270,15 +447,42 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
+* **binary_path** (*string*): (imode_gcc) iMODS imode binary path to be used.
 * **cg** (*integer*): (2) Coarse-Grained model. 
 * **remove_tmp** (*boolean*): (True) Remove temporal files.
 * **restart** (*boolean*): (False) Do not execute if output files exist.
 * **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Path to the binary executable of your container.
+* **container_image** (*string*): (cmip/cmip:latest) Container Image identifier.
+* **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
+* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
+* **container_user_id** (*string*): (None) User number id to be mapped inside the container.
+* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imode.yml)
 ```python
 properties:
   cg: 2
+
+```
+#### [Docker config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imode_docker.yml)
+```python
+properties:
+  cg: 2
+  container_image: quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
+  container_path: docker
+  container_volume_path: /tmp
+  container_working_dir: /tmp
+
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imode_singularity.yml)
+```python
+properties:
+  cg: 2
+  container_image: https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
+  container_path: singularity
+  container_volume_path: /tmp
+  container_working_dir: /tmp
 
 ```
 #### Command line
@@ -291,6 +495,30 @@ imod_imode --config config_imod_imode.yml --input_pdb_path structure.pdb --outpu
 {
   "properties": {
     "cg": 2
+  }
+}
+```
+#### [Docker config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imode_docker.json)
+```python
+{
+  "properties": {
+    "cg": 2,
+    "container_path": "docker",
+    "container_image": "quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0",
+    "container_volume_path": "/tmp",
+    "container_working_dir": "/tmp"
+  }
+}
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imode_singularity.json)
+```python
+{
+  "properties": {
+    "cg": 2,
+    "container_path": "singularity",
+    "container_image": "https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0",
+    "container_volume_path": "/tmp",
+    "container_working_dir": "/tmp"
   }
 }
 ```
@@ -333,15 +561,42 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
+* **binary_path** (*string*): (imove) iMODS imove binary path to be used.
 * **pc** (*integer*): (1) Principal Component.
 * **num_frames** (*integer*): (11) Number of frames to be generated
 * **remove_tmp** (*boolean*): (True) Remove temporal files.
 * **restart** (*boolean*): (False) Do not execute if output files exist.
 * **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Path to the binary executable of your container.
+* **container_image** (*string*): (cmip/cmip:latest) Container Image identifier.
+* **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
+* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
+* **container_user_id** (*string*): (None) User number id to be mapped inside the container.
+* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imove.yml)
 ```python
 properties:
+  pc: 1
+
+```
+#### [Docker config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imove_docker.yml)
+```python
+properties:
+  container_image: quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
+  container_path: docker
+  container_volume_path: /tmp
+  container_working_dir: /tmp
+  pc: 1
+
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imove_singularity.yml)
+```python
+properties:
+  container_image: https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
+  container_path: singularity
+  container_volume_path: /tmp
+  container_working_dir: /tmp
   pc: 1
 
 ```
@@ -355,6 +610,30 @@ imod_imove --config config_imod_imove.yml --input_pdb_path structure_cleaned.pdb
 {
   "properties": {
     "pc": 1
+  }
+}
+```
+#### [Docker config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imove_docker.json)
+```python
+{
+  "properties": {
+    "pc": 1,
+    "container_path": "docker",
+    "container_image": "quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0",
+    "container_volume_path": "/tmp",
+    "container_working_dir": "/tmp"
+  }
+}
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imove_singularity.json)
+```python
+{
+  "properties": {
+    "pc": 1,
+    "container_path": "singularity",
+    "container_image": "https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0",
+    "container_volume_path": "/tmp",
+    "container_working_dir": "/tmp"
   }
 }
 ```
@@ -394,16 +673,43 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
+* **binary_path** (*string*): (NOLB) NOLB binary path to be used.
 * **num_structs** (*integer*): (500) Number of structures to be generated
 * **cutoff** (*number*): (5.0) This options specifies the interaction cutoff distance for the elastic network models (in angstroms), 5 by default. The Hessian matrix is constructed according to this interaction distance. Some artifacts should be expected for too short distances (< 5 Å).
 * **rmsd** (*number*): (1.0) Maximum RMSd for decoy generation.
 * **remove_tmp** (*boolean*): (True) Remove temporal files.
 * **restart** (*boolean*): (False) Do not execute if output files exist.
 * **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Path to the binary executable of your container.
+* **container_image** (*string*): (cmip/cmip:latest) Container Image identifier.
+* **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
+* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
+* **container_user_id** (*string*): (None) User number id to be mapped inside the container.
+* **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_nolb_nma.yml)
 ```python
 properties:
+  num_structs: 20
+
+```
+#### [Docker config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_nolb_nma_docker.yml)
+```python
+properties:
+  container_image: quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
+  container_path: docker
+  container_volume_path: /tmp
+  container_working_dir: /tmp
+  num_structs: 20
+
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_nolb_nma_singularity.yml)
+```python
+properties:
+  container_image: https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
+  container_path: singularity
+  container_volume_path: /tmp
+  container_working_dir: /tmp
   num_structs: 20
 
 ```
@@ -417,6 +723,30 @@ nolb_nma --config config_nolb_nma.yml --input_pdb_path structure.pdb --output_pd
 {
   "properties": {
     "num_structs": 20
+  }
+}
+```
+#### [Docker config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_nolb_nma_docker.json)
+```python
+{
+  "properties": {
+    "num_structs": 20,
+    "container_path": "docker",
+    "container_image": "quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0",
+    "container_volume_path": "/tmp",
+    "container_working_dir": "/tmp"
+  }
+}
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_nolb_nma_singularity.json)
+```python
+{
+  "properties": {
+    "num_structs": 20,
+    "container_path": "singularity",
+    "container_image": "https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0",
+    "container_volume_path": "/tmp",
+    "container_working_dir": "/tmp"
   }
 }
 ```
