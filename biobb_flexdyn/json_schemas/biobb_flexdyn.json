@@ -4,9 +4,9 @@
     "github": "https://github.com/bioexcel/biobb_flexdyn",
     "readthedocs": "https://biobb-flexdyn.readthedocs.io/en/latest/",
     "conda": "https://anaconda.org/bioconda/biobb_flexdyn",
-    "docker": "https://quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0",
-    "singularity": "https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0",
-    "version": "5.2.2",
+    "docker": "https://quay.io/biocontainers/biobb_flexdyn:5.3.0--py312hc5e4ab4_0",
+    "singularity": "https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.3.0--py312hc5e4ab4_0",
+    "version": "5.3.0",
     "rest": true,
     "tools": [
         {
@@ -67,13 +67,13 @@
         }
     ],
     "dep_pypi": [
-        "install_requires=['biobb_common==5.2.2', 'scipy>=1.13.0,<1.14.0']",
+        "install_requires=['biobb_common==5.3.1', 'scipy>=1.13.0,<1.14.0']",
         "python_requires='>=3.10'"
     ],
     "dep_conda": [
         "python >=3.10",
         "sciPy >=1.13.0,<1.14.0",
-        "biobb_common ==5.2.2",
+        "biobb_common ==5.3.1",
         "imods",
         "concoord ==2.1.2",
         "nolb",
