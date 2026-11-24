@@ -4,7 +4,6 @@
 from typing import Optional
 import prody  # type: ignore
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.tools.file_utils import launchlogger
 
 
 class ProdyANM(BiobbObject):
@@ -73,18 +72,8 @@ class ProdyANM(BiobbObject):
         self.gamma = properties.get('gamma', 1.0)
         self.rmsd = properties.get('rmsd', 1.0)
 
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
-
-    @launchlogger
-    def launch(self):
+    def run(self):
         """Launches the execution of the FlexDyn ConcoordDist module."""
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         prot = prody.parsePDB(self.stage_io_dict["in"]["input_pdb_path"],)
 

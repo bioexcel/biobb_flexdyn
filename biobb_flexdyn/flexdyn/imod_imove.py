@@ -4,7 +4,6 @@
 from typing import Optional
 from pathlib import PurePath
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.tools.file_utils import launchlogger
 
 
 class ImodImove(BiobbObject):
@@ -76,18 +75,8 @@ class ImodImove(BiobbObject):
         self.pc = properties.get('pc', 1)
         self.num_frames = properties.get('num_frames', 11)
 
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
-
-    @launchlogger
-    def launch(self):
+    def run(self):
         """Launches the execution of the FlexDyn iMOD imove module."""
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         # Determine working directory (host unique_dir or container volume path)
         if self.container_path:

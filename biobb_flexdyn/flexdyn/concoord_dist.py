@@ -7,7 +7,6 @@ import shutil
 from pathlib import Path, PurePath
 from biobb_common.tools import file_utils as fu
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.tools.file_utils import launchlogger
 
 
 class ConcoordDist(BiobbObject):
@@ -98,21 +97,13 @@ class ConcoordDist(BiobbObject):
         self.concoord_lib_path = properties.get('concoord_lib_path', None)
         self.bond_angle = properties.get('bond_angle', 1)
 
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
-
-    @launchlogger
-    def launch(self):
-        """Launches the execution of the FlexDyn ConcoordDist module."""
-
+    def prepare(self) -> None:
+        """Create the stdin file with the input parameters."""
         # Set input params
         self.io_dict['in']['stdin_file_path'] = fu.create_stdin_file(f'{self.vdw}\n{self.bond_angle}\n')
 
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
+    def run(self):
+        """Launches the execution of the FlexDyn ConcoordDist module."""
 
         # Copy auxiliary file (HBONDS) to the working dir
         if self.concoord_lib_path is None:

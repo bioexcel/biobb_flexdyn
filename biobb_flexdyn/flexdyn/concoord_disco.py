@@ -7,7 +7,6 @@ import shutil
 from pathlib import Path, PurePath
 from biobb_common.tools import file_utils as fu
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.tools.file_utils import launchlogger
 
 
 class ConcoordDisco(BiobbObject):
@@ -120,18 +119,8 @@ class ConcoordDisco(BiobbObject):
         self.ref = properties.get('ref')
         self.scale = properties.get('scale')
 
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
-
-    @launchlogger
-    def launch(self):
+    def run(self):
         """Launches the execution of the FlexDyn ConcoordDisco module."""
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         # Copy auxiliary files (MARGINS, ATOMS, BONDS) according to the VdW property to the working dir
         if self.concoord_lib_path is None:
