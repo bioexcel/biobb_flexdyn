@@ -171,6 +171,7 @@ class ConcoordDisco(BiobbObject):
             self.cmd.append(PurePath(self.stage_io_dict["out"]["output_traj_path"]).name)
         else:
             fu.log("ERROR: output_traj_path ({}) must be a PDB, GRO or XTC formatted file ({})".format(self.io_dict["out"]["output_traj_path"], file_extension), self.out_log, self.global_log)
+            raise ValueError("output_traj_path ({}) must be a PDB, GRO or XTC formatted file".format(self.io_dict["out"]["output_traj_path"]))
 
         # Properties
         if self.num_structs:

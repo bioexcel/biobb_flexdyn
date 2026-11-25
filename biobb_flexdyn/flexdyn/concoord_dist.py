@@ -159,6 +159,7 @@ class ConcoordDist(BiobbObject):
 
         else:
             fu.log("ERROR: input_structure_path ({}) must be a PDB or a GRO formatted file ({})".format(self.io_dict["in"]["input_structure_path"], file_extension), self.out_log, self.global_log)
+            raise ValueError("input_structure_path ({}) must be a PDB or a GRO formatted file".format(self.io_dict["in"]["input_structure_path"]))
 
         if self.retain_hydrogens:
             self.cmd.append('-r')
