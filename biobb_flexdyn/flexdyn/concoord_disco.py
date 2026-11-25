@@ -100,7 +100,7 @@ class ConcoordDisco(BiobbObject):
         self.properties = properties
         self.binary_path = properties.get('binary_path', 'disco')
 
-        self.vdw = properties.get('vdw')
+        self.vdw = properties.get('vdw', 1)
         self.concoord_lib_path = properties.get('concoord_lib_path', None)
         self.num_structs = properties.get('num_structs')
         self.num_iterations = properties.get('num_iterations')
