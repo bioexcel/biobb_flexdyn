@@ -181,7 +181,7 @@ class ConcoordDisco(BiobbObject):
             self.cmd.append('-i')
             self.cmd.append(str(self.num_iterations))
 
-        if self.chirality_check:
+        if self.chirality_check is not None:
             self.cmd.append('-c')
             self.cmd.append(str(self.chirality_check))
 
@@ -193,7 +193,7 @@ class ConcoordDisco(BiobbObject):
             self.cmd.append('-rc')
             self.cmd.append(str(self.cutoff))
 
-        if self.seed:
+        if self.seed is not None:
             self.cmd.append('-s')
             self.cmd.append(str(self.seed))
 
