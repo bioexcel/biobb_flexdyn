@@ -17,7 +17,7 @@ class ProdyANM(BiobbObject):
         output_pdb_path (str): Output multi-model PDB file with the generated ensemble. File type: output. `Sample file <https://github.com/bioexcel/biobb_flexdyn/raw/master/biobb_flexdyn/test/reference/flexdyn/prody_output.pdb>`_. Accepted formats: pdb (edam:format_1476).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
             * **num_structs** (*int*) - (500) Number of structures to be generated
-            * **selection** (*str*) - (calpha) Atoms selection (Prody syntax: http://prody.csb.pitt.edu/manual/reference/atomic/select.html)
+            * **selection** (*str*) - ("calpha") Atoms selection (Prody syntax: http://prody.csb.pitt.edu/manual/reference/atomic/select.html)
             * **cutoff** (*float*) - (15.0) Cutoff distance (Å) for pairwise interactions, minimum is 4.0 Å
             * **gamma** (*float*) - (1.0) Spring constant
             * **rmsd** (*float*) - (1.0) Average RMSD that the conformations will have with respect to the initial conformation
@@ -50,27 +50,7 @@ class ProdyANM(BiobbObject):
 
     def __init__(self, input_pdb_path: str, output_pdb_path: str,
                  properties: Optional[dict] = None, **kwargs) -> None:
-
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            'in': {'input_pdb_path': input_pdb_path},
-            'out': {'output_pdb_path': output_pdb_path}
-        }
-
-        # Properties specific for BB
-        self.properties = properties
-
-        self.num_structs = properties.get('num_structs', 500)
-        self.selection = properties.get('selection', 'calpha')
-        self.cutoff = properties.get('cutoff', 15.0)
-        self.gamma = properties.get('gamma', 1.0)
-        self.rmsd = properties.get('rmsd', 1.0)
+        super().__init__(**locals())
 
     def run(self):
         """Launches the execution of the FlexDyn ConcoordDist module."""

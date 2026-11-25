@@ -98,8 +98,8 @@
                     "description": "Number of eigenvectors to be employed"
                 },
                 "amplitude": {
-                    "type": "integer",
-                    "default": 1,
+                    "type": "number",
+                    "default": 1.0,
                     "wf_prop": false,
                     "description": "Amplitude linear factor to scale motion"
                 },

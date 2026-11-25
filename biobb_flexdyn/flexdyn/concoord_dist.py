@@ -68,34 +68,7 @@ class ConcoordDist(BiobbObject):
 
     def __init__(self, input_structure_path: str, output_pdb_path: str,
                  output_gro_path: str, output_dat_path: str, properties: Optional[dict] = None, **kwargs) -> None:
-
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            'in': {'input_structure_path': input_structure_path},
-            'out': {'output_pdb_path': output_pdb_path,
-                    'output_gro_path': output_gro_path,
-                    'output_dat_path': output_dat_path}
-        }
-
-        # Properties specific for BB
-        self.properties = properties
-        self.binary_path = properties.get('binary_path', 'dist')
-        self.retain_hydrogens = properties.get('retain_hydrogens', False)
-        self.nb_interactions = properties.get('nb_interactions', False)
-        self.cutoff = properties.get('cutoff', 4.0)
-        self.min_distances = properties.get('min_distances', 50)
-        self.damp = properties.get('damp', 1.0)
-        self.fixed_atoms = properties.get('fixed_atoms', False)
-
-        self.vdw = properties.get('vdw', 1)
-        self.concoord_lib_path = properties.get('concoord_lib_path', None)
-        self.bond_angle = properties.get('bond_angle', 1)
+        super().__init__(**locals())
 
     def prepare(self) -> None:
         """Create the stdin file with the input parameters."""

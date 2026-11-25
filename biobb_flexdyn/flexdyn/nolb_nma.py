@@ -55,27 +55,7 @@ class Nolb_nma(BiobbObject):
 
     def __init__(self, input_pdb_path: str, output_pdb_path: str,
                  properties: Optional[dict] = None, **kwargs) -> None:
-
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            'in': {'input_pdb_path': input_pdb_path},
-            'out': {'output_pdb_path': output_pdb_path}
-        }
-
-        # Properties specific for BB
-        self.properties = properties
-        self.binary_path = properties.get('binary_path', 'NOLB')
-
-        self.num_structs = properties.get('num_structs', 500)
-        # self.num_modes = properties.get('num_modes', 10)
-        self.cutoff = properties.get('cutoff', 5.0)
-        self.rmsd = properties.get('rmsd', 1.0)
+        super().__init__(**locals())
 
     def run(self):
         """Launches the execution of the FlexDyn NOLB module."""

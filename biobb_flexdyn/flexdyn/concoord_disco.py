@@ -25,23 +25,23 @@ class ConcoordDisco(BiobbObject):
             * **binary_path** (*str*) - ("disco") Concoord disco binary path to be used.
             * **vdw** (*int*) - (1) Select a set of Van der Waals parameters. Values: 1 (OPLS-UA -united atoms- parameters), 2 (OPLS-AA -all atoms- parameters), 3 (PROLSQ repel parameters), 4 (Yamber2 parameters), 5 (Li et al. parameters), 6 (OPLS-X parameters -recommended for NMR structure determination-)
             * **concoord_lib_path** (*str*) - (None) Path to Concoord library files. If not specified will look for CONCOORDLIB conda environment variable.
-            * **num_structs** (*int*) - (500) Number of structures to be generated
-            * **num_iterations** (*int*) - (2500) Maximum number of iterations per structure
-            * **chirality_check** (*int*) - (2) Chirality check. Values: 0 (no chirality checks), 1 (only check afterwards), 2 (check on the fly)
-            * **bs** (*int*) - (0) Number of rounds of triangular bound smoothing (default 0), (if >= 6, tetragonal BS is activated)
+            * **num_structs** (*int*) - (None) Number of structures to be generated. If not set, CONCOORD uses 500.
+            * **num_iterations** (*int*) - (None) Maximum number of iterations per structure. If not set, CONCOORD uses 2500.
+            * **chirality_check** (*int*) - (None) Chirality check. If not set, CONCOORD uses 2. Values: 0 (no chirality checks), 1 (only check afterwards), 2 (check on the fly)
+            * **bs** (*int*) - (None) Number of rounds of triangular bound smoothing (default 0), (if >= 6, tetragonal BS is activated). If not set, CONCOORD uses 0.
             * **nofit** (*bool*) - (False) Do not fit generated structures to reference
-            * **seed** (*int*) - (741265) Initial random seed
-            * **violation** (*float*) - (1.0) Maximal acceptable sum of violations (nm)
+            * **seed** (*int*) - (None) Initial random seed. If not set, CONCOORD uses 741265.
+            * **violation** (*float*) - (None) Maximal acceptable sum of violations (nm). If not set, CONCOORD uses 1.0.
             * **nofit** (*bool*) - (False) Do not fit generated structures to reference
-            * **convergence** (*int*) - (50) Consider convergence failed after this number of non-productive iterations
-            * **trials** (*int*) - (25) Maximum number of trials per run
-            * **damp** (*int*) - (1) Damping factor for distance corrections. Values: 1 (default), 2 (for cases with convergence problems)
-            * **dyn** (*int*) - (1) Number of rounds to dynamically set tolerances
+            * **convergence** (*int*) - (None) Consider convergence failed after this number of non-productive iterations. If not set, CONCOORD uses 500.
+            * **trials** (*int*) - (None) Maximum number of trials per run. If not set, CONCOORD uses 25.
+            * **damp** (*int*) - (None) Damping factor for distance corrections. If not set, CONCOORD uses 1. Values: 1 (default), 2 (for cases with convergence problems)
+            * **dyn** (*int*) - (None) Number of rounds to dynamically set tolerances. If not set, CONCOORD uses 0.
             * **bump** (*bool*) - (False) Do extra bump check
-            * **pairlist_freq** (*int*) - (10) Pairlist update frequency in steps (only valid together with bump)
-            * **cutoff** (*float*) - (0.5) Cut-off radius for pairlist (nm) (only valid together with bump)
+            * **pairlist_freq** (*int*) - (None) Pairlist update frequency in steps (only valid together with bump). If not set, CONCOORD uses 10.
+            * **cutoff** (*float*) - (None) Cut-off radius for pairlist (nm) (only valid together with bump). If not set, CONCOORD uses 0.5.
             * **ref** (*bool*) - (False) Use input coordinates instead of random starting coordinates
-            * **scale** (*int*) - (1) Pre-scale coordinates with this factor
+            * **scale** (*int*) - (None) Pre-scale coordinates with this factor. If not set, CONCOORD uses 1.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
             * **sandbox_path** (*str*) - ("./") [WF property] Parent path to the sandbox directory.
@@ -80,44 +80,8 @@ class ConcoordDisco(BiobbObject):
 
     def __init__(self, input_pdb_path: str, input_dat_path: str, output_traj_path: str,
                  output_rmsd_path: str, output_bfactor_path: str, properties: Optional[dict] = None, **kwargs) -> None:
+        super().__init__(**locals())
 
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            'in': {'input_pdb_path': input_pdb_path,
-                   'input_dat_path': input_dat_path},
-            'out': {'output_traj_path': output_traj_path,
-                    'output_rmsd_path': output_rmsd_path,
-                    'output_bfactor_path': output_bfactor_path}
-        }
-
-        # Properties specific for BB
-        self.properties = properties
-        self.binary_path = properties.get('binary_path', 'disco')
-
-        self.vdw = properties.get('vdw', 1)
-        self.concoord_lib_path = properties.get('concoord_lib_path', None)
-        self.num_structs = properties.get('num_structs')
-        self.num_iterations = properties.get('num_iterations')
-        self.chirality_check = properties.get('chirality_check')
-        self.bs = properties.get('bs')
-        self.nofit = properties.get('nofit')
-        self.seed = properties.get('seed')
-        self.violation = properties.get('violation')
-        self.convergence = properties.get('convergence')
-        self.trials = properties.get('trials')
-        self.damp = properties.get('damp')
-        self.dyn = properties.get('dyn')
-        self.bump = properties.get('bump')
-        self.pairlist_freq = properties.get('pairlist_freq')
-        self.cutoff = properties.get('cutoff')
-        self.ref = properties.get('ref')
-        self.scale = properties.get('scale')
 
     def run(self):
         """Launches the execution of the FlexDyn ConcoordDisco module."""

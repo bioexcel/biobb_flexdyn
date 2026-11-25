@@ -21,7 +21,7 @@ class ImodImc(BiobbObject):
             * **binary_path** (*str*) - ("imc") iMODS imc binary path to be used.
             * **num_structs** (*int*) - (500) Number of structures to be generated
             * **num_modes** (*int*) - (5) Number of eigenvectors to be employed
-            * **amplitude** (*int*) - (1) Amplitude linear factor to scale motion
+            * **amplitude** (*float*) - (1.0) Amplitude linear factor to scale motion
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
             * **sandbox_path** (*str*) - ("./") [WF property] Parent path to the sandbox directory.
@@ -57,26 +57,7 @@ class ImodImc(BiobbObject):
 
     def __init__(self, input_pdb_path: str, input_dat_path: str, output_traj_path: str,
                  properties: Optional[dict] = None, **kwargs) -> None:
-
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            'in': {'input_pdb_path': input_pdb_path, 'input_dat_path': input_dat_path},
-            'out': {'output_traj_path': output_traj_path}
-        }
-
-        # Properties specific for BB
-        self.properties = properties
-        self.binary_path = properties.get('binary_path', 'imc')
-
-        self.num_structs = properties.get('num_structs', 500)
-        self.num_modes = properties.get('num_modes', 5)
-        self.amplitude = properties.get('amplitude', 1.0)
+        super().__init__(**locals())
 
     def run(self):
         """Launches the execution of the FlexDyn iMOD imc module."""

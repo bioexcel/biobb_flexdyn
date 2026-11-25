@@ -53,24 +53,7 @@ class ImodImode(BiobbObject):
 
     def __init__(self, input_pdb_path: str, output_dat_path: str,
                  properties: Optional[dict] = None, **kwargs) -> None:
-
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            'in': {'input_pdb_path': input_pdb_path},
-            'out': {'output_dat_path': output_dat_path}
-        }
-
-        # Properties specific for BB
-        self.properties = properties
-        self.binary_path = properties.get('binary_path', 'imode_gcc')
-
-        self.cg = properties.get('cg', 2)
+        super().__init__(**locals())
 
     def run(self):
         """Launches the execution of the FlexDyn iMOD imode module."""
