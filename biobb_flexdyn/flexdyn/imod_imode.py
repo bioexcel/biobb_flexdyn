@@ -2,7 +2,7 @@
 
 """Module containing the imode class and the command line interface."""
 from typing import Optional
-import shutil
+import os
 from pathlib import Path
 from biobb_common.generic.biobb_object import BiobbObject, launcher
 
@@ -57,12 +57,10 @@ class ImodImode(BiobbObject):
     def run(self):
         """Launches the execution of the FlexDyn iMOD imode module."""
 
-        # Output temporary file
-        out_file_prefix = "imods_evecs"  # Needed as imod is appending the _ic.evec extension
-        out_file = "imods_evecs_ic.evec"
-
         # Command line
-        # imode_gcc  1ake_backbone.pdb -m 0 -o patata.evec
+        # imode_gcc  1ake_backbone.pdb -m 0 -o 1ake_backbone: writes 1ake_backbone_ic.evec (and its .log and _model.pdb)
+        # -o is the output path without its extension: no fixed names next to the output without sandbox
+        out_file_prefix = str(Path(self.stage_io_dict["out"]["output_dat_path"]).with_suffix(''))
         self.cmd = [self.binary_path,
                     self.stage_io_dict["in"]["input_pdb_path"],
                     '-o', out_file_prefix,
@@ -72,13 +70,8 @@ class ImodImode(BiobbObject):
         # Run Biobb block
         self.run_biobb()
 
-        # Rename generated output file to staged output path inside the sandbox.
-        # stage_io_dict output paths are container-internal when running in containers.
-        generated_output = Path(self.stage_io_dict.get('unique_dir', '')).joinpath(out_file)
-        staged_output = Path(self.stage_io_dict.get('unique_dir', '')).joinpath(
-            self.stage_io_dict["out"]["output_dat_path"]
-        )
-        shutil.copy2(generated_output, staged_output)
+        # The eigenvectors file is the output
+        os.replace(Path(self.stage_io_dict["unique_dir"], out_file_prefix + "_ic.evec"), self.sandbox_file("output_dat_path"))
 
 
 imod_imode = launcher(ImodImode)

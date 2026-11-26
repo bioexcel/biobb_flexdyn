@@ -2,7 +2,7 @@
 
 """Module containing the nolb class and the command line interface."""
 from typing import Optional
-import shutil
+import os
 from pathlib import Path
 from biobb_common.generic.biobb_object import BiobbObject, launcher
 
@@ -59,15 +59,12 @@ class Nolb_nma(BiobbObject):
     def run(self):
         """Launches the execution of the FlexDyn NOLB module."""
 
-        # Output temporary file
-        out_file_prefix = "nolb_ensemble"
-        out_file = "nolb_ensemble_nlb_decoys.pdb"
-
         # Command line
-        # ./NOLB 1ake_monomer.pdb -s 100 --rmsd 5 -m  -o patata # Output: patata_nlb_decoys.pdb
+        # ./NOLB 1ake_monomer.pdb -s 100 --rmsd 5 -m  -o 1ake_decoys.pdb # Output: 1ake_decoys_nlb_decoys.pdb
+        # NOLB removes the extension of -o (after the last dot of the path): -o is the output path
         self.cmd = [self.binary_path,
                     self.stage_io_dict["in"]["input_pdb_path"],
-                    "-o", out_file_prefix,
+                    "-o", self.stage_io_dict["out"]["output_pdb_path"],
                     "-m"  # Minimizing the generated structures by default
                     ]
 
@@ -90,13 +87,9 @@ class Nolb_nma(BiobbObject):
         # Run Biobb block
         self.run_biobb()
 
-        # Rename generated output file to staged output path inside the sandbox.
-        # stage_io_dict output paths are container-internal when running in containers.
-        generated_output = Path(self.stage_io_dict.get("unique_dir", "")).joinpath(out_file)
-        staged_output = Path(self.stage_io_dict.get("unique_dir", "")).joinpath(
-            self.stage_io_dict["out"]["output_pdb_path"]
-        )
-        shutil.copy2(generated_output, staged_output)
+        # The decoys file is the output
+        decoys = str(Path(self.stage_io_dict["out"]["output_pdb_path"]).with_suffix('')) + "_nlb_decoys.pdb"
+        os.replace(Path(self.stage_io_dict["unique_dir"], decoys), self.sandbox_file("output_pdb_path"))
 
 
 nolb_nma = launcher(Nolb_nma)

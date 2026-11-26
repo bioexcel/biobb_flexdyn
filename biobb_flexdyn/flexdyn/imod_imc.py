@@ -2,7 +2,6 @@
 
 """Module containing the imode class and the command line interface."""
 from typing import Optional
-import shutil
 from pathlib import Path
 from biobb_common.generic.biobb_object import BiobbObject, launcher
 
@@ -61,16 +60,13 @@ class ImodImc(BiobbObject):
     def run(self):
         """Launches the execution of the FlexDyn iMOD imc module."""
 
-        # Output temporary file
-        out_file_prefix = "imod_ensemble"  # Needed as imod is appending the .pdb extension
-        out_file = "imod_ensemble.pdb"
-
         # Command line
-        # imc 1ake_backbone.pdb  1ake_backbone_evecs.dat -o 1ake_backbone.ensemble.pdb -c 500
+        # imc 1ake_backbone.pdb  1ake_backbone_evecs.dat -o 1ake_backbone.ensemble -c 500
+        # imc adds .pdb to the -o name: the output path without its extension
         self.cmd = [self.binary_path,
                     self.stage_io_dict["in"]["input_pdb_path"],
                     self.stage_io_dict["in"]["input_dat_path"],
-                    '-o', out_file_prefix
+                    '-o', str(Path(self.stage_io_dict["out"]["output_traj_path"]).with_suffix(''))
                     ]
 
         # Properties
@@ -88,14 +84,6 @@ class ImodImc(BiobbObject):
 
         # Run Biobb block
         self.run_biobb()
-
-        # Rename generated output file to staged output path inside the sandbox.
-        # stage_io_dict output paths are container-internal when running in containers.
-        generated_output = Path(self.stage_io_dict.get('unique_dir', '')).joinpath(out_file)
-        staged_output = Path(self.stage_io_dict.get('unique_dir', '')).joinpath(
-            self.stage_io_dict["out"]["output_traj_path"]
-        )
-        shutil.copy2(generated_output, staged_output)
 
 
 imod_imc = launcher(ImodImc)

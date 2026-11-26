@@ -4,6 +4,7 @@
 
 ### Changes
 
+* [FIX] `imod_imc`, `imod_imode`, `nolb_nma`: the files of the tool are named after the output instead of fixed names (`imod_ensemble.pdb`, `imods_evecs_*`, `nolb_ensemble_nlb_decoys.pdb`). Without sandbox (`disable_sandbox`) they were left in the working directory and two runs in the same folder overwrote each other; now only the side files of imode (`.log`, `_model.pdb`) stay, next to the output with its name.
 * [FIX] `concoord_dist`, `concoord_disco`: when neither the `concoord_lib_path` property nor the `CONCOORDLIB` environment variable is set, the block stops before running with an error that names both, instead of failing with a missing `None/HBONDS.DAT` file and leaving the sandbox behind.
 
 ## What's new in version [5.3.0](https://github.com/bioexcel/biobb_amber/releases/tag/v5.3.0)?
