@@ -2,11 +2,11 @@
 
 """Module containing the concoord_disco class and the command line interface."""
 from typing import Optional
-import os
 import shutil
 from pathlib import Path
 from biobb_common.tools import file_utils as fu
 from biobb_common.generic.biobb_object import BiobbObject, launcher
+from biobb_flexdyn.flexdyn.common import concoord_lib
 
 
 class ConcoordDisco(BiobbObject):
@@ -81,29 +81,26 @@ class ConcoordDisco(BiobbObject):
                  output_rmsd_path: str, output_bfactor_path: str, properties: Optional[dict] = None, **kwargs) -> None:
         super().__init__(**locals())
 
+    def prepare(self) -> None:
+        """Find the CONCOORD library folder and check the vdw property."""
+        self.concoord_lib_dir = concoord_lib(self.concoord_lib_path)
+        if self.vdw is None:
+            raise ValueError("The 'vdw' property cannot be None")
 
     def run(self):
         """Launches the execution of the FlexDyn ConcoordDisco module."""
 
         # Copy auxiliary files (MARGINS, ATOMS, BONDS) according to the VdW property to the working dir
-        if self.concoord_lib_path is None:
-            concoord_lib = os.getenv("CONCOORDLIB")
-        else:
-            concoord_lib = self.concoord_lib_path
-
         # MARGINS_li.DAT, MARGINS_oplsaa.DAT, MARGINS_oplsua.DAT, MARGINS_oplsx.DAT, MARGINS_repel.DAT, MARGINS_yamber2.DAT
         # 1 (OPLS-UA -united atoms- parameters), 2 (OPLS-AA -all atoms- parameters), 3 (PROLSQ repel parameters), 4 (Yamber2 parameters), 5 (Li et al. parameters), 6 (OPLS-X parameters -recommended for NMR structure determination-).
         vdw_values = ["vdw_values", "oplsua", "oplsaa", "repel", "yamber2", "li", "oplsx"]
-        if self.vdw is None:
-            raise ValueError("The 'vdw' property cannot be None")
-        vdw_index = int(self.vdw)
-        margins_file = str(concoord_lib) + "/MARGINS_" + vdw_values[vdw_index] + ".DAT"
-        atoms_file = str(concoord_lib) + "/ATOMS_" + vdw_values[vdw_index] + ".DAT"
-        bonds_file = str(concoord_lib) + "/BONDS.DAT"
-        shutil.copy2(margins_file, self.stage_io_dict.get("unique_dir", ""))
-        shutil.copy2(margins_file, self.stage_io_dict.get("unique_dir", "")+"/MARGINS.DAT")
-        shutil.copy2(atoms_file, self.stage_io_dict.get("unique_dir", ""))
-        shutil.copy2(bonds_file, self.stage_io_dict.get("unique_dir", ""))
+        vdw_name = vdw_values[int(self.vdw)]
+        sandbox = self.stage_io_dict["unique_dir"]
+        margins_file = self.concoord_lib_dir / f"MARGINS_{vdw_name}.DAT"
+        shutil.copy2(margins_file, sandbox)
+        shutil.copy2(margins_file, Path(sandbox, "MARGINS.DAT"))
+        shutil.copy2(self.concoord_lib_dir / f"ATOMS_{vdw_name}.DAT", sandbox)
+        shutil.copy2(self.concoord_lib_dir / "BONDS.DAT", sandbox)
 
         # Command line
         # (concoord) OROZCO67:biobb_flexdyn hospital$ disco -d biobb_flexdyn/test/reference/flexdyn/dist.dat

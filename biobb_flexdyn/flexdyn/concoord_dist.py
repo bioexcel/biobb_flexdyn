@@ -2,11 +2,11 @@
 
 """Module containing the concoord_dist class and the command line interface."""
 from typing import Optional
-import os
 import shutil
 from pathlib import Path
 from biobb_common.tools import file_utils as fu
 from biobb_common.generic.biobb_object import BiobbObject, launcher
+from biobb_flexdyn.flexdyn.common import concoord_lib
 
 
 class ConcoordDist(BiobbObject):
@@ -70,7 +70,8 @@ class ConcoordDist(BiobbObject):
         super().__init__(**locals())
 
     def prepare(self) -> None:
-        """Create the stdin file with the input parameters."""
+        """Find the CONCOORD library folder and create the stdin file with the input parameters."""
+        self.concoord_lib_dir = concoord_lib(self.concoord_lib_path)
         # Set input params
         self.io_dict['in']['stdin_file_path'] = fu.create_stdin_file(f'{self.vdw}\n{self.bond_angle}\n')
 
@@ -78,13 +79,7 @@ class ConcoordDist(BiobbObject):
         """Launches the execution of the FlexDyn ConcoordDist module."""
 
         # Copy auxiliary file (HBONDS) to the working dir
-        if self.concoord_lib_path is None:
-            concoord_lib = os.getenv("CONCOORDLIB")
-        else:
-            concoord_lib = self.concoord_lib_path
-
-        hbonds_file = str(concoord_lib) + "/HBONDS.DAT"
-        shutil.copy2(hbonds_file, self.stage_io_dict.get("unique_dir", ""))
+        shutil.copy2(self.concoord_lib_dir / "HBONDS.DAT", self.stage_io_dict["unique_dir"])
 
         # Command line
         # (concoord) OROZCO67:biobb_flexdyn hospital$ dist -p biobb_flexdyn/test/data/flexdyn/structure.pdb

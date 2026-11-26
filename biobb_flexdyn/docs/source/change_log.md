@@ -1,5 +1,11 @@
 # Biobb FlexDyn changelog
 
+## [Unreleased]
+
+### Changes
+
+* [FIX] `concoord_dist`, `concoord_disco`: when neither the `concoord_lib_path` property nor the `CONCOORDLIB` environment variable is set, the block stops before running with an error that names both, instead of failing with a missing `None/HBONDS.DAT` file and leaving the sandbox behind.
+
 ## What's new in version [5.3.0](https://github.com/bioexcel/biobb_amber/releases/tag/v5.3.0)?
 
 ### Changes
