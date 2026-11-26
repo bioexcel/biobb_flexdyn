@@ -3,7 +3,7 @@
 """Module containing the imode class and the command line interface."""
 from typing import Optional
 import shutil
-from pathlib import Path, PurePath
+from pathlib import Path
 from biobb_common.generic.biobb_object import BiobbObject, launcher
 
 
@@ -25,7 +25,6 @@ class ImodImode(BiobbObject):
             * **container_path** (*str*) - (None)  Path to the binary executable of your container.
             * **container_image** (*str*) - ("cmip/cmip:latest") Container Image identifier.
             * **container_volume_path** (*str*) - ("/data") Path to an internal directory in the container.
-            * **container_working_dir** (*str*) - (None) Path to the internal CWD in the container.
             * **container_user_id** (*str*) - (None) User number id to be mapped inside the container.
             * **container_shell_path** (*str*) - ("/bin/bash") Path to the binary executable of the container shell.
 
@@ -58,12 +57,6 @@ class ImodImode(BiobbObject):
     def run(self):
         """Launches the execution of the FlexDyn iMOD imode module."""
 
-        # Determine working directory (host unique_dir or container volume path)
-        if self.container_path:
-            working_dir = self.container_volume_path if self.container_volume_path else "/data"
-        else:
-            working_dir = self.stage_io_dict.get('unique_dir', '')
-
         # Output temporary file
         # out_file_prefix = Path(self.stage_io_dict.get("unique_dir", "")).joinpath("imods_evecs")
         # out_file = Path(self.stage_io_dict.get("unique_dir", "")).joinpath("imods_evecs_ic.evec")
@@ -78,9 +71,8 @@ class ImodImode(BiobbObject):
         #             "-m", str(self.cg)
         #             ]
 
-        self.cmd = ['cd', working_dir, ';',
-                    self.binary_path,
-                    PurePath(self.stage_io_dict["in"]["input_pdb_path"]).name,
+        self.cmd = [self.binary_path,
+                    self.stage_io_dict["in"]["input_pdb_path"],
                     '-o', out_file_prefix,
                     '-m', str(self.cg)
                     ]
@@ -92,7 +84,7 @@ class ImodImode(BiobbObject):
         # stage_io_dict output paths are container-internal when running in containers.
         generated_output = Path(self.stage_io_dict.get('unique_dir', '')).joinpath(out_file)
         staged_output = Path(self.stage_io_dict.get('unique_dir', '')).joinpath(
-            Path(self.stage_io_dict["out"]["output_dat_path"]).name
+            self.stage_io_dict["out"]["output_dat_path"]
         )
         shutil.copy2(generated_output, staged_output)
 

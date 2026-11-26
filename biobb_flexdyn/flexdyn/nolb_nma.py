@@ -3,7 +3,7 @@
 """Module containing the nolb class and the command line interface."""
 from typing import Optional
 import shutil
-from pathlib import Path, PurePath
+from pathlib import Path
 from biobb_common.generic.biobb_object import BiobbObject, launcher
 
 
@@ -27,7 +27,6 @@ class Nolb_nma(BiobbObject):
             * **container_path** (*str*) - (None)  Path to the binary executable of your container.
             * **container_image** (*str*) - ("cmip/cmip:latest") Container Image identifier.
             * **container_volume_path** (*str*) - ("/data") Path to an internal directory in the container.
-            * **container_working_dir** (*str*) - (None) Path to the internal CWD in the container.
             * **container_user_id** (*str*) - (None) User number id to be mapped inside the container.
             * **container_shell_path** (*str*) - ("/bin/bash") Path to the binary executable of the container shell.
 
@@ -60,20 +59,14 @@ class Nolb_nma(BiobbObject):
     def run(self):
         """Launches the execution of the FlexDyn NOLB module."""
 
-        # Determine working directory (host unique_dir or container volume path)
-        if self.container_path:
-            working_dir = self.container_volume_path if self.container_volume_path else "/data"
-        else:
-            working_dir = self.stage_io_dict.get('unique_dir', '')
-
         # Output temporary file
         out_file_prefix = "nolb_ensemble"
         out_file = "nolb_ensemble_nlb_decoys.pdb"
 
         # Command line
         # ./NOLB 1ake_monomer.pdb -s 100 --rmsd 5 -m  -o patata # Output: patata_nlb_decoys.pdb
-        self.cmd = ["cd", working_dir, ";", self.binary_path,
-                    PurePath(self.stage_io_dict["in"]["input_pdb_path"]).name,
+        self.cmd = [self.binary_path,
+                    self.stage_io_dict["in"]["input_pdb_path"],
                     "-o", out_file_prefix,
                     "-m"  # Minimizing the generated structures by default
                     ]
@@ -107,7 +100,7 @@ class Nolb_nma(BiobbObject):
         # stage_io_dict output paths are container-internal when running in containers.
         generated_output = Path(self.stage_io_dict.get("unique_dir", "")).joinpath(out_file)
         staged_output = Path(self.stage_io_dict.get("unique_dir", "")).joinpath(
-            Path(self.stage_io_dict["out"]["output_pdb_path"]).name
+            self.stage_io_dict["out"]["output_pdb_path"]
         )
         shutil.copy2(generated_output, staged_output)
 

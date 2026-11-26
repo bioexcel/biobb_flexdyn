@@ -29,7 +29,6 @@ concoord_dist_docker:
     container_path: docker
     container_image: quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
     container_volume_path: /tmp
-    container_working_dir: /tmp
     concoord_lib_path: path_to_concoord_lib  # Optional property to specify Concoord library path, if not set will use CONCOORDLIB env variable
 
 concoord_dist_singularity:
@@ -47,7 +46,6 @@ concoord_dist_singularity:
     container_path: singularity
     container_image: https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
     container_volume_path: /tmp
-    container_working_dir: /tmp
     concoord_lib_path: path_to_concoord_lib  # Optional property to specify Concoord library path, if not set will use CONCOORDLIB env variable
 
 concoord_disco:
@@ -80,7 +78,6 @@ concoord_disco_docker:
     container_path: docker
     container_image: quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
     container_volume_path: /tmp
-    container_working_dir: /tmp
     concoord_lib_path: path_to_concoord_lib  # Optional property to specify Concoord library path, if not set will use CONCOORDLIB env variable
 
 concoord_disco_singularity:
@@ -99,7 +96,6 @@ concoord_disco_singularity:
     container_path: singularity
     container_image: https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
     container_volume_path: /tmp
-    container_working_dir: /tmp
     concoord_lib_path: path_to_concoord_lib  # Optional property to specify Concoord library path, if not set will use CONCOORDLIB env variable
 
 nolb_nma:
@@ -120,7 +116,6 @@ nolb_nma_docker:
     container_path: docker
     container_image: quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
     container_volume_path: /tmp
-    container_working_dir: /tmp
 
 nolb_nma_singularity:
   paths:
@@ -132,7 +127,6 @@ nolb_nma_singularity:
     container_path: singularity
     container_image: https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
     container_volume_path: /tmp
-    container_working_dir: /tmp
 
 prody_anm:
   paths:
@@ -161,7 +155,6 @@ imod_imode_docker:
     container_path: docker
     container_image: quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
     container_volume_path: /tmp
-    container_working_dir: /tmp
 
 imod_imode_singularity:
   paths:
@@ -173,7 +166,6 @@ imod_imode_singularity:
     container_path: singularity
     container_image: https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
     container_volume_path: /tmp
-    container_working_dir: /tmp
 
 imod_imove:
   paths:
@@ -195,7 +187,6 @@ imod_imove_docker:
     container_path: docker
     container_image: quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
     container_volume_path: /tmp
-    container_working_dir: /tmp
 
 imod_imove_singularity:
   paths:
@@ -208,7 +199,6 @@ imod_imove_singularity:
     container_path: singularity
     container_image: https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
     container_volume_path: /tmp
-    container_working_dir: /tmp
 
 imod_imc:
   paths:
@@ -234,7 +224,6 @@ imod_imc_docker:
     container_path: docker
     container_image: quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
     container_volume_path: /tmp
-    container_working_dir: /tmp
 
 imod_imc_singularity:
   paths:
@@ -249,4 +238,3 @@ imod_imc_singularity:
     container_path: singularity
     container_image: https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
     container_volume_path: /tmp
-    container_working_dir: /tmp
