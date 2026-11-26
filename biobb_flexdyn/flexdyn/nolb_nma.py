@@ -4,7 +4,7 @@
 from typing import Optional
 import shutil
 from pathlib import Path, PurePath
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 
 
 class Nolb_nma(BiobbObject):
@@ -112,15 +112,7 @@ class Nolb_nma(BiobbObject):
         shutil.copy2(generated_output, staged_output)
 
 
-def nolb_nma(input_pdb_path: str, output_pdb_path: str,
-             properties: Optional[dict] = None, **kwargs) -> int:
-    """Create :class:`Nolb_nma <flexdyn.nolb_nma.Nolb_nma>`flexdyn.nolb_nma.Nolb_nma class and
-    execute :meth:`launch() <flexdyn.nolb_nma.Nolb_nma.launch>` method"""
-    return Nolb_nma(**dict(locals())).launch()
-
-
-nolb_nma.__doc__ = Nolb_nma.__doc__
-main = Nolb_nma.get_main(nolb_nma, "Generate an ensemble of structures using the NOLB (NOn-Linear rigid Block) NMA tool.")
+nolb_nma = launcher(Nolb_nma)
 
 if __name__ == '__main__':
-    main()
+    Nolb_nma.main()

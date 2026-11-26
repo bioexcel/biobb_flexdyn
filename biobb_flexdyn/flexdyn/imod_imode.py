@@ -4,7 +4,7 @@
 from typing import Optional
 import shutil
 from pathlib import Path, PurePath
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 
 
 class ImodImode(BiobbObject):
@@ -97,15 +97,7 @@ class ImodImode(BiobbObject):
         shutil.copy2(generated_output, staged_output)
 
 
-def imod_imode(input_pdb_path: str, output_dat_path: str,
-               properties: Optional[dict] = None, **kwargs) -> int:
-    """Create :class:`ImodImode <flexdyn.imod_imode.ImodImode>`flexdyn.imod_imode.ImodImode class and
-    execute :meth:`launch() <flexdyn.imod_imode.ImodImode.launch>` method"""
-    return ImodImode(**dict(locals())).launch()
-
-
-imod_imode.__doc__ = ImodImode.__doc__
-main = ImodImode.get_main(imod_imode, "Compute the normal modes of a macromolecule using the imode tool from the iMODS package.")
+imod_imode = launcher(ImodImode)
 
 if __name__ == '__main__':
-    main()
+    ImodImode.main()

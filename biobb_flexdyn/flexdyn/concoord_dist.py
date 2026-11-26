@@ -6,7 +6,7 @@ import os
 import shutil
 from pathlib import Path, PurePath
 from biobb_common.tools import file_utils as fu
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 
 
 class ConcoordDist(BiobbObject):
@@ -166,16 +166,7 @@ class ConcoordDist(BiobbObject):
         self.tmp_files.append(self.io_dict['in'].get("stdin_file_path", ""))
 
 
-def concoord_dist(input_structure_path: str,
-                  output_pdb_path: str, output_gro_path: str, output_dat_path: str,
-                  properties: Optional[dict] = None, **kwargs) -> int:
-    """Create :class:`ConcoordDist <flexdyn.concoord_dist.ConcoordDist>`flexdyn.concoord_dist.ConcoordDist class and
-    execute :meth:`launch() <flexdyn.concoord_dist.ConcoordDist.launch>` method"""
-    return ConcoordDist(**dict(locals())).launch()
-
-
-concoord_dist.__doc__ = ConcoordDist.__doc__
-main = ConcoordDist.get_main(concoord_dist, "Structure interpretation and bond definitions from a PDB/GRO file.")
+concoord_dist = launcher(ConcoordDist)
 
 if __name__ == '__main__':
-    main()
+    ConcoordDist.main()

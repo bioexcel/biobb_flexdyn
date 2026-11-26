@@ -3,7 +3,7 @@
 """Module containing the imode class and the command line interface."""
 from typing import Optional
 from pathlib import PurePath
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 
 
 class ImodImove(BiobbObject):
@@ -92,15 +92,7 @@ class ImodImove(BiobbObject):
         self.run_biobb()
 
 
-def imod_imove(input_pdb_path: str, input_dat_path: str, output_pdb_path: str,
-               properties: Optional[dict] = None, **kwargs) -> int:
-    """Create :class:`ImodImove <flexdyn.imod_imove.ImodImove>`flexdyn.imod_imove.ImodImove class and
-    execute :meth:`launch() <flexdyn.imod_imove.ImodImove.launch>` method"""
-    return ImodImove(**dict(locals())).launch()
-
-
-imod_imove.__doc__ = ImodImove.__doc__
-main = ImodImove.get_main(imod_imove, "Animate the normal modes of a macromolecule using the imove tool from the iMODS package.")
+imod_imove = launcher(ImodImove)
 
 if __name__ == '__main__':
-    main()
+    ImodImove.main()

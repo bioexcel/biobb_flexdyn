@@ -6,7 +6,7 @@ import os
 import shutil
 from pathlib import Path, PurePath
 from biobb_common.tools import file_utils as fu
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 
 
 class ConcoordDisco(BiobbObject):
@@ -203,16 +203,7 @@ class ConcoordDisco(BiobbObject):
         self.run_biobb()
 
 
-def concoord_disco(input_pdb_path: str, input_dat_path: str,
-                   output_traj_path: str, output_rmsd_path: str, output_bfactor_path: str,
-                   properties: Optional[dict] = None, **kwargs) -> int:
-    """Create :class:`ConcoordDisco <flexdyn.concoord_disco.ConcoordDisco>`flexdyn.concoord_disco.ConcoordDisco class and
-    execute :meth:`launch() <flexdyn.concoord_disco.ConcoordDisco.launch>` method"""
-    return ConcoordDisco(**dict(locals())).launch()
-
-
-concoord_disco.__doc__ = ConcoordDisco.__doc__
-main = ConcoordDisco.get_main(concoord_disco, "Structure generation based on a set of geometric constraints extracted with the Concoord Dist tool.")
+concoord_disco = launcher(ConcoordDisco)
 
 if __name__ == '__main__':
-    main()
+    ConcoordDisco.main()

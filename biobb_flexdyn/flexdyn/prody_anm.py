@@ -3,7 +3,7 @@
 """Module containing the prody_anm class and the command line interface."""
 from typing import Optional
 import prody  # type: ignore
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 
 
 class ProdyANM(BiobbObject):
@@ -76,15 +76,7 @@ class ProdyANM(BiobbObject):
         prody.writePDB(self.stage_io_dict["out"]["output_pdb_path"], nmastruct)
 
 
-def prody_anm(input_pdb_path: str, output_pdb_path: str,
-              properties: Optional[dict] = None, **kwargs) -> int:
-    """Create :class:`ProdyANM <flexdyn.prody_anm.ProdyANM>`flexdyn.prody_anm.ProdyANM class and
-    execute :meth:`launch() <flexdyn.prody_anm.ProdyANM.launch>` method"""
-    return ProdyANM(**dict(locals())).launch()
-
-
-prody_anm.__doc__ = ProdyANM.__doc__
-main = ProdyANM.get_main(prody_anm, "Generate an ensemble of structures using the Prody Anisotropic Network Model (ANM), for coarse-grained NMA.")
+prody_anm = launcher(ProdyANM)
 
 if __name__ == '__main__':
-    main()
+    ProdyANM.main()

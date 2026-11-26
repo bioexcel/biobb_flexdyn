@@ -4,7 +4,7 @@
 from typing import Optional
 import shutil
 from pathlib import Path, PurePath
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 
 
 class ImodImc(BiobbObject):
@@ -114,15 +114,7 @@ class ImodImc(BiobbObject):
         shutil.copy2(generated_output, staged_output)
 
 
-def imod_imc(input_pdb_path: str, input_dat_path: str, output_traj_path: str,
-             properties: Optional[dict] = None, **kwargs) -> int:
-    """Create :class:`ImodImc <flexdyn.imod_imc.ImodImc>`flexdyn.imod_imc.ImodImc class and
-    execute :meth:`launch() <flexdyn.imod_imc.ImodImc.launch>` method"""
-    return ImodImc(**dict(locals())).launch()
-
-
-imod_imc.__doc__ = ImodImc.__doc__
-main = ImodImc.get_main(imod_imc, "Compute a Monte-Carlo IC-NMA based conformational ensemble using the imc tool from the iMODS package.")
+imod_imc = launcher(ImodImc)
 
 if __name__ == '__main__':
-    main()
+    ImodImc.main()

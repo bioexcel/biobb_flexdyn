@@ -24,13 +24,13 @@ setuptools.setup(
     python_requires='>=3.10',
     entry_points={
         "console_scripts": [
-            "concoord_dist = biobb_flexdyn.flexdyn.concoord_dist:main",
-            "concoord_disco = biobb_flexdyn.flexdyn.concoord_disco:main",
-            "imod_imode = biobb_flexdyn.flexdyn.imod_imode:main",
-            "imod_imove = biobb_flexdyn.flexdyn.imod_imove:main",
-            "imod_imc = biobb_flexdyn.flexdyn.imod_imc:main",
-            "nolb_nma = biobb_flexdyn.flexdyn.nolb_nma:main",
-            "prody_anm = biobb_flexdyn.flexdyn.prody_anm:main"
+            "concoord_dist = biobb_flexdyn.flexdyn.concoord_dist:ConcoordDist.main",
+            "concoord_disco = biobb_flexdyn.flexdyn.concoord_disco:ConcoordDisco.main",
+            "imod_imode = biobb_flexdyn.flexdyn.imod_imode:ImodImode.main",
+            "imod_imove = biobb_flexdyn.flexdyn.imod_imove:ImodImove.main",
+            "imod_imc = biobb_flexdyn.flexdyn.imod_imc:ImodImc.main",
+            "nolb_nma = biobb_flexdyn.flexdyn.nolb_nma:Nolb_nma.main",
+            "prody_anm = biobb_flexdyn.flexdyn.prody_anm:ProdyANM.main"
         ]
     },
     classifiers=[
