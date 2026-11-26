@@ -18,11 +18,14 @@ on:
       - '**/test/data/**'
       - '**/test/references/**'
       - '.github/workflows/linting_and_testing.yml'
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
   test_containers:
     uses: bioexcel/biobb/.github/workflows/test_containers.yml@master
     with:
+      biobb-common-ref: ${{ github.event_name == 'pull_request' && 'master' || '' }}
       extra-packages: "prody sciPy>=1.13.0,<1.14.0"
       setup-script: |
         sed -i "s|path_to_concoord_lib|$GITHUB_WORKSPACE/biobb_flexdyn/flexdyn/lib|g" biobb_flexdyn/test/conf.yml
