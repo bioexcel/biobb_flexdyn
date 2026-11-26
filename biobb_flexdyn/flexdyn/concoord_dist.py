@@ -82,25 +82,8 @@ class ConcoordDist(BiobbObject):
         shutil.copy2(self.concoord_lib_dir / "HBONDS.DAT", self.stage_io_dict["unique_dir"])
 
         # Command line
-        # (concoord) OROZCO67:biobb_flexdyn hospital$ dist -p biobb_flexdyn/test/data/flexdyn/structure.pdb
-        # -op dist.pdb -og dist.gro -od dist.dat
-        # Select a set of Van der Waals parameters:
-        # 1: OPLS-UA (united atoms) parameters
-        # 2: OPLS-AA (all atoms) parameters
-        # 3: PROLSQ repel parameters
-        # 4: Yamber2 parameters
-        # 5: Li et al. parameters
-        # 6: OPLS-X parameters (recommended for NMR structure determination)
-        # 2
-        # Selected parameter set 2
-        # copying /opt/anaconda3/envs/concoord/share/concoord/lib/ATOMS_oplsaa.DAT to ATOMS.DAT in current working directory
-        # copying /opt/anaconda3/envs/concoord/share/concoord/lib/MARGINS_oplsaa.DAT to MARGINS.DAT in current working directory
-        # Select a set of bond/angle parameters:
-        # 1: Concoord default parameters
-        # 2: Engh-Huber parameters
-        # 1
-        # Selected parameter set 1
-        # copying /opt/anaconda3/envs/concoord/share/concoord/lib/BONDS.DAT.noeh to BONDS.DAT in current working directory
+        # dist -p structure.pdb -op dist.pdb -og dist.gro -od dist.dat
+        # dist asks for the VdW parameter set and then for the bond/angle set: the stdin file of prepare() answers both
 
         self.cmd = [
             self.binary_path,

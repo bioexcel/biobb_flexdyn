@@ -58,19 +58,11 @@ class ImodImode(BiobbObject):
         """Launches the execution of the FlexDyn iMOD imode module."""
 
         # Output temporary file
-        # out_file_prefix = Path(self.stage_io_dict.get("unique_dir", "")).joinpath("imods_evecs")
-        # out_file = Path(self.stage_io_dict.get("unique_dir", "")).joinpath("imods_evecs_ic.evec")
         out_file_prefix = "imods_evecs"  # Needed as imod is appending the _ic.evec extension
         out_file = "imods_evecs_ic.evec"
 
         # Command line
         # imode_gcc  1ake_backbone.pdb -m 0 -o patata.evec
-        # self.cmd = [self.binary_path,
-        #             str(Path(self.stage_io_dict["in"]["input_pdb_path"]).relative_to(Path.cwd())),
-        #             "-o", str(out_file_prefix),
-        #             "-m", str(self.cg)
-        #             ]
-
         self.cmd = [self.binary_path,
                     self.stage_io_dict["in"]["input_pdb_path"],
                     '-o', out_file_prefix,

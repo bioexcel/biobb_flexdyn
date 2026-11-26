@@ -62,19 +62,11 @@ class ImodImc(BiobbObject):
         """Launches the execution of the FlexDyn iMOD imc module."""
 
         # Output temporary file
-        # out_file_prefix = Path(self.stage_io_dict.get("unique_dir", "")).joinpath("imod_ensemble")
-        # out_file = Path(self.stage_io_dict.get("unique_dir", "")).joinpath("imod_ensemble.pdb")
         out_file_prefix = "imod_ensemble"  # Needed as imod is appending the .pdb extension
         out_file = "imod_ensemble.pdb"
 
         # Command line
         # imc 1ake_backbone.pdb  1ake_backbone_evecs.dat -o 1ake_backbone.ensemble.pdb -c 500
-        # self.cmd = [self.binary_path,
-        #             str(Path(self.stage_io_dict["in"]["input_pdb_path"]).relative_to(Path.cwd())),
-        #             str(Path(self.stage_io_dict["in"]["input_dat_path"]).relative_to(Path.cwd())),
-        #             "-o", str(out_file_prefix)
-        #             ]
-
         self.cmd = [self.binary_path,
                     self.stage_io_dict["in"]["input_pdb_path"],
                     self.stage_io_dict["in"]["input_dat_path"],

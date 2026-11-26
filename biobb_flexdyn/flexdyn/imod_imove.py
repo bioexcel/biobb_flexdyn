@@ -60,13 +60,6 @@ class ImodImove(BiobbObject):
 
         # Command line
         # imove 1ake_backbone.pdb  1ake_backbone_evecs.dat -o 1ake_backbone.ensemble.pdb 1 -c 500
-        # self.cmd = [self.binary_path,
-        #             str(Path(self.stage_io_dict["in"]["input_pdb_path"]).relative_to(Path.cwd())),
-        #             str(Path(self.stage_io_dict["in"]["input_dat_path"]).relative_to(Path.cwd())),
-        #             str(Path(self.stage_io_dict["out"]["output_pdb_path"]).relative_to(Path.cwd())),
-        #             str(self.pc)
-        #             ]
-
         self.cmd = [self.binary_path,
                     self.stage_io_dict["in"]["input_pdb_path"],
                     self.stage_io_dict["in"]["input_dat_path"],

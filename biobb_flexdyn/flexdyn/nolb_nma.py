@@ -76,12 +76,6 @@ class Nolb_nma(BiobbObject):
             self.cmd.append('-s')
             self.cmd.append(str(self.num_structs))
 
-        # Num modes is deactivated for the decoys generation. CHECK!
-        #  * **num_modes** (*int*) - (10) Number of non-trivial modes to compute, 10 by default. If this number exceeds the size of the Hessian matrix, it will be adapted accordingly.
-        # if self.num_modes:
-        #    self.cmd.append('-n')
-        #    self.cmd.append(str(self.num_modes))
-
         if self.cutoff:
             self.cmd.append('-c')
             self.cmd.append(str(self.cutoff))

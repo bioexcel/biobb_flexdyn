@@ -103,8 +103,7 @@ class ConcoordDisco(BiobbObject):
         shutil.copy2(self.concoord_lib_dir / "BONDS.DAT", sandbox)
 
         # Command line
-        # (concoord) OROZCO67:biobb_flexdyn hospital$ disco -d biobb_flexdyn/test/reference/flexdyn/dist.dat
-        # -p biobb_flexdyn/test/reference/flexdyn/dist.pdb  -op patata.pdb
+        # disco -d dist.dat -p dist.pdb -on disco_trj.pdb
         self.cmd = [self.binary_path,
                     "-p", self.stage_io_dict["in"]["input_pdb_path"],
                     "-d", self.stage_io_dict["in"]["input_dat_path"],
