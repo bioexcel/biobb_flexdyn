@@ -32,7 +32,6 @@ class ConcoordDisco(BiobbObject):
             * **nofit** (*bool*) - (False) Do not fit generated structures to reference
             * **seed** (*int*) - (None) Initial random seed. If not set, CONCOORD uses 741265.
             * **violation** (*float*) - (None) Maximal acceptable sum of violations (nm). If not set, CONCOORD uses 1.0.
-            * **nofit** (*bool*) - (False) Do not fit generated structures to reference
             * **convergence** (*int*) - (None) Consider convergence failed after this number of non-productive iterations. If not set, CONCOORD uses 500.
             * **trials** (*int*) - (None) Maximum number of trials per run. If not set, CONCOORD uses 25.
             * **damp** (*int*) - (None) Damping factor for distance corrections. If not set, CONCOORD uses 1. Values: 1 (default), 2 (for cases with convergence problems)
@@ -46,7 +45,7 @@ class ConcoordDisco(BiobbObject):
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
             * **sandbox_path** (*str*) - ("./") [WF property] Parent path to the sandbox directory.
             * **container_path** (*str*) - (None)  Path to the binary executable of your container.
-            * **container_image** (*str*) - ("cmip/cmip:latest") Container Image identifier.
+            * **container_image** (*str*) - (None) Container Image identifier.
             * **container_volume_path** (*str*) - ("/data") Path to an internal directory in the container.
             * **container_user_id** (*str*) - (None) User number id to be mapped inside the container.
             * **container_shell_path** (*str*) - ("/bin/bash") Path to the binary executable of the container shell.

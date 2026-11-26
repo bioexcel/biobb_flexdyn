@@ -123,7 +123,7 @@
                 },
                 "container_image": {
                     "type": "string",
-                    "default": "cmip/cmip:latest",
+                    "default": null,
                     "wf_prop": false,
                     "description": "Container Image identifier."
                 },
