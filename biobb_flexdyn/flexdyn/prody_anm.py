@@ -55,7 +55,7 @@ class ProdyANM(BiobbObject):
     def run(self):
         """Launches the execution of the FlexDyn ConcoordDist module."""
 
-        prot = prody.parsePDB(self.stage_io_dict["in"]["input_pdb_path"],)
+        prot = prody.parsePDB(self.sandbox_file("input_pdb_path"),)
 
         # http://prody.csb.pitt.edu/manual/reference/atomic/select.html
         prot_sel = prot.select(self.selection)  # type: ignore
@@ -73,7 +73,7 @@ class ProdyANM(BiobbObject):
         nmastruct = bb_atoms.copy()
         nmastruct.addCoordset(ensemble)
 
-        prody.writePDB(self.stage_io_dict["out"]["output_pdb_path"], nmastruct)
+        prody.writePDB(self.sandbox_file("output_pdb_path"), nmastruct)
 
 
 prody_anm = launcher(ProdyANM)

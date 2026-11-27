@@ -2,11 +2,11 @@
 
 """Module containing the concoord_disco class and the command line interface."""
 from typing import Optional
-import os
 import shutil
-from pathlib import Path, PurePath
+from pathlib import Path
 from biobb_common.tools import file_utils as fu
 from biobb_common.generic.biobb_object import BiobbObject, launcher
+from biobb_flexdyn.flexdyn.common import concoord_lib
 
 
 class ConcoordDisco(BiobbObject):
@@ -32,7 +32,6 @@ class ConcoordDisco(BiobbObject):
             * **nofit** (*bool*) - (False) Do not fit generated structures to reference
             * **seed** (*int*) - (None) Initial random seed. If not set, CONCOORD uses 741265.
             * **violation** (*float*) - (None) Maximal acceptable sum of violations (nm). If not set, CONCOORD uses 1.0.
-            * **nofit** (*bool*) - (False) Do not fit generated structures to reference
             * **convergence** (*int*) - (None) Consider convergence failed after this number of non-productive iterations. If not set, CONCOORD uses 500.
             * **trials** (*int*) - (None) Maximum number of trials per run. If not set, CONCOORD uses 25.
             * **damp** (*int*) - (None) Damping factor for distance corrections. If not set, CONCOORD uses 1. Values: 1 (default), 2 (for cases with convergence problems)
@@ -46,9 +45,8 @@ class ConcoordDisco(BiobbObject):
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
             * **sandbox_path** (*str*) - ("./") [WF property] Parent path to the sandbox directory.
             * **container_path** (*str*) - (None)  Path to the binary executable of your container.
-            * **container_image** (*str*) - ("cmip/cmip:latest") Container Image identifier.
+            * **container_image** (*str*) - (None) Container Image identifier.
             * **container_volume_path** (*str*) - ("/data") Path to an internal directory in the container.
-            * **container_working_dir** (*str*) - (None) Path to the internal CWD in the container.
             * **container_user_id** (*str*) - (None) User number id to be mapped inside the container.
             * **container_shell_path** (*str*) - ("/bin/bash") Path to the binary executable of the container shell.
 
@@ -82,57 +80,47 @@ class ConcoordDisco(BiobbObject):
                  output_rmsd_path: str, output_bfactor_path: str, properties: Optional[dict] = None, **kwargs) -> None:
         super().__init__(**locals())
 
+    def prepare(self) -> None:
+        """Find the CONCOORD library folder and check the vdw property."""
+        self.concoord_lib_dir = concoord_lib(self.concoord_lib_path)
+        if self.vdw is None:
+            raise ValueError("The 'vdw' property cannot be None")
 
     def run(self):
         """Launches the execution of the FlexDyn ConcoordDisco module."""
 
         # Copy auxiliary files (MARGINS, ATOMS, BONDS) according to the VdW property to the working dir
-        if self.concoord_lib_path is None:
-            concoord_lib = os.getenv("CONCOORDLIB")
-        else:
-            concoord_lib = self.concoord_lib_path
-
         # MARGINS_li.DAT, MARGINS_oplsaa.DAT, MARGINS_oplsua.DAT, MARGINS_oplsx.DAT, MARGINS_repel.DAT, MARGINS_yamber2.DAT
         # 1 (OPLS-UA -united atoms- parameters), 2 (OPLS-AA -all atoms- parameters), 3 (PROLSQ repel parameters), 4 (Yamber2 parameters), 5 (Li et al. parameters), 6 (OPLS-X parameters -recommended for NMR structure determination-).
         vdw_values = ["vdw_values", "oplsua", "oplsaa", "repel", "yamber2", "li", "oplsx"]
-        if self.vdw is None:
-            raise ValueError("The 'vdw' property cannot be None")
-        vdw_index = int(self.vdw)
-        margins_file = str(concoord_lib) + "/MARGINS_" + vdw_values[vdw_index] + ".DAT"
-        atoms_file = str(concoord_lib) + "/ATOMS_" + vdw_values[vdw_index] + ".DAT"
-        bonds_file = str(concoord_lib) + "/BONDS.DAT"
-        shutil.copy2(margins_file, self.stage_io_dict.get("unique_dir", ""))
-        shutil.copy2(margins_file, self.stage_io_dict.get("unique_dir", "")+"/MARGINS.DAT")
-        shutil.copy2(atoms_file, self.stage_io_dict.get("unique_dir", ""))
-        shutil.copy2(bonds_file, self.stage_io_dict.get("unique_dir", ""))
-
-        # Determine working directory (host unique_dir or container volume path)
-        if self.container_path:
-            working_dir = self.container_volume_path if self.container_volume_path else "/data"
-        else:
-            working_dir = self.stage_io_dict.get('unique_dir', '')
+        vdw_name = vdw_values[int(self.vdw)]
+        sandbox = self.stage_io_dict["unique_dir"]
+        margins_file = self.concoord_lib_dir / f"MARGINS_{vdw_name}.DAT"
+        shutil.copy2(margins_file, sandbox)
+        shutil.copy2(margins_file, Path(sandbox, "MARGINS.DAT"))
+        shutil.copy2(self.concoord_lib_dir / f"ATOMS_{vdw_name}.DAT", sandbox)
+        shutil.copy2(self.concoord_lib_dir / "BONDS.DAT", sandbox)
 
         # Command line
-        # (concoord) OROZCO67:biobb_flexdyn hospital$ disco -d biobb_flexdyn/test/reference/flexdyn/dist.dat
-        # -p biobb_flexdyn/test/reference/flexdyn/dist.pdb  -op patata.pdb
-        self.cmd = ["cd", working_dir, ";", self.binary_path,
-                    "-p", PurePath(self.stage_io_dict["in"]["input_pdb_path"]).name,
-                    "-d", PurePath(self.stage_io_dict["in"]["input_dat_path"]).name,
-                    "-or", PurePath(self.stage_io_dict["out"]["output_rmsd_path"]).name,
-                    "-of", PurePath(self.stage_io_dict["out"]["output_bfactor_path"]).name
+        # disco -d dist.dat -p dist.pdb -on disco_trj.pdb
+        self.cmd = [self.binary_path,
+                    "-p", self.stage_io_dict["in"]["input_pdb_path"],
+                    "-d", self.stage_io_dict["in"]["input_dat_path"],
+                    "-or", self.stage_io_dict["out"]["output_rmsd_path"],
+                    "-of", self.stage_io_dict["out"]["output_bfactor_path"]
                     ]
 
         # Output structure formats:
         file_extension = Path(self.stage_io_dict["out"]["output_traj_path"]).suffix
         if file_extension == ".pdb":
             self.cmd.append('-on')  # NMR-PDB format (multi-model)
-            self.cmd.append(PurePath(self.stage_io_dict["out"]["output_traj_path"]).name)
+            self.cmd.append(self.stage_io_dict["out"]["output_traj_path"])
         elif file_extension == ".gro":
             self.cmd.append('-ot')
-            self.cmd.append(PurePath(self.stage_io_dict["out"]["output_traj_path"]).name)
+            self.cmd.append(self.stage_io_dict["out"]["output_traj_path"])
         elif file_extension == ".xtc":
             self.cmd.append('-ox')
-            self.cmd.append(PurePath(self.stage_io_dict["out"]["output_traj_path"]).name)
+            self.cmd.append(self.stage_io_dict["out"]["output_traj_path"])
         else:
             fu.log("ERROR: output_traj_path ({}) must be a PDB, GRO or XTC formatted file ({})".format(self.io_dict["out"]["output_traj_path"], file_extension), self.out_log, self.global_log)
             raise ValueError("output_traj_path ({}) must be a PDB, GRO or XTC formatted file".format(self.io_dict["out"]["output_traj_path"]))

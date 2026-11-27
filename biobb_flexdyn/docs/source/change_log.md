@@ -1,5 +1,20 @@
 # Biobb FlexDyn changelog
 
+## [Unreleased]
+
+## What's new in version [5.4.0](https://github.com/bioexcel/biobb_flexdyn/releases/tag/v5.4.0)?
+
+### Changes
+
+* [UPDATE] Update to biobb_common 5.4.0.
+* [FIX] `imod_imc`, `imod_imode`, `nolb_nma`: the files of the tool are named after the output instead of fixed names (`imod_ensemble.pdb`, `imods_evecs_*`, `nolb_ensemble_nlb_decoys.pdb`). Without sandbox (`disable_sandbox`) they were left in the working directory and two runs in the same folder overwrote each other; now only the side files of imode (`.log`, `_model.pdb`) stay, next to the output with its name.
+* [FIX] `concoord_dist`, `concoord_disco`: when neither the `concoord_lib_path` property nor the `CONCOORDLIB` environment variable is set, the block stops before running with an error that names both, instead of failing with a missing `None/HBONDS.DAT` file and leaving the sandbox behind.
+* [FIX] `concoord_dist`, `concoord_disco`: an input or output file with an unsupported extension stops the block with a `ValueError`; it logged an error and ran CONCOORD anyway.
+* [FIX] `concoord_disco`: `vdw` defaults to 1 (OPLS-UA), as documented; without it the block stopped with an error.
+* [FIX] `concoord_disco`: `chirality_check` 0 and `seed` 0 are passed to disco; they were ignored as if unset.
+* [DOCS] `concoord_dist`, `concoord_disco`, `imod_imc`, `imod_imode`, `imod_imove`, `nolb_nma`: the documented `container_image` default is None (the blocks never used the `cmip/cmip:latest` image named there); `concoord_disco` documents `nofit` once.
+* [UPDATE] Python 3.11 and 3.12 (no Python 3.13 yet: prody has no conda build for it).
+
 ## What's new in version [5.3.0](https://github.com/bioexcel/biobb_amber/releases/tag/v5.3.0)?
 
 ### Changes

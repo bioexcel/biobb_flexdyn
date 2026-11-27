@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="biobb_flexdyn",
-    version="5.3.0",
+    version="5.4.0",
     author="Biobb developers",
     author_email="adam.hospital@irbbarcelona.org",
     description="biobb_flexdyn is a BioBB category for studies on the conformational landscape of native proteins.",
@@ -20,8 +20,8 @@ setuptools.setup(
     packages=setuptools.find_packages(exclude=['docs', 'test']),
     package_data={'biobb_flexdyn': ['py.typed']},
     include_package_data=True,
-    install_requires=['biobb_common==5.3.1', 'scipy>=1.13.0,<1.14.0', 'ProDy'],
-    python_requires='>=3.10',
+    install_requires=['biobb_common==5.4.0', 'scipy>=1.13.0,<1.14.0', 'ProDy'],
+    python_requires='>=3.11,<3.13',
     entry_points={
         "console_scripts": [
             "concoord_dist = biobb_flexdyn.flexdyn.concoord_dist:ConcoordDist.main",
@@ -35,7 +35,8 @@ setuptools.setup(
     },
     classifiers=[
         "Development Status :: 5 - Production/Stable",
-        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: MacOS :: MacOS X",
         "Operating System :: POSIX"

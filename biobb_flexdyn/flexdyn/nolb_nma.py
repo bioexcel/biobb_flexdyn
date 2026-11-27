@@ -2,8 +2,8 @@
 
 """Module containing the nolb class and the command line interface."""
 from typing import Optional
-import shutil
-from pathlib import Path, PurePath
+import os
+from pathlib import Path
 from biobb_common.generic.biobb_object import BiobbObject, launcher
 
 
@@ -25,9 +25,8 @@ class Nolb_nma(BiobbObject):
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
             * **sandbox_path** (*str*) - ("./") [WF property] Parent path to the sandbox directory.
             * **container_path** (*str*) - (None)  Path to the binary executable of your container.
-            * **container_image** (*str*) - ("cmip/cmip:latest") Container Image identifier.
+            * **container_image** (*str*) - (None) Container Image identifier.
             * **container_volume_path** (*str*) - ("/data") Path to an internal directory in the container.
-            * **container_working_dir** (*str*) - (None) Path to the internal CWD in the container.
             * **container_user_id** (*str*) - (None) User number id to be mapped inside the container.
             * **container_shell_path** (*str*) - ("/bin/bash") Path to the binary executable of the container shell.
 
@@ -60,21 +59,12 @@ class Nolb_nma(BiobbObject):
     def run(self):
         """Launches the execution of the FlexDyn NOLB module."""
 
-        # Determine working directory (host unique_dir or container volume path)
-        if self.container_path:
-            working_dir = self.container_volume_path if self.container_volume_path else "/data"
-        else:
-            working_dir = self.stage_io_dict.get('unique_dir', '')
-
-        # Output temporary file
-        out_file_prefix = "nolb_ensemble"
-        out_file = "nolb_ensemble_nlb_decoys.pdb"
-
         # Command line
-        # ./NOLB 1ake_monomer.pdb -s 100 --rmsd 5 -m  -o patata # Output: patata_nlb_decoys.pdb
-        self.cmd = ["cd", working_dir, ";", self.binary_path,
-                    PurePath(self.stage_io_dict["in"]["input_pdb_path"]).name,
-                    "-o", out_file_prefix,
+        # ./NOLB 1ake_monomer.pdb -s 100 --rmsd 5 -m  -o 1ake_decoys.pdb # Output: 1ake_decoys_nlb_decoys.pdb
+        # NOLB removes the extension of -o (after the last dot of the path): -o is the output path
+        self.cmd = [self.binary_path,
+                    self.stage_io_dict["in"]["input_pdb_path"],
+                    "-o", self.stage_io_dict["out"]["output_pdb_path"],
                     "-m"  # Minimizing the generated structures by default
                     ]
 
@@ -82,12 +72,6 @@ class Nolb_nma(BiobbObject):
         if self.num_structs:
             self.cmd.append('-s')
             self.cmd.append(str(self.num_structs))
-
-        # Num modes is deactivated for the decoys generation. CHECK!
-        #  * **num_modes** (*int*) - (10) Number of non-trivial modes to compute, 10 by default. If this number exceeds the size of the Hessian matrix, it will be adapted accordingly.
-        # if self.num_modes:
-        #    self.cmd.append('-n')
-        #    self.cmd.append(str(self.num_modes))
 
         if self.cutoff:
             self.cmd.append('-c')
@@ -103,13 +87,9 @@ class Nolb_nma(BiobbObject):
         # Run Biobb block
         self.run_biobb()
 
-        # Rename generated output file to staged output path inside the sandbox.
-        # stage_io_dict output paths are container-internal when running in containers.
-        generated_output = Path(self.stage_io_dict.get("unique_dir", "")).joinpath(out_file)
-        staged_output = Path(self.stage_io_dict.get("unique_dir", "")).joinpath(
-            Path(self.stage_io_dict["out"]["output_pdb_path"]).name
-        )
-        shutil.copy2(generated_output, staged_output)
+        # The decoys file is the output
+        decoys = str(Path(self.stage_io_dict["out"]["output_pdb_path"]).with_suffix('')) + "_nlb_decoys.pdb"
+        os.replace(Path(self.stage_io_dict["unique_dir"], decoys), self.sandbox_file("output_pdb_path"))
 
 
 nolb_nma = launcher(Nolb_nma)

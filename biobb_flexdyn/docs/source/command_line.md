@@ -49,29 +49,28 @@ Config parameters for this building block:
 * **binary_path** (*string*): (disco) Concoord disco binary path to be used.
 * **vdw** (*integer*): (1) Select a set of Van der Waals parameters. 
 * **concoord_lib_path** (*string*): (None) Path to Concoord library files. If not specified will look for CONCOORDLIB conda environment variable.
-* **num_structs** (*integer*): (500) Number of structures to be generated
-* **num_iterations** (*integer*): (2500) Maximum number of iterations per structure
-* **chirality_check** (*integer*): (2) Chirality check. 
-* **bs** (*integer*): (0) Number of rounds of triangular bound smoothing (default 0), (if >= 6, tetragonal BS is activated)
+* **num_structs** (*integer*): (None) Number of structures to be generated. If not set, CONCOORD uses 500.
+* **num_iterations** (*integer*): (None) Maximum number of iterations per structure. If not set, CONCOORD uses 2500.
+* **chirality_check** (*integer*): (None) Chirality check. If not set, CONCOORD uses 2. 
+* **bs** (*integer*): (None) Number of rounds of triangular bound smoothing (default 0), (if >= 6, tetragonal BS is activated). If not set, CONCOORD uses 0.
 * **nofit** (*boolean*): (False) Do not fit generated structures to reference
-* **seed** (*integer*): (741265) Initial random seed
-* **violation** (*number*): (1.0) Maximal acceptable sum of violations (nm)
-* **convergence** (*integer*): (50) Consider convergence failed after this number of non-productive iterations
-* **trials** (*integer*): (25) Maximum number of trials per run
-* **damp** (*integer*): (1) Damping factor for distance corrections. 
-* **dyn** (*integer*): (1) Number of rounds to dynamically set tolerances
+* **seed** (*integer*): (None) Initial random seed. If not set, CONCOORD uses 741265.
+* **violation** (*number*): (None) Maximal acceptable sum of violations (nm). If not set, CONCOORD uses 1.0.
+* **convergence** (*integer*): (None) Consider convergence failed after this number of non-productive iterations. If not set, CONCOORD uses 500.
+* **trials** (*integer*): (None) Maximum number of trials per run. If not set, CONCOORD uses 25.
+* **damp** (*integer*): (None) Damping factor for distance corrections. If not set, CONCOORD uses 1. 
+* **dyn** (*integer*): (None) Number of rounds to dynamically set tolerances. If not set, CONCOORD uses 0.
 * **bump** (*boolean*): (False) Do extra bump check
-* **pairlist_freq** (*integer*): (10) Pairlist update frequency in steps (only valid together with bump)
-* **cutoff** (*number*): (0.5) Cut-off radius for pairlist (nm) (only valid together with bump)
+* **pairlist_freq** (*integer*): (None) Pairlist update frequency in steps (only valid together with bump). If not set, CONCOORD uses 10.
+* **cutoff** (*number*): (None) Cut-off radius for pairlist (nm) (only valid together with bump). If not set, CONCOORD uses 0.5.
 * **ref** (*boolean*): (False) Use input coordinates instead of random starting coordinates
-* **scale** (*integer*): (1) Pre-scale coordinates with this factor
+* **scale** (*integer*): (None) Pre-scale coordinates with this factor. If not set, CONCOORD uses 1.
 * **remove_tmp** (*boolean*): (True) Remove temporal files.
 * **restart** (*boolean*): (False) Do not execute if output files exist.
 * **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
 * **container_path** (*string*): (None) Path to the binary executable of your container.
-* **container_image** (*string*): (cmip/cmip:latest) Container Image identifier.
+* **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -89,7 +88,6 @@ properties:
   container_image: quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
   container_path: docker
   container_volume_path: /tmp
-  container_working_dir: /tmp
   num_structs: 20
   vdw: 4
 
@@ -101,7 +99,6 @@ properties:
   container_image: https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
   container_path: singularity
   container_volume_path: /tmp
-  container_working_dir: /tmp
   num_structs: 20
   vdw: 4
 
@@ -129,7 +126,6 @@ concoord_disco --config config_concoord_disco.yml --input_pdb_path structure.pdb
     "container_path": "docker",
     "container_image": "quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0",
     "container_volume_path": "/tmp",
-    "container_working_dir": "/tmp",
     "concoord_lib_path": "path_to_concoord_lib"
   }
 }
@@ -143,7 +139,6 @@ concoord_disco --config config_concoord_disco.yml --input_pdb_path structure.pdb
     "container_path": "singularity",
     "container_image": "https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0",
     "container_volume_path": "/tmp",
-    "container_working_dir": "/tmp",
     "concoord_lib_path": "path_to_concoord_lib"
   }
 }
@@ -204,9 +199,8 @@ Config parameters for this building block:
 * **restart** (*boolean*): (False) Do not execute if output files exist.
 * **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
 * **container_path** (*string*): (None) Path to the binary executable of your container.
-* **container_image** (*string*): (cmip/cmip:latest) Container Image identifier.
+* **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -225,7 +219,6 @@ properties:
   container_image: quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
   container_path: docker
   container_volume_path: /tmp
-  container_working_dir: /tmp
   vdw: 1
 
 ```
@@ -237,7 +230,6 @@ properties:
   container_image: https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
   container_path: singularity
   container_volume_path: /tmp
-  container_working_dir: /tmp
   vdw: 1
 
 ```
@@ -264,7 +256,6 @@ concoord_dist --config config_concoord_dist.yml --input_structure_path structure
     "container_path": "docker",
     "container_image": "quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0",
     "container_volume_path": "/tmp",
-    "container_working_dir": "/tmp",
     "concoord_lib_path": "path_to_concoord_lib"
   }
 }
@@ -278,7 +269,6 @@ concoord_dist --config config_concoord_dist.yml --input_structure_path structure
     "container_path": "singularity",
     "container_image": "https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0",
     "container_volume_path": "/tmp",
-    "container_working_dir": "/tmp",
     "concoord_lib_path": "path_to_concoord_lib"
   }
 }
@@ -325,14 +315,13 @@ Config parameters for this building block:
 * **binary_path** (*string*): (imc) iMODS imc binary path to be used.
 * **num_structs** (*integer*): (500) Number of structures to be generated
 * **num_modes** (*integer*): (5) Number of eigenvectors to be employed
-* **amplitude** (*integer*): (1) Amplitude linear factor to scale motion
+* **amplitude** (*number*): (1.0) Amplitude linear factor to scale motion
 * **remove_tmp** (*boolean*): (True) Remove temporal files.
 * **restart** (*boolean*): (False) Do not execute if output files exist.
 * **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
 * **container_path** (*string*): (None) Path to the binary executable of your container.
-* **container_image** (*string*): (cmip/cmip:latest) Container Image identifier.
+* **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -351,7 +340,6 @@ properties:
   container_image: quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
   container_path: docker
   container_volume_path: /tmp
-  container_working_dir: /tmp
   num_modes: 10
   num_structs: 10
 
@@ -363,7 +351,6 @@ properties:
   container_image: https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
   container_path: singularity
   container_volume_path: /tmp
-  container_working_dir: /tmp
   num_modes: 10
   num_structs: 10
 
@@ -392,8 +379,7 @@ imod_imc --config config_imod_imc.yml --input_pdb_path structure_cleaned.pdb --i
     "amplitude": 6.0,
     "container_path": "docker",
     "container_image": "quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0",
-    "container_volume_path": "/tmp",
-    "container_working_dir": "/tmp"
+    "container_volume_path": "/tmp"
   }
 }
 ```
@@ -406,8 +392,7 @@ imod_imc --config config_imod_imc.yml --input_pdb_path structure_cleaned.pdb --i
     "amplitude": 6.0,
     "container_path": "singularity",
     "container_image": "https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0",
-    "container_volume_path": "/tmp",
-    "container_working_dir": "/tmp"
+    "container_volume_path": "/tmp"
   }
 }
 ```
@@ -453,9 +438,8 @@ Config parameters for this building block:
 * **restart** (*boolean*): (False) Do not execute if output files exist.
 * **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
 * **container_path** (*string*): (None) Path to the binary executable of your container.
-* **container_image** (*string*): (cmip/cmip:latest) Container Image identifier.
+* **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -472,7 +456,6 @@ properties:
   container_image: quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
   container_path: docker
   container_volume_path: /tmp
-  container_working_dir: /tmp
 
 ```
 #### [Singularity config file](https://github.com/bioexcel/biobb_flexdyn/blob/master/biobb_flexdyn/test/data/config/config_imod_imode_singularity.yml)
@@ -482,7 +465,6 @@ properties:
   container_image: https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
   container_path: singularity
   container_volume_path: /tmp
-  container_working_dir: /tmp
 
 ```
 #### Command line
@@ -505,8 +487,7 @@ imod_imode --config config_imod_imode.yml --input_pdb_path structure.pdb --outpu
     "cg": 2,
     "container_path": "docker",
     "container_image": "quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0",
-    "container_volume_path": "/tmp",
-    "container_working_dir": "/tmp"
+    "container_volume_path": "/tmp"
   }
 }
 ```
@@ -517,8 +498,7 @@ imod_imode --config config_imod_imode.yml --input_pdb_path structure.pdb --outpu
     "cg": 2,
     "container_path": "singularity",
     "container_image": "https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0",
-    "container_volume_path": "/tmp",
-    "container_working_dir": "/tmp"
+    "container_volume_path": "/tmp"
   }
 }
 ```
@@ -568,9 +548,8 @@ Config parameters for this building block:
 * **restart** (*boolean*): (False) Do not execute if output files exist.
 * **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
 * **container_path** (*string*): (None) Path to the binary executable of your container.
-* **container_image** (*string*): (cmip/cmip:latest) Container Image identifier.
+* **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -586,7 +565,6 @@ properties:
   container_image: quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
   container_path: docker
   container_volume_path: /tmp
-  container_working_dir: /tmp
   pc: 1
 
 ```
@@ -596,7 +574,6 @@ properties:
   container_image: https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
   container_path: singularity
   container_volume_path: /tmp
-  container_working_dir: /tmp
   pc: 1
 
 ```
@@ -620,8 +597,7 @@ imod_imove --config config_imod_imove.yml --input_pdb_path structure_cleaned.pdb
     "pc": 1,
     "container_path": "docker",
     "container_image": "quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0",
-    "container_volume_path": "/tmp",
-    "container_working_dir": "/tmp"
+    "container_volume_path": "/tmp"
   }
 }
 ```
@@ -632,8 +608,7 @@ imod_imove --config config_imod_imove.yml --input_pdb_path structure_cleaned.pdb
     "pc": 1,
     "container_path": "singularity",
     "container_image": "https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0",
-    "container_volume_path": "/tmp",
-    "container_working_dir": "/tmp"
+    "container_volume_path": "/tmp"
   }
 }
 ```
@@ -681,9 +656,8 @@ Config parameters for this building block:
 * **restart** (*boolean*): (False) Do not execute if output files exist.
 * **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
 * **container_path** (*string*): (None) Path to the binary executable of your container.
-* **container_image** (*string*): (cmip/cmip:latest) Container Image identifier.
+* **container_image** (*string*): (None) Container Image identifier.
 * **container_volume_path** (*string*): (/data) Path to an internal directory in the container.
-* **container_working_dir** (*string*): (None) Path to the internal CWD in the container.
 * **container_user_id** (*string*): (None) User number id to be mapped inside the container.
 * **container_shell_path** (*string*): (/bin/bash) Path to the binary executable of the container shell.
 ### YAML
@@ -699,7 +673,6 @@ properties:
   container_image: quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
   container_path: docker
   container_volume_path: /tmp
-  container_working_dir: /tmp
   num_structs: 20
 
 ```
@@ -709,7 +682,6 @@ properties:
   container_image: https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0
   container_path: singularity
   container_volume_path: /tmp
-  container_working_dir: /tmp
   num_structs: 20
 
 ```
@@ -733,8 +705,7 @@ nolb_nma --config config_nolb_nma.yml --input_pdb_path structure.pdb --output_pd
     "num_structs": 20,
     "container_path": "docker",
     "container_image": "quay.io/biocontainers/biobb_flexdyn:5.2.2--py312hc5e4ab4_0",
-    "container_volume_path": "/tmp",
-    "container_working_dir": "/tmp"
+    "container_volume_path": "/tmp"
   }
 }
 ```
@@ -745,8 +716,7 @@ nolb_nma --config config_nolb_nma.yml --input_pdb_path structure.pdb --output_pd
     "num_structs": 20,
     "container_path": "singularity",
     "container_image": "https://depot.galaxyproject.org/singularity/biobb_flexdyn:5.2.2--py312hc5e4ab4_0",
-    "container_volume_path": "/tmp",
-    "container_working_dir": "/tmp"
+    "container_volume_path": "/tmp"
   }
 }
 ```

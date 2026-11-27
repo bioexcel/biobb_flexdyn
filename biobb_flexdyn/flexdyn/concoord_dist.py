@@ -2,11 +2,11 @@
 
 """Module containing the concoord_dist class and the command line interface."""
 from typing import Optional
-import os
 import shutil
-from pathlib import Path, PurePath
+from pathlib import Path
 from biobb_common.tools import file_utils as fu
 from biobb_common.generic.biobb_object import BiobbObject, launcher
+from biobb_flexdyn.flexdyn.common import concoord_lib
 
 
 class ConcoordDist(BiobbObject):
@@ -35,9 +35,8 @@ class ConcoordDist(BiobbObject):
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
             * **sandbox_path** (*str*) - ("./") [WF property] Parent path to the sandbox directory.
             * **container_path** (*str*) - (None)  Path to the binary executable of your container.
-            * **container_image** (*str*) - ("cmip/cmip:latest") Container Image identifier.
+            * **container_image** (*str*) - (None) Container Image identifier.
             * **container_volume_path** (*str*) - ("/data") Path to an internal directory in the container.
-            * **container_working_dir** (*str*) - (None) Path to the internal CWD in the container.
             * **container_user_id** (*str*) - (None) User number id to be mapped inside the container.
             * **container_shell_path** (*str*) - ("/bin/bash") Path to the binary executable of the container shell.
 
@@ -71,7 +70,8 @@ class ConcoordDist(BiobbObject):
         super().__init__(**locals())
 
     def prepare(self) -> None:
-        """Create the stdin file with the input parameters."""
+        """Find the CONCOORD library folder and create the stdin file with the input parameters."""
+        self.concoord_lib_dir = concoord_lib(self.concoord_lib_path)
         # Set input params
         self.io_dict['in']['stdin_file_path'] = fu.create_stdin_file(f'{self.vdw}\n{self.bond_angle}\n')
 
@@ -79,56 +79,27 @@ class ConcoordDist(BiobbObject):
         """Launches the execution of the FlexDyn ConcoordDist module."""
 
         # Copy auxiliary file (HBONDS) to the working dir
-        if self.concoord_lib_path is None:
-            concoord_lib = os.getenv("CONCOORDLIB")
-        else:
-            concoord_lib = self.concoord_lib_path
-
-        hbonds_file = str(concoord_lib) + "/HBONDS.DAT"
-        shutil.copy2(hbonds_file, self.stage_io_dict.get("unique_dir", ""))
-
-        # Determine working directory (host unique_dir or container volume path)
-        if self.container_path:
-            working_dir = self.container_volume_path if self.container_volume_path else "/data"
-        else:
-            working_dir = self.stage_io_dict.get('unique_dir', '')
+        shutil.copy2(self.concoord_lib_dir / "HBONDS.DAT", self.stage_io_dict["unique_dir"])
 
         # Command line
-        # (concoord) OROZCO67:biobb_flexdyn hospital$ dist -p biobb_flexdyn/test/data/flexdyn/structure.pdb
-        # -op dist.pdb -og dist.gro -od dist.dat
-        # Select a set of Van der Waals parameters:
-        # 1: OPLS-UA (united atoms) parameters
-        # 2: OPLS-AA (all atoms) parameters
-        # 3: PROLSQ repel parameters
-        # 4: Yamber2 parameters
-        # 5: Li et al. parameters
-        # 6: OPLS-X parameters (recommended for NMR structure determination)
-        # 2
-        # Selected parameter set 2
-        # copying /opt/anaconda3/envs/concoord/share/concoord/lib/ATOMS_oplsaa.DAT to ATOMS.DAT in current working directory
-        # copying /opt/anaconda3/envs/concoord/share/concoord/lib/MARGINS_oplsaa.DAT to MARGINS.DAT in current working directory
-        # Select a set of bond/angle parameters:
-        # 1: Concoord default parameters
-        # 2: Engh-Huber parameters
-        # 1
-        # Selected parameter set 1
-        # copying /opt/anaconda3/envs/concoord/share/concoord/lib/BONDS.DAT.noeh to BONDS.DAT in current working directory
+        # dist -p structure.pdb -op dist.pdb -og dist.gro -od dist.dat
+        # dist asks for the VdW parameter set and then for the bond/angle set: the stdin file of prepare() answers both
 
         self.cmd = [
-            "cd", working_dir, ";", self.binary_path,
-            "-op", PurePath(self.stage_io_dict["out"]["output_pdb_path"]).name,
-            "-og", PurePath(self.stage_io_dict["out"]["output_gro_path"]).name,
-            "-od", PurePath(self.stage_io_dict["out"]["output_dat_path"]).name
+            self.binary_path,
+            "-op", self.stage_io_dict["out"]["output_pdb_path"],
+            "-og", self.stage_io_dict["out"]["output_gro_path"],
+            "-od", self.stage_io_dict["out"]["output_dat_path"]
         ]
         # If input structure in pdb format:
         file_extension = Path(self.stage_io_dict["in"]["input_structure_path"]).suffix
         if file_extension == ".pdb":
             self.cmd.append('-p')
-            self.cmd.append(PurePath(self.stage_io_dict["in"]["input_structure_path"]).name)
+            self.cmd.append(self.stage_io_dict["in"]["input_structure_path"])
 
         elif file_extension == ".gro":
             self.cmd.append('-g')
-            self.cmd.append(PurePath(self.stage_io_dict["in"]["input_structure_path"]).name)
+            self.cmd.append(self.stage_io_dict["in"]["input_structure_path"])
 
         else:
             fu.log("ERROR: input_structure_path ({}) must be a PDB or a GRO formatted file ({})".format(self.io_dict["in"]["input_structure_path"], file_extension), self.out_log, self.global_log)
@@ -157,7 +128,7 @@ class ConcoordDist(BiobbObject):
 
         # Add stdin input file
         self.cmd.append('<')
-        self.cmd.append(PurePath(self.stage_io_dict["in"]["stdin_file_path"]).name)
+        self.cmd.append(self.stage_io_dict["in"]["stdin_file_path"])
 
         # Run Biobb block
         self.run_biobb()
